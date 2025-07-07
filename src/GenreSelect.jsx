@@ -1,7 +1,13 @@
 import React from 'react'
-import styles from './GenreSelect.module.css'
+import styled from 'styled-components'
 
-export default function GenreSelect({genres, selected, onSelect}) {
+const StyledList = styled.ul``
+
+const StyledListItem = styled.li`
+  color: ${(props) => (props.selected ? 'red' : 'black')};
+`
+
+export default function GenreSelect({ genres, selected, onSelect }) {
   const [genre, setGenre] = React.useState(selected)
 
   const handleClick = (selectedGenre) => {
@@ -10,8 +16,17 @@ export default function GenreSelect({genres, selected, onSelect}) {
   }
 
   return (
-      <ul className={styles.root}>
-        {genres.map(g => <li key={g} className={g === genre ? styles.selected : null} onClick={() => handleClick(g)} value={g}>{g}</li>)}
-      </ul>
+    <StyledList>
+      {genres.map((g) => (
+        <StyledListItem
+          key={g}
+          selected={g === genre}
+          onClick={() => handleClick(g)}
+          value={g}
+        >
+          {g}
+        </StyledListItem>
+      ))}
+    </StyledList>
   )
 }

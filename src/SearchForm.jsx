@@ -1,7 +1,13 @@
 import React from 'react'
-import styles from './SearchForm.module.css'
+import styled from 'styled-components'
 
-export default function SearchForm({query, onSearch}) {
+const StyledDiv = styled.div``
+
+const StyledInput = styled.input``
+
+const StyledButton = styled.button``
+
+export default function SearchForm({ query, onSearch }) {
   const [value, setValue] = React.useState(query)
 
   const handleChange = (e) => {
@@ -19,9 +25,14 @@ export default function SearchForm({query, onSearch}) {
   }
 
   return (
-      <div className={styles.root}>
-        <input type="text" onChange={handleChange} onKeyUp={handleKeyUp} value={value}/>
-        <button onClick={handleClick}>Search</button>
-      </div>
+    <StyledDiv>
+      <StyledInput
+        type="text"
+        onChange={handleChange}
+        onKeyUp={handleKeyUp}
+        value={value}
+      />
+      <StyledButton onClick={handleClick}>Search</StyledButton>
+    </StyledDiv>
   )
 }
