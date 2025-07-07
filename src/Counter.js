@@ -1,29 +1,38 @@
+import './Counter.css'
 import React from 'react'
 
 export default class Counter extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      count: props.count ?? 0,
+      value: props.defaultValue ?? 0,
     }
   }
 
+  increment = () => this.setState({ value: this.state.value + 1 })
+
+  decrement = () => this.setState({ value: this.state.value - 1 })
+
   render() {
     return React.createElement('div', { className: 'counter' }, [
-      this.state.count,
+      this.state.value,
       React.createElement(
         'button',
         {
-          key: '2',
-          onClick: () => this.setState({ count: this.state.count + 1 }),
+          key: 'Up',
+          onClick: () => {
+            this.increment()
+          },
         },
         '+'
       ),
       React.createElement(
         'button',
         {
-          key: '3',
-          onClick: () => this.setState({ count: this.state.count - 1 }),
+          key: 'Down',
+          onClick: () => {
+            this.decrement()
+          },
         },
         '-'
       ),

@@ -1,31 +1,38 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const StyledList = styled.ul``
+const StyledList = styled.ul`
+  list-style: none;
+  padding: 6px;
 
-const StyledListItem = styled.li`
-  color: ${(props) => (props.selected ? 'red' : 'black')};
+  & li {
+    cursor: pointer;
+    display: inline-block;
+    padding: 6px;
+  }
+  & li.selected {
+    color: red;
+  }
 `
 
-export default function GenreSelect({ genres, selected, onSelect }) {
-  const [genre, setGenre] = React.useState(selected)
+export default function GenreSelect({ values, defaultValue, onChange }) {
+  const [value, setValue] = React.useState(defaultValue)
 
-  const handleClick = (selectedGenre) => {
-    setGenre(selectedGenre)
-    onSelect(selectedGenre)
+  const handleItemClick = (e) => {
+    setValue(e.target.innerText)
+    onChange(e.target.innerText)
   }
 
   return (
     <StyledList>
-      {genres.map((g) => (
-        <StyledListItem
-          key={g}
-          selected={g === genre}
-          onClick={() => handleClick(g)}
-          value={g}
+      {values.map((it) => (
+        <li
+          key={it}
+          className={it === value ? 'selected' : ''}
+          onClick={handleItemClick}
         >
-          {g}
-        </StyledListItem>
+          {it}
+        </li>
       ))}
     </StyledList>
   )

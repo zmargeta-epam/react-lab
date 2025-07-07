@@ -7,12 +7,12 @@ import GenreSelect from './GenreSelect.jsx'
 export default function App() {
   return (
     <React.Fragment>
-      <Counter count={1} />
-      <SearchForm query="Pulp Fiction" onSearch={(q) => console.log(q)} />
+      <Counter defaultValue={1} />
+      <SearchForm defaultValue="Pulp Fiction" onSubmit={console.log} />
       <GenreSelect
-        genres={['All', 'Documentary', 'Comedy', 'Horror', 'Crime']}
-        selected="All"
-        onSelect={(g) => console.log(g)}
+        values={['All', 'Documentary', 'Comedy', 'Horror', 'Crime']}
+        defaultValue="All"
+        onChange={console.log}
       />
     </React.Fragment>
   )
