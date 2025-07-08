@@ -6,8 +6,8 @@ const StyledForm = styled.form`
   margin-block-end: 1em;
 `
 
-export default function SearchForm({ defaultValue, onSubmit }) {
-  const [, setValue] = React.useState(defaultValue)
+export default function SearchForm({ initialValue, onSubmit }) {
+  const [, setValue] = React.useState(initialValue)
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
@@ -21,7 +21,12 @@ export default function SearchForm({ defaultValue, onSubmit }) {
 
   return (
     <StyledForm onSubmit={handleFormSubmit}>
-      <input id="query" name="query" type="text" defaultValue={defaultValue} />
+      <input
+        id="query"
+        name="query"
+        type="search"
+        defaultValue={initialValue}
+      />
       <input type="submit" value="Search" />
     </StyledForm>
   )
