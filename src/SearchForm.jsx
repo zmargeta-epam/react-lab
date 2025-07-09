@@ -6,7 +6,7 @@ const StyledForm = styled.form`
   margin-block-end: 1em;
 `
 
-export default function SearchForm({ initialValue, onSubmit }) {
+export default function SearchForm({ initialValue = '', onSubmit }) {
   const [, setValue] = React.useState(initialValue)
 
   const handleFormSubmit = (e) => {
@@ -16,7 +16,7 @@ export default function SearchForm({ initialValue, onSubmit }) {
     let queryValue = formData.get('query')
 
     setValue(queryValue)
-    onSubmit(queryValue)
+    onSubmit?.(queryValue)
   }
 
   return (

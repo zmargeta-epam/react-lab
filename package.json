@@ -8,13 +8,11 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "vitest",
+    "test": "vitest --project unit",
+    "test-e2e": "cypress run --e2e",
     "coverage": "vitest run --coverage",
-    "open-cypress": "cypress open --e2e --browser chrome",
-    "run-cypress": "cypress run --e2e",
-    "cypress": "start-server-and-test dev http://localhost:5173 cy:open",
-    "storybook": "BROWSER='google chrome' storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "cypress": "start-server-and-test dev http://localhost:5173 cypress open --e2e --browser chrome",
+    "storybook": "BROWSER='google chrome' storybook dev -p 6006"
   },
   "dependencies": {
     "react": "^19.1.0",

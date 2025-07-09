@@ -15,12 +15,12 @@ const StyledList = styled.ul`
   }
 `
 
-export default function GenreSelect({ values, defaultValue, onChange }) {
+export default function GenreSelect({ values = [], defaultValue, onChange }) {
   const [value, setValue] = React.useState(defaultValue)
 
   const handleItemClick = (e) => {
     setValue(e.target.innerText)
-    onChange(e.target.innerText)
+    onChange?.(e.target.innerText)
   }
 
   return (
