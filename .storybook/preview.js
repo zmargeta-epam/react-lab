@@ -14,6 +14,13 @@ const preview = {
       // 'off' - skip a11y checks entirely
       test: 'todo',
     },
+
+    backgrounds: {
+      default: 'Default',
+      options: {
+        default: { name: 'Default', value: '#232323' },
+      },
+    },
   },
 }
 

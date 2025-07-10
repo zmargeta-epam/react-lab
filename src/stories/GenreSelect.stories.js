@@ -9,7 +9,7 @@ export default {
 
 export const Default = {
   args: {
-    values: ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'],
+    values: ['All', 'Documentary', 'Comedy', 'Horror', 'Thriller', 'Crime'],
     defaultValue: 'All',
     onChange: fn(),
   },

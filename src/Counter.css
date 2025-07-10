@@ -1,4 +1,21 @@
 .counter {
-  margin-block-start: 1em;
-  margin-block-end: 1em;
+  align-content: center;
+  align-items: center;
+  color: #fff;
+  display: flex;
+  font-family: Monserrat, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 200;
+  gap: 6px;
+  padding: 8px;
+}
+
+.counter > button {
+  background-color: #f65261;
+  border: none;
+  border-radius: 4px;
+  color: inherit;
+  font: inherit;
+  min-height: 22px;
+  min-width: 22px;
 }

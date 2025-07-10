@@ -9,7 +9,7 @@ export default {
 
 export const Default = {
   args: {
-    initialValue: 'Pulp Fiction',
+    initialValue: '',
     onSubmit: fn(),
   },
 }
