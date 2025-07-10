@@ -1,27 +1,33 @@
 import React from 'react'
-import styles from './SearchForm.module.css'
+import styled from 'styled-components'
 
-export default function SearchForm({query, onSearch}) {
-  const [value, setValue] = React.useState(query)
+const StyledForm = styled.form`
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+`
 
-  const handleChange = (e) => {
-    setValue(e.target.value)
-  }
+export default function SearchForm({ initialValue, onSubmit }) {
+  const [, setValue] = React.useState(initialValue)
 
-  const handleKeyUp = (e) => {
-    if (e.keyCode === 13) {
-      onSearch(e.target.value)
-    }
-  }
+  const handleFormSubmit = (e) => {
+    e.preventDefault()
 
-  const handleClick = () => {
-    onSearch(value)
+    let formData = new FormData(e.target)
+    let queryValue = formData.get('query')
+
+    setValue(queryValue)
+    onSubmit(queryValue)
   }
 
   return (
-      <div className={styles.root}>
-        <input type="text" onChange={handleChange} onKeyUp={handleKeyUp} value={value}/>
-        <button onClick={handleClick}>Search</button>
-      </div>
+    <StyledForm onSubmit={handleFormSubmit}>
+      <input
+        id="query"
+        name="query"
+        type="search"
+        defaultValue={initialValue}
+      />
+      <input type="submit" value="Search" />
+    </StyledForm>
   )
 }
