@@ -26,24 +26,24 @@ const StyledList = styled.ul`
 `
 
 export default function GenreSelect({ values = [], defaultValue, onChange }) {
-  const [value, setValue] = React.useState(
-    values.find((it) => it.toUpperCase() === defaultValue?.toUpperCase())
+  const [index, setIndex] = React.useState(
+    values.findIndex((it) => it.toUpperCase() === defaultValue?.toUpperCase())
   )
-
-  const handleItemClick = (e) => {
-    const idx = e.target.dataset.genreId
-    setValue(values[idx])
-    onChange?.(values[idx])
-  }
 
   return (
     <StyledList>
       {values.map((it, idx) => (
         <li
           key={idx}
-          data-genre-id={idx}
-          className={it === value ? 'selected' : ''}
-          onClick={handleItemClick}
+          data-index={idx}
+          className={it === values[index] ? 'selected' : ''}
+          onClick={(event) => {
+            const newIndex = event.target.dataset.index
+            if (index !== newIndex) {
+              setIndex(newIndex)
+              onChange?.(values[newIndex])
+            }
+          }}
         >
           {it}
         </li>

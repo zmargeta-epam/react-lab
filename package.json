@@ -9,10 +9,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest --project unit",
-    "test-e2e": "cypress run --e2e",
     "coverage": "vitest run --coverage",
-    "cypress": "start-server-and-test dev http://localhost:5173 cypress open --e2e --browser chrome",
-    "storybook": "BROWSER='google chrome' storybook dev -p 6006"
+    "cy:dev": "start-server-and-test dev http://localhost:5173 'cypress open --e2e --browser chrome'",
+    "sb:dev": "BROWSER='google chrome' storybook dev -p 6006"
   },
   "dependencies": {
     "react": "^19.1.0",

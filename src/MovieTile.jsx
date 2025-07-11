@@ -14,8 +14,8 @@ const StyledMovieTile = styled.div`
   width: 322px;
 `
 
-const Poster = styled.div`
-  background-image: url('${(props) => props.imageUrl}');
+const Poster = styled.div.attrs({ role: 'img' })`
+  background-image: url('${(props) => props.$imageUrl}');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -26,16 +26,19 @@ const Poster = styled.div`
 const Info = styled.div`
   display: flex;
   flex-direction: column;
+  align-content: flex-start;
   gap: 8px;
 `
 
 const Title = styled.span`
   font-size: 18px;
+  text-align: left;
 `
 
 const Genres = styled.span`
   color: #ffffff80;
   font-size: 14px;
+  text-align: left;
 `
 
 const ReleaseYear = styled.span`
@@ -58,7 +61,7 @@ export default function MovieTile({
 }) {
   return (
     <StyledMovieTile>
-      <Poster role="img" imageUrl={imageUrl} />
+      <Poster $imageUrl={imageUrl} />
       <Info>
         <Title>{title || 'Unknown'}</Title>
         <Genres>{genres.length > 0 ? genres.join(', ') : 'Unknown'}</Genres>

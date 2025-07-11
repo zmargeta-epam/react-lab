@@ -11,6 +11,6 @@ export const Default = {
       'https://www.themoviedb.org/t/p/w1280/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg',
     title: 'Pulp Fiction',
     releaseYear: 1994,
-    genres: ['Thriller', 'Crime'],
+    genres: ['Thriller', 'Crime', 'Comedy'],
   },
 }

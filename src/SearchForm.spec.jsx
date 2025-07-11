@@ -8,7 +8,7 @@ import '@testing-library/jest-dom/vitest'
 describe('SearchForm', () => {
   it('renders the initial value', () => {
     // arrange
-    render(<SearchForm initialValue="initial_value" onSubmit={vi.fn()} />)
+    render(<SearchForm initialValue="initial_value" />)
 
     // assert
     expect(screen.getByRole('searchbox')).toHaveValue('initial_value')

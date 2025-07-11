@@ -3,20 +3,10 @@ describe('Application', () => {
     cy.visit('/')
   })
 
-  it('renders counter', () => {
+  it('submits search query', () => {
     cy.visit('/')
-    cy.get('div.counter').should('include.text', '1')
-  })
-
-  it('increments counter', () => {
-    cy.visit('/')
-    cy.get('div.counter').find('button').contains('+').click()
-    cy.get('div.counter').should('include.text', '2')
-  })
-
-  it('decrements counter', () => {
-    cy.visit('/')
-    cy.get('div.counter').find('button').contains('-').click()
-    cy.get('div.counter').should('include.text', '0')
+    cy.get('form').find('input[type=search]').type('some_query')
+    cy.get('form').find('input[type=submit]').click()
+    // todo: finish testing actual functionality
   })
 })

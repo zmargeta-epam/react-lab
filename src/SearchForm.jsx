@@ -40,18 +40,18 @@ const StyledForm = styled.form`
 export default function SearchForm({ initialValue, onSubmit }) {
   const [, setValue] = React.useState(initialValue)
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault()
-
-    let formData = new FormData(e.target)
-    let queryValue = formData.get('query')
-
-    setValue(queryValue)
-    onSubmit?.(queryValue)
-  }
-
   return (
-    <StyledForm onSubmit={handleFormSubmit}>
+    <StyledForm
+      onSubmit={(event) => {
+        event.preventDefault()
+
+        let formData = new FormData(event.target)
+        let newValue = formData.get('query')
+
+        setValue(newValue)
+        onSubmit?.(newValue)
+      }}
+    >
       <input
         id="query"
         name="query"
