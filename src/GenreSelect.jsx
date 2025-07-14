@@ -5,7 +5,7 @@ const StyledList = styled.ul`
   align-items: stretch;
   color: #fff;
   display: flex;
-  font-family: Monserrat, Helvetica, Arial, sans-serif;
+  font-family: Montserrat, Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 200;
   gap: 30px;

@@ -5,7 +5,7 @@ const StyledMovieTile = styled.div`
   color: #ffffffb3;
   display: flex;
   flex-direction: column;
-  font-family: Monserrat, Helvetica, Arial, sans-serif;
+  font-family: Montserrat, Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 100;
   gap: 25px;

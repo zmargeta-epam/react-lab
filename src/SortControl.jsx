@@ -5,7 +5,7 @@ import { SortCriteria } from './SortCriteria.js'
 const StyledSortControl = styled.label`
   display: flex;
   color: #ffffff99;
-  font-family: Monserrat, Helvetica, Arial, sans-serif;
+  font-family: Montserrat, Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 100;
   gap: 30px;

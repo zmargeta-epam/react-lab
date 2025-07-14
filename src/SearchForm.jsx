@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const StyledForm = styled.form`
   color: #fff;
   display: flex;
-  font-family: Monserrat, Helvetica, Arial, sans-serif;
+  font-family: Montserrat, Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 200;
   gap: 14px;

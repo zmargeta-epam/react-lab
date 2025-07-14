@@ -22,6 +22,10 @@ const preview = {
       },
     },
   },
+
+  initialGlobals: {
+    backgrounds: { value: 'default' },
+  },
 }
 
 export default preview
