@@ -12,7 +12,6 @@ describe('GenreSelect', () => {
       <GenreSelect
         values={['some_genre', 'some_other_genre']}
         defaultValue={'some_genre'}
-        onChange={vi.fn()}
       />
     )
 
@@ -29,7 +28,6 @@ describe('GenreSelect', () => {
       <GenreSelect
         values={['some_genre', 'some_other_genre']}
         defaultValue={'some_genre'}
-        onChange={vi.fn()}
       />
     )
 
