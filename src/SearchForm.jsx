@@ -32,14 +32,13 @@ const StyledForm = styled.form`
     background-color: #f65261;
     border-radius: 4px;
     color: #fff;
+    cursor: pointer;
     text-transform: uppercase;
     width: 233px;
   }
 `
 
 export default function SearchForm({ initialValue, onSubmit }) {
-  const [, setValue] = React.useState(initialValue)
-
   return (
     <StyledForm
       onSubmit={(event) => {
@@ -48,7 +47,6 @@ export default function SearchForm({ initialValue, onSubmit }) {
         let formData = new FormData(event.target)
         let newValue = formData.get('query')
 
-        setValue(newValue)
         onSubmit?.(newValue)
       }}
     >

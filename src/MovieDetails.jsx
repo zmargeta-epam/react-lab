@@ -13,12 +13,6 @@ const StyledMovieDetails = styled.div`
   width: 100%;
 `
 
-const Header = styled.div`
-  align-items: center;
-  display: flex;
-  gap: 25px;
-`
-
 const Poster = styled.div.attrs({ role: 'img' })`
   background-image: url('${(props) => props.$imageUrl}');
   background-position: center;
@@ -29,18 +23,40 @@ const Poster = styled.div.attrs({ role: 'img' })`
   width: 322px;
 `
 
-const Info = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-content: flex-start;
-  gap: 25px;
+const Details = styled.div`
+  display: grid;
+  grid-template-columns: 100px min-content 60px 1fr;
+  grid-template-rows: 60px repeat(3, min-content);
+  grid-template-areas:
+    'title title rating .'
+    'genres genres genres genres'
+    'release-year duration duration duration'
+    'description description description description';
 `
 
 const Title = styled.span`
   color: #fff;
   font-size: 40px;
+  grid-area: title;
+  line-height: 60px;
+  padding-right: 25px;
   text-align: left;
   text-transform: uppercase;
+  width: max-content;
+`
+
+const ReleaseYear = styled.span`
+  color: #f65261;
+  font-size: 24px;
+  grid-area: release-year;
+  padding: 25px 0;
+`
+
+const Genres = styled.span`
+  color: #ffffff80;
+  font-size: 14px;
+  grid-area: genres;
+  text-align: left;
 `
 
 const Rating = styled.span`
@@ -48,31 +64,27 @@ const Rating = styled.span`
   border-radius: 30px;
   color: #fff;
   font-size: 20px;
+  grid-area: rating;
   height: 60px;
   line-height: 60px;
+  max-height: 60px;
+  max-width: 60px;
+  min-height: 60px;
+  min-width: 60px;
   text-align: center;
   width: 60px;
 `
 
-const Genres = styled.span`
-  color: #ffffff80;
-  font-size: 14px;
-  text-align: left;
-`
-
-const Details = styled.span`
+const Duration = styled.span`
   color: #f65261;
-  display: flex;
   font-size: 24px;
-  gap: 50px;
+  grid-area: duration;
+  padding: 25px 0;
 `
-
-const ReleaseYear = styled.span``
-
-const Duration = styled.span``
 
 const Description = styled.span`
   font-size: 20px;
+  grid-area: description;
 `
 
 export default function MovieDetails({
@@ -90,20 +102,14 @@ export default function MovieDetails({
   return (
     <StyledMovieDetails>
       <Poster $imageUrl={imageUrl} />
-      <Info>
-        <Header>
-          <Title>{title || 'Unknown'}</Title>
-          <Rating>{rating || 'N/A'}</Rating>
-        </Header>
+      <Details>
+        <Title>{title || 'Unknown'}</Title>
+        <Rating>{rating || 'N/A'}</Rating>
         <Genres>{genres.length > 0 ? genres.join(', ') : 'Unknown'}</Genres>
-        <Details>
-          <ReleaseYear>{releaseYear || 'Unknown'}</ReleaseYear>
-          <Duration>
-            {(duration && `${hours}h ${minutes}min`) || 'N/A'}
-          </Duration>
-        </Details>
+        <ReleaseYear>{releaseYear || 'Unknown'}</ReleaseYear>
+        <Duration>{(duration && `${hours}h ${minutes}min`) || 'N/A'}</Duration>
         <Description>{description || 'Unknown'}</Description>
-      </Info>
+      </Details>
     </StyledMovieDetails>
   )
 }

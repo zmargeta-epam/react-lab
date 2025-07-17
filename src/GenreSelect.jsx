@@ -21,7 +21,7 @@ const StyledList = styled.ul`
     text-align: center;
   }
   & li.selected {
-    border-bottom: 2px solid #f65261;
+    border-bottom: 4px solid #f65261;
   }
 `
 
@@ -34,14 +34,12 @@ export default function GenreSelect({ values = [], defaultValue, onChange }) {
     <StyledList>
       {values.map((it, idx) => (
         <li
-          key={idx}
-          data-index={idx}
+          key={it?.toLowerCase().replace(/ +/, '_') || idx}
           className={it === values[index] ? 'selected' : ''}
-          onClick={(event) => {
-            const newIndex = event.target.dataset.index
-            if (index !== newIndex) {
-              setIndex(newIndex)
-              onChange?.(values[newIndex])
+          onClick={() => {
+            if (index !== idx) {
+              setIndex(idx)
+              onChange?.(values[idx])
             }
           }}
         >

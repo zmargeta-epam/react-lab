@@ -12,7 +12,10 @@ export default function MovieTiles({ movies = [] }) {
   return (
     <StyledMovieTiles>
       {movies.map((it, idx) => (
-        <MovieTile key={idx} {...it} />
+        <MovieTile
+          key={it.id || it?.title.toLowerCase().replace(/ +/, '_') || idx}
+          {...it}
+        />
       ))}
     </StyledMovieTiles>
   )
