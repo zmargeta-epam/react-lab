@@ -1,8 +1,9 @@
 import MovieTile from './MovieTile'
 import React from 'react'
-import { afterEach, describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import { cleanup, render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/vitest'
+import { userEvent } from '@testing-library/user-event'
 
 describe('MovieTile', () => {
   it('renders default information', () => {
@@ -10,7 +11,8 @@ describe('MovieTile', () => {
     render(<MovieTile />)
 
     // assert
-    expect(screen.getAllByText('Unknown')).toHaveLength(3)
+    expect(screen.getAllByText('Unknown')).toHaveLength(2)
+    expect(screen.getAllByText('N/A')).toHaveLength(1)
   })
 
   it('renders movie information', () => {
@@ -31,6 +33,19 @@ describe('MovieTile', () => {
     screen.getByText('some_title')
     screen.getByText('2025')
     screen.getByText('some_genre, some_other_genre')
+  })
+
+  it('calls the onClick callback after clicking', async () => {
+    // arrange
+    const user = userEvent.setup()
+    const callback = vi.fn()
+    render(<MovieTile onClick={callback} />)
+
+    // act
+    await user.click(screen.getByRole('article'))
+
+    // assert
+    expect(callback).toHaveBeenCalled()
   })
 
   afterEach(() => {

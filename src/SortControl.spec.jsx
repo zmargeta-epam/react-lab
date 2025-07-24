@@ -29,7 +29,7 @@ describe('SortControl', () => {
     )
   })
 
-  it('submits the selected criteria on change', async () => {
+  it('triggers the callback on sort criteria change', async () => {
     // arrange
     const user = userEvent.setup()
     const callback = vi.fn()

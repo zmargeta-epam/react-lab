@@ -1,8 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
+import Poster from './Poster.jsx'
 
-const StyledMovieTile = styled.div`
+const StyledMovieTile = styled.article`
   color: #ffffffb3;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   font-family: Montserrat, Helvetica, Arial, sans-serif;
@@ -12,15 +14,6 @@ const StyledMovieTile = styled.div`
   margin: 0;
   padding: 0;
   gap: 25px;
-  width: 322px;
-`
-
-const Poster = styled.div.attrs({ role: 'img' })`
-  background-image: url('${(props) => props.$imageUrl}');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 455px;
   width: 322px;
 `
 
@@ -38,7 +31,10 @@ const Title = styled.span`
   font-size: 18px;
   grid-area: title;
   height: fit-content;
+  overflow: hidden;
   text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `
 
 const ReleaseYear = styled.span`
@@ -58,7 +54,10 @@ const Genres = styled.span`
   font-size: 14px;
   grid-area: genres;
   height: fit-content;
+  overflow: hidden;
   text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `
 
 export default function MovieTile({
@@ -66,13 +65,14 @@ export default function MovieTile({
   title,
   releaseYear,
   genres = [],
+  onClick,
 }) {
   return (
-    <StyledMovieTile>
-      <Poster $imageUrl={imageUrl} />
+    <StyledMovieTile onClick={() => onClick?.()}>
+      <Poster imageUrl={imageUrl} />
       <Details>
         <Title>{title || 'Unknown'}</Title>
-        <ReleaseYear>{releaseYear || 'Unknown'}</ReleaseYear>
+        <ReleaseYear>{releaseYear || 'N/A'}</ReleaseYear>
         <Genres>{genres.length > 0 ? genres.join(', ') : 'Unknown'}</Genres>
       </Details>
     </StyledMovieTile>

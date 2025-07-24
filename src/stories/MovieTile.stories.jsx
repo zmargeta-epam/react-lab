@@ -1,10 +1,12 @@
 import MovieTile from '../MovieTile.jsx'
+import { fn } from 'storybook/test'
 
 export default {
   title: 'MovieTile',
   component: MovieTile,
   tags: ['autodocs'],
 }
+
 export const Default = {
   args: {
     imageUrl:
@@ -12,5 +14,12 @@ export const Default = {
     title: 'Pulp Fiction',
     releaseYear: 1994,
     genres: ['Thriller', 'Crime', 'Comedy'],
+    onClick: fn(),
+  },
+}
+
+export const Unavailable = {
+  args: {
+    onClick: fn(),
   },
 }

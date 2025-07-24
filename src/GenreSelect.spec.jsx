@@ -39,7 +39,7 @@ describe('GenreSelect', () => {
     expect(actualGenres[1]).not.toHaveClass('selected')
   })
 
-  it('submits the selected genre on click', async () => {
+  it('triggers the callback on selected genre change', async () => {
     // arrange
     const user = userEvent.setup()
     const callback = vi.fn()

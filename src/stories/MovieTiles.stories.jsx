@@ -1,4 +1,5 @@
 import MovieTiles from '../MovieTiles.jsx'
+import { fn } from 'storybook/test'
 
 export default {
   title: 'MovieTiles',
@@ -24,6 +25,8 @@ export const Default = {
         releaseYear: 2007,
         genres: ['Crime', 'Drama', 'Thriller'],
       },
+      {},
     ],
+    onSelect: fn(),
   },
 }

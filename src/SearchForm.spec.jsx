@@ -14,7 +14,7 @@ describe('SearchForm', () => {
     expect(screen.getByRole('searchbox')).toHaveValue('initial_value')
   })
 
-  it('submits the value after clicking the submit button', async () => {
+  it('triggers the callback on button click', async () => {
     // arrange
     const user = userEvent.setup()
     const callback = vi.fn()
@@ -29,7 +29,7 @@ describe('SearchForm', () => {
     expect(callback).toHaveBeenCalledWith('some_value')
   })
 
-  it('submits the value after typing enter in the search textbox', async () => {
+  it('triggers the callback on typing enter in the search textbox', async () => {
     // arrange
     const user = userEvent.setup()
     const callback = vi.fn()

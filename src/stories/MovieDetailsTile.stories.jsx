@@ -1,10 +1,12 @@
-import MovieDetails from '../MovieDetails.jsx'
+import MovieDetailsTile from '../MovieDetailsTile.jsx'
+import { fn } from 'storybook/test'
 
 export default {
-  title: 'MovieDetails',
-  component: MovieDetails,
+  title: 'MovieDetailsTile',
+  component: MovieDetailsTile,
   tags: ['autodocs'],
 }
+
 export const Default = {
   args: {
     imageUrl:
@@ -18,5 +20,6 @@ export const Default = {
       "A burger-loving hit man, his philosophical partner, a drug-addled gangster's moll and a washed-up boxer " +
       'converge in this sprawling, comedic crime caper. Their adventures unfurl in three stories that ingeniously ' +
       'trip back and forth in time.',
+    onClose: fn(),
   },
 }

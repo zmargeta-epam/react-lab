@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Poster from './Poster.jsx'
 
 const StyledMovieDetails = styled.div`
   color: #ffffffb3;
@@ -10,23 +11,12 @@ const StyledMovieDetails = styled.div`
   gap: 25px;
   margin: 0;
   padding: 0;
-  width: 100%;
-`
-
-const Poster = styled.div.attrs({ role: 'img' })`
-  background-image: url('${(props) => props.$imageUrl}');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 455px;
-  min-width: 322px;
-  width: 322px;
 `
 
 const Details = styled.div`
   display: grid;
-  grid-template-columns: 100px min-content 60px 1fr;
-  grid-template-rows: 60px repeat(3, min-content);
+  grid-template-columns: 100px fit-content(650px) 60px 1fr;
+  grid-template-rows: repeat(4, min-content);
   grid-template-areas:
     'title title rating .'
     'genres genres genres genres'
@@ -42,7 +32,6 @@ const Title = styled.span`
   padding-right: 25px;
   text-align: left;
   text-transform: uppercase;
-  width: max-content;
 `
 
 const ReleaseYear = styled.span`
@@ -50,6 +39,7 @@ const ReleaseYear = styled.span`
   font-size: 24px;
   grid-area: release-year;
   padding: 25px 0;
+  text-align: left;
 `
 
 const Genres = styled.span`
@@ -80,11 +70,13 @@ const Duration = styled.span`
   font-size: 24px;
   grid-area: duration;
   padding: 25px 0;
+  text-align: left;
 `
 
 const Description = styled.span`
   font-size: 20px;
   grid-area: description;
+  text-align: left;
 `
 
 export default function MovieDetails({
@@ -101,12 +93,12 @@ export default function MovieDetails({
 
   return (
     <StyledMovieDetails>
-      <Poster $imageUrl={imageUrl} />
+      <Poster imageUrl={imageUrl} />
       <Details>
         <Title>{title || 'Unknown'}</Title>
         <Rating>{rating || 'N/A'}</Rating>
         <Genres>{genres.length > 0 ? genres.join(', ') : 'Unknown'}</Genres>
-        <ReleaseYear>{releaseYear || 'Unknown'}</ReleaseYear>
+        <ReleaseYear>{releaseYear || 'N/A'}</ReleaseYear>
         <Duration>{(duration && `${hours}h ${minutes}min`) || 'N/A'}</Duration>
         <Description>{description || 'Unknown'}</Description>
       </Details>
