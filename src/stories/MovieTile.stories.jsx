@@ -15,11 +15,15 @@ export const Default = {
     releaseYear: 1994,
     genres: ['Thriller', 'Crime', 'Comedy'],
     onClick: fn(),
+    onEditMovie: fn(),
+    onDeleteMovie: fn(),
   },
 }
 
 export const Unavailable = {
   args: {
     onClick: fn(),
+    onEditMovie: fn(),
+    onDeleteMovie: fn(),
   },
 }

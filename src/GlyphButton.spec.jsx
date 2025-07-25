@@ -11,7 +11,7 @@ describe('GlyphButton', () => {
     render(<GlyphButton imageUrl="some_image_url">label</GlyphButton>)
 
     // assert
-    expect(screen.getByRole('button')).toHaveStyle(
+    expect(screen.getByRole('img')).toHaveStyle(
       'mask-image: url("some_image_url")'
     )
   })

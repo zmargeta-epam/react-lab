@@ -10,7 +10,7 @@ import Logo from './Logo.jsx'
 
 const Header = styled.div`
   border-bottom: 10px solid #555;
-  box-sizing: content-box;
+  box-sizing: border-box;
   min-height: 540px;
 `
 

@@ -45,7 +45,7 @@ export default function SearchTile({ onSearch, onAddMovie }) {
         <Button
           variant={ButtonVariant.SECONDARY}
           size={ButtonSize.SMALL}
-          onClick={() => onAddMovie?.()}
+          onClick={(e) => onAddMovie?.(e)}
         >
           + Add Movie
         </Button>

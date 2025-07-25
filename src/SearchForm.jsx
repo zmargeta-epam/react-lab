@@ -37,13 +37,9 @@ const StyledForm = styled.form`
 export default function SearchForm({ initialValue, onSubmit }) {
   return (
     <StyledForm
-      onSubmit={(event) => {
-        event.preventDefault()
-
-        let formData = new FormData(event.target)
-        let newValue = formData.get('query')
-
-        onSubmit?.(newValue)
+      onSubmit={(e) => {
+        e.preventDefault()
+        onSubmit?.(new FormData(e.target).get('query'))
       }}
     >
       <input

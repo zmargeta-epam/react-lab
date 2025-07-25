@@ -27,7 +27,7 @@ export default function MovieDetailsTile({ movie, onClose }) {
   return (
     <StyledMovieDetailsTile>
       <Logo />
-      <GlyphButton imageUrl={glyphUrl} onClick={() => onClose?.()} />
+      <GlyphButton imageUrl={glyphUrl} onClick={(e) => onClose?.(e)} />
       <MovieDetails {...movie} />
     </StyledMovieDetailsTile>
   )

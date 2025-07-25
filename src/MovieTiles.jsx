@@ -14,9 +14,7 @@ export default function MovieTiles({ movies = [], onSelect }) {
       {movies.map((it, idx) => (
         <MovieTile
           key={it.id || it?.title?.toLowerCase().replace(/ +/, '_') || idx}
-          onClick={() => {
-            onSelect?.(it)
-          }}
+          onClick={(e) => onSelect?.(it, e)}
           {...it}
         />
       ))}

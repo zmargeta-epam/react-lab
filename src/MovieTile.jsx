@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import Poster from './Poster.jsx'
+import GlyphButton from './GlyphButton.jsx'
+import glyphUrl from './assets/glyph_menu.svg'
+import PopupMenu, { PopupMenuItem } from './PopupMenu.jsx'
 
 const StyledMovieTile = styled.article`
   color: #ffffffb3;
@@ -13,8 +16,16 @@ const StyledMovieTile = styled.article`
   grid-template-rows: 455px 1fr;
   margin: 0;
   padding: 0;
+  position: relative;
   gap: 25px;
   width: 322px;
+
+  & > button:nth-of-type(1),
+  & > ul[role='menu']:nth-of-type(1) {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
 `
 
 const Details = styled.div`
@@ -66,15 +77,61 @@ export default function MovieTile({
   releaseYear,
   genres = [],
   onClick,
+  onEditMovie,
+  onDeleteMovie,
 }) {
+  const [menuButtonVisible, setMenuButtonVisible] = React.useState(false)
+  const [menuVisible, setMenuVisible] = React.useState(false)
+
   return (
-    <StyledMovieTile onClick={() => onClick?.()}>
+    <StyledMovieTile
+      onClick={(e) => onClick?.(e)}
+      onMouseEnter={() => setMenuButtonVisible(true)}
+      onMouseLeave={() => setMenuButtonVisible(false)}
+    >
       <Poster imageUrl={imageUrl} />
       <Details>
         <Title>{title || 'Unknown'}</Title>
         <ReleaseYear>{releaseYear || 'N/A'}</ReleaseYear>
         <Genres>{genres.length > 0 ? genres.join(', ') : 'Unknown'}</Genres>
       </Details>
+      {menuButtonVisible && (
+        <GlyphButton
+          imageUrl={glyphUrl}
+          onClick={(e) => {
+            e.stopPropagation()
+            setMenuVisible(true)
+          }}
+        />
+      )}
+      <PopupMenu
+        visible={menuVisible}
+        onHide={(e) => {
+          e.stopPropagation()
+          setMenuVisible(false)
+        }}
+      >
+        <PopupMenuItem
+          key="edit"
+          onClick={(e) => {
+            e.stopPropagation()
+            setMenuVisible(false)
+            onEditMovie?.(e)
+          }}
+        >
+          Edit
+        </PopupMenuItem>
+        <PopupMenuItem
+          key="delete"
+          onClick={(e) => {
+            e.stopPropagation()
+            setMenuVisible(false)
+            onDeleteMovie?.(e)
+          }}
+        >
+          Delete
+        </PopupMenuItem>
+      </PopupMenu>
     </StyledMovieTile>
   )
 }

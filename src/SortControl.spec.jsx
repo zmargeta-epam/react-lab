@@ -12,8 +12,8 @@ describe('SortControl', () => {
     render(<SortControl />)
 
     // assert
-    screen.getByText('Release Date')
-    screen.getByText('Title')
+    expect(screen.getByText('Release Date')).toBeInTheDocument()
+    expect(screen.getByText('Title')).toBeInTheDocument()
     expect(screen.getByRole('combobox')).toHaveValue(
       SortCriteria.RELEASE_DATE.toString()
     )

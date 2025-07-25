@@ -1,8 +1,9 @@
 import Counter from './Counter'
 import React from 'react'
-import { afterEach, describe, it } from 'vitest'
+import { afterEach, describe, expect, it } from 'vitest'
 import { cleanup, render, screen } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
+import '@testing-library/jest-dom/vitest'
 
 describe('Counter', () => {
   it('renders the default value', () => {
@@ -10,7 +11,7 @@ describe('Counter', () => {
     render(<Counter />)
 
     // assert
-    screen.getByText('0')
+    expect(screen.getByText('0')).toBeInTheDocument()
   })
 
   it('renders the initial value', () => {
@@ -18,7 +19,7 @@ describe('Counter', () => {
     render(<Counter initialValue={1} />)
 
     // assert
-    screen.getByText('1')
+    expect(screen.getByText('1')).toBeInTheDocument()
   })
 
   it('increments and renders the value', async () => {
@@ -30,7 +31,7 @@ describe('Counter', () => {
     await user.click(screen.getByRole('button', { name: '+' }))
 
     // assert
-    screen.getByText('1')
+    expect(screen.getByText('1')).toBeInTheDocument()
   })
 
   it('decrements and renders the value', async () => {
@@ -42,7 +43,7 @@ describe('Counter', () => {
     await user.click(screen.getByRole('button', { name: '-' }))
 
     // assert
-    screen.getByText('-1')
+    expect(screen.getByText('-1')).toBeInTheDocument()
   })
 
   afterEach(() => {

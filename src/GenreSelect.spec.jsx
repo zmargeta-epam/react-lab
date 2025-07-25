@@ -16,7 +16,7 @@ describe('GenreSelect', () => {
     )
 
     // assert
-    const actualGenres = screen.getAllByRole('listitem')
+    const actualGenres = screen.getAllByRole('tab')
     expect(actualGenres).toHaveLength(2)
     expect(actualGenres[0]).toHaveTextContent('some_genre')
     expect(actualGenres[1]).toHaveTextContent('some_other_genre')
@@ -32,7 +32,7 @@ describe('GenreSelect', () => {
     )
 
     // assert
-    const actualGenres = screen.getAllByRole('listitem')
+    const actualGenres = screen.getAllByRole('tab')
     expect(actualGenres[0]).toHaveTextContent('some_genre')
     expect(actualGenres[0]).toHaveClass('selected')
     expect(actualGenres[1]).toHaveTextContent('some_other_genre')
@@ -56,7 +56,7 @@ describe('GenreSelect', () => {
 
     // assert
     expect(callback).toHaveBeenCalled()
-    expect(callback).toHaveBeenCalledWith('some_other_genre')
+    expect(callback).toHaveBeenCalledWith('some_other_genre', expect.anything())
   })
 
   afterEach(() => {

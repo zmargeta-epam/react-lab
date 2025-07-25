@@ -6,7 +6,7 @@ const StyledButton = styled.button`
   background-color: transparent;
   border: 1px solid #f65261;
   border-radius: 4px;
-  box-sizing: content-box;
+  box-sizing: border-box;
   display: block;
   color: #f65261;
   cursor: pointer;
@@ -69,7 +69,7 @@ export default function Button({
     .join(' ')
 
   return (
-    <StyledButton onClick={() => onClick?.()} className={styles}>
+    <StyledButton onClick={(e) => onClick?.(e)} className={styles}>
       {children}
     </StyledButton>
   )

@@ -31,11 +31,11 @@ describe('MovieDetails', () => {
     expect(screen.getByRole('img')).toHaveStyle(
       'background-image: url("some_image_url")'
     )
-    screen.getByText('some_title')
-    screen.getByText('8.5')
-    screen.getByText('some_genre, some_other_genre')
-    screen.getByText('2025')
-    screen.getByText('1h 5min')
+    expect(screen.getByText('some_title')).toBeInTheDocument()
+    expect(screen.getByText('8.5')).toBeInTheDocument()
+    expect(screen.getByText('some_genre, some_other_genre')).toBeInTheDocument()
+    expect(screen.getByText('2025')).toBeInTheDocument()
+    expect(screen.getByText('1h 5min')).toBeInTheDocument()
   })
 
   afterEach(() => {

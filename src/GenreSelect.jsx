@@ -33,15 +33,16 @@ export default function GenreSelect({ values = [], defaultValue, onChange }) {
   )
 
   return (
-    <StyledList>
+    <StyledList role="tablist">
       {values.map((it, idx) => (
         <li
+          role="tab"
           key={it?.toLowerCase().replace(/ +/, '_') || idx}
           className={it === values[index] ? 'selected' : ''}
-          onClick={() => {
+          onClick={(e) => {
             if (index !== idx) {
               setIndex(idx)
-              onChange?.(values[idx])
+              onChange?.(values[idx], e)
             }
           }}
         >
