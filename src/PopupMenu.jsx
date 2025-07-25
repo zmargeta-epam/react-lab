@@ -9,10 +9,10 @@ const StyledPopupMenu = styled.ul`
   box-sizing: border-box;
   color: #ffffffcc;
   display: flex;
+  flex-direction: column;
   font-family: Montserrat, Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 200;
-  flex-direction: column;
   margin: 0;
   padding: 0 0 10px;
   max-width: max-content;

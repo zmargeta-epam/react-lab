@@ -15,17 +15,17 @@ describe('SortControl', () => {
     expect(screen.getByText('Release Date')).toBeInTheDocument()
     expect(screen.getByText('Title')).toBeInTheDocument()
     expect(screen.getByRole('combobox')).toHaveValue(
-      SortCriteria.RELEASE_DATE.toString()
+      SortCriteria.ReleaseDate.toString()
     )
   })
 
   it('renders selected option', () => {
     // arrange
-    render(<SortControl defaultValue={SortCriteria.TITLE} />)
+    render(<SortControl defaultValue={SortCriteria.Title} />)
 
     // assert
     expect(screen.getByRole('combobox')).toHaveValue(
-      SortCriteria.TITLE.toString()
+      SortCriteria.Title.toString()
     )
   })
 
@@ -40,7 +40,7 @@ describe('SortControl', () => {
 
     // assert
     expect(callback).toHaveBeenCalled()
-    expect(callback).toHaveBeenCalledWith(SortCriteria.TITLE)
+    expect(callback).toHaveBeenCalledWith(SortCriteria.Title)
   })
 
   afterEach(() => {

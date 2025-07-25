@@ -11,18 +11,18 @@ export default {
       control: {
         type: 'select',
         labels: {
-          [SortCriteria.RELEASE_DATE]: 'RELEASE_DATE',
-          [SortCriteria.TITLE]: 'TITLE',
+          [SortCriteria.ReleaseDate]: 'Release Date',
+          [SortCriteria.Title]: 'Title',
         },
       },
-      options: [SortCriteria.RELEASE_DATE, SortCriteria.TITLE],
+      options: [SortCriteria.ReleaseDate, SortCriteria.Title],
     },
   },
 }
 
 export const Default = {
   args: {
-    defaultValue: SortCriteria.RELEASE_DATE,
+    defaultValue: SortCriteria.ReleaseDate,
     onChange: fn(),
   },
 }

@@ -12,34 +12,34 @@ export default {
       control: {
         type: 'select',
         labels: {
-          [ButtonVariant.DEFAULT]: 'DEFAULT',
-          [ButtonVariant.PRIMARY]: 'PRIMARY',
-          [ButtonVariant.SECONDARY]: 'SECONDARY',
+          [ButtonVariant.Default]: 'Default',
+          [ButtonVariant.Primary]: 'Primary',
+          [ButtonVariant.Secondary]: 'Secondary',
         },
       },
       options: [
-        ButtonVariant.DEFAULT,
-        ButtonVariant.PRIMARY,
-        ButtonVariant.SECONDARY,
+        ButtonVariant.Default,
+        ButtonVariant.Primary,
+        ButtonVariant.Secondary,
       ],
     },
     size: {
       control: {
         type: 'select',
         labels: {
-          [ButtonSize.X_SMALL]: 'X_SMALL',
-          [ButtonSize.SMALL]: 'SMALL',
-          [ButtonSize.MEDIUM]: 'MEDIUM',
-          [ButtonSize.LARGE]: 'LARGE',
-          [ButtonSize.X_LARGE]: 'X_LARGE',
+          [ButtonSize.ExtraSmall]: 'Extra Small',
+          [ButtonSize.Small]: 'Small',
+          [ButtonSize.Medium]: 'Medium',
+          [ButtonSize.Large]: 'Large',
+          [ButtonSize.ExtraLarge]: 'Extra Large',
         },
       },
       options: [
-        ButtonSize.X_SMALL,
-        ButtonSize.SMALL,
-        ButtonSize.MEDIUM,
-        ButtonSize.LARGE,
-        ButtonSize.X_LARGE,
+        ButtonSize.ExtraSmall,
+        ButtonSize.Small,
+        ButtonSize.Medium,
+        ButtonSize.Large,
+        ButtonSize.ExtraLarge,
       ],
     },
   },
@@ -55,7 +55,7 @@ export const Default = {
 export const Primary = {
   args: {
     label: 'Submit',
-    variant: ButtonVariant.PRIMARY,
+    variant: ButtonVariant.Primary,
     onClick: fn(),
   },
 }
@@ -63,7 +63,7 @@ export const Primary = {
 export const Secondary = {
   args: {
     label: 'Submit',
-    variant: ButtonVariant.SECONDARY,
+    variant: ButtonVariant.Secondary,
     onClick: fn(),
   },
 }

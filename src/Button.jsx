@@ -50,18 +50,18 @@ const StyledButton = styled.button`
 
 export default function Button({
   children,
-  variant = ButtonVariant.DEFAULT,
-  size = ButtonSize.MEDIUM,
+  variant = ButtonVariant.Default,
+  size = ButtonSize.Medium,
   onClick,
 }) {
   const VARIANT_STYLES = Object.freeze({
-    [ButtonVariant.PRIMARY]: 'primary',
-    [ButtonVariant.SECONDARY]: 'secondary',
+    [ButtonVariant.Primary]: 'primary',
+    [ButtonVariant.Secondary]: 'secondary',
   })
 
   const SIZE_STYLES = Object.freeze({
-    [ButtonSize.X_SMALL]: 'x-small',
-    [ButtonSize.SMALL]: 'small',
+    [ButtonSize.ExtraSmall]: 'x-small',
+    [ButtonSize.Small]: 'small',
   })
 
   const styles = [VARIANT_STYLES[variant], SIZE_STYLES[size]]

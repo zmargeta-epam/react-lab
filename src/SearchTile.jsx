@@ -43,8 +43,8 @@ export default function SearchTile({ onSearch, onAddMovie }) {
       <GradientOverlay>
         <Logo />
         <Button
-          variant={ButtonVariant.SECONDARY}
-          size={ButtonSize.SMALL}
+          variant={ButtonVariant.Secondary}
+          size={ButtonSize.Small}
           onClick={(e) => onAddMovie?.(e)}
         >
           + Add Movie

@@ -49,7 +49,7 @@ export default function SearchForm({ initialValue, onSubmit }) {
         placeholder="What do you want to watch?"
         defaultValue={initialValue}
       />
-      <Button variant={ButtonVariant.PRIMARY}>Search</Button>
+      <Button variant={ButtonVariant.Primary}>Search</Button>
     </StyledForm>
   )
 }

@@ -27,7 +27,7 @@ const StyledSortControl = styled.label`
 `
 
 export default function SortControl({
-  defaultValue = SortCriteria.RELEASE_DATE,
+  defaultValue = SortCriteria.ReleaseDate,
   onChange,
 }) {
   const [value, setValue] = React.useState(parseInt(defaultValue))
@@ -45,8 +45,8 @@ export default function SortControl({
           }
         }}
       >
-        <option value={SortCriteria.RELEASE_DATE}>Release Date</option>
-        <option value={SortCriteria.TITLE}>Title</option>
+        <option value={SortCriteria.ReleaseDate}>Release Date</option>
+        <option value={SortCriteria.Title}>Title</option>
       </select>
     </StyledSortControl>
   )

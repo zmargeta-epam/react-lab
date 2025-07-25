@@ -1,13 +1,13 @@
 export const ButtonVariant = Object.freeze({
-  DEFAULT: 0,
-  PRIMARY: 1,
-  SECONDARY: 2,
+  Default: 0,
+  Primary: 1,
+  Secondary: 2,
 })
 
 export const ButtonSize = Object.freeze({
-  X_SMALL: 0,
-  SMALL: 1,
-  MEDIUM: 2,
-  LARGE: 3,
-  X_LARGE: 4,
+  ExtraSmall: 0,
+  Small: 1,
+  Medium: 2,
+  Large: 3,
+  ExtraLarge: 4,
 })
