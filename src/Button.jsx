@@ -18,8 +18,13 @@ const StyledButton = styled.button`
   text-overflow: ellipsis;
   text-transform: uppercase;
   white-space: nowrap;
+  max-width: max-content;
   min-width: 180px;
   padding: 0 16px;
+
+  &:focus {
+    text-decoration: underline;
+  }
 
   &.primary {
     background-color: #f65261;
@@ -52,6 +57,7 @@ export default function Button({
   children,
   variant = ButtonVariant.Default,
   size = ButtonSize.Medium,
+  type = 'button',
   onClick,
 }) {
   const VARIANT_STYLES = Object.freeze({
@@ -64,12 +70,10 @@ export default function Button({
     [ButtonSize.Small]: 'small',
   })
 
-  const styles = [VARIANT_STYLES[variant], SIZE_STYLES[size]]
-    .filter((it) => it)
-    .join(' ')
+  const styles = [VARIANT_STYLES[variant], SIZE_STYLES[size]].filter((it) => it).join(' ')
 
   return (
-    <StyledButton onClick={(e) => onClick?.(e)} className={styles}>
+    <StyledButton type={type} onClick={(e) => onClick?.(e)} className={styles}>
       {children}
     </StyledButton>
   )

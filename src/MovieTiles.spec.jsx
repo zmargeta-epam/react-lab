@@ -11,15 +11,15 @@ describe('MovieTiles', () => {
     render(
       <MovieTiles
         movies={[
-          { id: 1, title: 'some_title' },
-          { id: 2, title: 'some_other_title' },
+          { id: 1, title: 'title' },
+          { id: 2, title: 'another_title' },
         ]}
       />
     )
 
     // assert
-    expect(screen.getByText('some_title')).toBeInTheDocument()
-    expect(screen.getByText('some_other_title')).toBeInTheDocument()
+    expect(screen.getByText('title')).toBeInTheDocument()
+    expect(screen.getByText('another_title')).toBeInTheDocument()
   })
 
   it('triggers the callback on selected movie change', async () => {
@@ -29,22 +29,19 @@ describe('MovieTiles', () => {
     render(
       <MovieTiles
         movies={[
-          { id: 1, title: 'some_title' },
-          { id: 2, title: 'some_other_title' },
+          { id: 1, title: 'title' },
+          { id: 2, title: 'another_title' },
         ]}
         onSelect={callback}
       />
     )
 
     // act
-    await user.click(screen.getByText('some_other_title'))
+    await user.click(screen.getByText('another_title'))
 
     // assert
     expect(callback).toHaveBeenCalled()
-    expect(callback).toHaveBeenCalledWith(
-      expect.objectContaining({ id: 2, title: 'some_other_title' }),
-      expect.anything()
-    )
+    expect(callback).toHaveBeenCalledWith(expect.objectContaining({ id: 2, title: 'another_title' }), expect.anything())
   })
 
   afterEach(() => {

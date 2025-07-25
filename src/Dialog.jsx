@@ -52,11 +52,11 @@ const Title = styled.h1`
   text-transform: uppercase;
 `
 
-export default function Dialog({ children, title, onClose }) {
+export default function Dialog({ children, title, onHide }) {
   return (
     <StyledDialog>
       <Container>
-        <GlyphButton imageUrl={glyphUrl} onClick={(e) => onClose?.(e)} />
+        <GlyphButton imageUrl={glyphUrl} onClick={(e) => onHide?.(e)} />
         <Title>{title}</Title>
         {children}
       </Container>

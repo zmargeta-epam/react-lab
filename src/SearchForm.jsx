@@ -15,10 +15,12 @@ const StyledForm = styled.form`
 
   & > input {
     border: 0;
+    box-sizing: border-box;
     display: block;
     font: inherit;
     font-weight: 400;
     height: 57px;
+    padding: 0;
   }
 
   & > input:focus {
@@ -27,6 +29,7 @@ const StyledForm = styled.form`
 
   & > input[type='search'] {
     background-color: #323232cc;
+    box-sizing: border-box;
     color: #ffffff4d;
     line-height: 57px;
     padding-left: 19px;
@@ -39,7 +42,9 @@ export default function SearchForm({ initialValue, onSubmit }) {
     <StyledForm
       onSubmit={(e) => {
         e.preventDefault()
-        onSubmit?.(new FormData(e.target).get('query'))
+
+        const formData = new FormData(e.target)
+        onSubmit?.(formData.get('query'))
       }}
     >
       <input
@@ -49,7 +54,9 @@ export default function SearchForm({ initialValue, onSubmit }) {
         placeholder="What do you want to watch?"
         defaultValue={initialValue}
       />
-      <Button variant={ButtonVariant.Primary}>Search</Button>
+      <Button type="submit" variant={ButtonVariant.Primary}>
+        Search
+      </Button>
     </StyledForm>
   )
 }

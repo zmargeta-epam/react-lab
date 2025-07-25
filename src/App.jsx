@@ -44,8 +44,8 @@ export default function App() {
       releaseYear: 1994,
       genres: ['Thriller', 'Crime', 'Comedy'],
       duration: 154,
-      description: `A burger-loving hit man, his philosophical partner, a drug-addled gangster's moll and a washed-up 
-boxer converge in this sprawling, comedic crime caper. Their adventures unfurl in three stories that ingeniously trip 
+      description: `A burger-loving hit man, his philosophical partner, a drug-addled gangster's moll and a washed-up\
+boxer converge in this sprawling, comedic crime caper. Their adventures unfurl in three stories that ingeniously trip\
 back and forth in time.`,
       rating: 8.5,
     },
@@ -57,8 +57,8 @@ back and forth in time.`,
       releaseYear: 2007,
       genres: ['Crime', 'Drama', 'Thriller'],
       duration: 122,
-      description: `Llewelyn Moss stumbles upon dead bodies, $2 million and a hoard of heroin in a Texas desert, but 
-methodical killer Anton Chigurh comes looking for it, with local sheriff Ed Tom Bell hot on his trail. The roles of 
+      description: `Llewelyn Moss stumbles upon dead bodies, $2 million and a hoard of heroin in a Texas desert, but\
+methodical killer Anton Chigurh comes looking for it, with local sheriff Ed Tom Bell hot on his trail. The roles of\
 prey and predator blur as the violent pursuit of money and justice collide`,
       rating: 7.9,
     },
@@ -70,8 +70,8 @@ prey and predator blur as the violent pursuit of money and justice collide`,
       releaseYear: 2005,
       genres: ['Action', 'Crime', 'Drama'],
       duration: 140,
-      description: `Driven by tragedy, billionaire Bruce Wayne dedicates his life to uncovering and defeating the 
-corruption that plagues his home, Gotham City. Unable to work within the system, he instead creates a new identity, a 
+      description: `Driven by tragedy, billionaire Bruce Wayne dedicates his life to uncovering and defeating the\
+corruption that plagues his home, Gotham City. Unable to work within the system, he instead creates a new identity, a\
 symbol of fear for the criminal underworld - The Batman.`,
       rating: 7.7,
     },
@@ -83,7 +83,7 @@ symbol of fear for the criminal underworld - The Batman.`,
       releaseYear: 2014,
       genres: ['Adventure', 'Drama', 'Science Fiction'],
       duration: 169,
-      description: `The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the 
+      description: `The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the\
 limitations on human space travel and conquer the vast distances involved in an interstellar voyage.`,
       rating: 8.5,
     },
@@ -95,8 +95,8 @@ limitations on human space travel and conquer the vast distances involved in an 
       releaseYear: 2017,
       genres: ['Drama'],
       duration: 138,
-      description: `After his older brother passes away, Lee Chandler is forced to return home to care for his 
-16-year-old nephew. There he is compelled to deal with a tragic past that separated him from his family and the 
+      description: `After his older brother passes away, Lee Chandler is forced to return home to care for his\
+16-year-old nephew. There he is compelled to deal with a tragic past that separated him from his family and the\
 community where he was born and raised.`,
       rating: 7.5,
     },
@@ -108,8 +108,8 @@ community where he was born and raised.`,
       releaseYear: 2019,
       genres: ['Comedy', 'Drama', 'Thriller'],
       duration: 162,
-      description: `Los Angeles, 1969. TV star Rick Dalton, a struggling actor specializing in westerns, and stuntman 
-Cliff Booth, his best friend, try to survive in a constantly changing movie industry. Dalton is the neighbor of the 
+      description: `Los Angeles, 1969. TV star Rick Dalton, a struggling actor specializing in westerns, and stuntman\
+Cliff Booth, his best friend, try to survive in a constantly changing movie industry. Dalton is the neighbor of the\
 young and promising actress and model Sharon Tate, who has just married the prestigious Polish director Roman Polanski…`,
       rating: 7.4,
     },

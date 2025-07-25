@@ -17,22 +17,13 @@ describe('MovieTile', () => {
 
   it('renders movie information', () => {
     // arrange
-    render(
-      <MovieTile
-        imageUrl="some_image_url"
-        title="some_title"
-        releaseYear={2025}
-        genres={['some_genre, some_other_genre']}
-      />
-    )
+    render(<MovieTile imageUrl="image_url" title="title" releaseYear={2025} genres={['genre, another_genre']} />)
 
     // assert
-    expect(screen.getByRole('img')).toHaveStyle(
-      'background-image: url("some_image_url")'
-    )
-    expect(screen.getByText('some_title')).toBeInTheDocument()
+    expect(screen.getByRole('img')).toHaveStyle('background-image: url("image_url")')
+    expect(screen.getByText('title')).toBeInTheDocument()
     expect(screen.getByText('2025')).toBeInTheDocument()
-    expect(screen.getByText('some_genre, some_other_genre')).toBeInTheDocument()
+    expect(screen.getByText('genre, another_genre')).toBeInTheDocument()
   })
 
   it('triggers the callback after clicking', async () => {

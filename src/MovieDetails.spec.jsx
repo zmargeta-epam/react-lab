@@ -18,22 +18,20 @@ describe('MovieDetails', () => {
     // arrange
     render(
       <MovieDetails
-        imageUrl="some_image_url"
-        title="some_title"
+        imageUrl="image_url"
+        title="title"
         releaseYear={2025}
-        genres={['some_genre, some_other_genre']}
+        genres={['genre, another_genre']}
         duration={65}
         rating={8.5}
       />
     )
 
     // assert
-    expect(screen.getByRole('img')).toHaveStyle(
-      'background-image: url("some_image_url")'
-    )
-    expect(screen.getByText('some_title')).toBeInTheDocument()
+    expect(screen.getByRole('img')).toHaveStyle('background-image: url("image_url")')
+    expect(screen.getByText('title')).toBeInTheDocument()
     expect(screen.getByText('8.5')).toBeInTheDocument()
-    expect(screen.getByText('some_genre, some_other_genre')).toBeInTheDocument()
+    expect(screen.getByText('genre, another_genre')).toBeInTheDocument()
     expect(screen.getByText('2025')).toBeInTheDocument()
     expect(screen.getByText('1h 5min')).toBeInTheDocument()
   })

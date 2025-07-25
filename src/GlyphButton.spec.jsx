@@ -8,12 +8,10 @@ import '@testing-library/jest-dom/vitest'
 describe('GlyphButton', () => {
   it('renders a button', () => {
     // arrange
-    render(<GlyphButton imageUrl="some_image_url">label</GlyphButton>)
+    render(<GlyphButton imageUrl="image_url">label</GlyphButton>)
 
     // assert
-    expect(screen.getByRole('img')).toHaveStyle(
-      'mask-image: url("some_image_url")'
-    )
+    expect(screen.getByRole('img')).toHaveStyle('mask-image: url("image_url")')
   })
 
   it('triggers the callback after clicking', async () => {
