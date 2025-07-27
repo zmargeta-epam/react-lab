@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import glyphUrl from './assets/glyph_close.svg'
 import GlyphButton from './GlyphButton.jsx'
@@ -10,6 +10,11 @@ const StyledDialog = styled.dialog`
   &::backdrop {
     background-color: #232323;
     opacity: 0.9;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
   }
 `
 
@@ -52,9 +57,24 @@ const Title = styled.h1`
   text-transform: uppercase;
 `
 
-export default function Dialog({ children, title, onHide }) {
+export default function Dialog({ title, visible = false, children, onHide }) {
+  const dialogRef = useRef(null)
+
+  useEffect(
+    () => (visible ? dialogRef.current?.showModal() : dialogRef.current?.close()),
+    [visible]
+  )
+
   return (
-    <StyledDialog>
+    <StyledDialog
+      ref={dialogRef}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') {
+          e.preventDefault()
+          onHide?.(e)
+        }
+      }}
+    >
       <Container>
         <GlyphButton imageUrl={glyphUrl} onClick={(e) => onHide?.(e)} />
         <Title>{title}</Title>

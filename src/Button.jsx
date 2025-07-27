@@ -48,16 +48,17 @@ const StyledButton = styled.button`
     padding: 0 12px;
   }
 
-  &:focus {
+  &:focus,
+  &:focus-visible {
     outline: none;
   }
 `
 
 export default function Button({
-  children,
+  type = 'button',
   variant = ButtonVariant.Default,
   size = ButtonSize.Medium,
-  type = 'button',
+  children,
   onClick,
 }) {
   const VARIANT_STYLES = Object.freeze({
@@ -73,7 +74,7 @@ export default function Button({
   const styles = [VARIANT_STYLES[variant], SIZE_STYLES[size]].filter((it) => it).join(' ')
 
   return (
-    <StyledButton type={type} onClick={(e) => onClick?.(e)} className={styles}>
+    <StyledButton type={type} onClick={onClick} className={styles}>
       {children}
     </StyledButton>
   )

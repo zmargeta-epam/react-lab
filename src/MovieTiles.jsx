@@ -8,13 +8,15 @@ const StyledMovieTiles = styled.div`
   gap: 56px;
 `
 
-export default function MovieTiles({ movies = [], onSelect }) {
+export default function MovieTiles({ movies = [], onSelectMovie, onEditMovie, onDeleteMovie }) {
   return (
     <StyledMovieTiles>
       {movies.map((it, idx) => (
         <MovieTile
           key={it.id || it?.title?.toLowerCase().replace(/ +/, '_') || idx}
-          onClick={(e) => onSelect?.(it, e)}
+          onClick={(e) => onSelectMovie?.(it, e)}
+          onEditMovie={() => onEditMovie?.(it)}
+          onDeleteMovie={() => onDeleteMovie?.(it)}
           {...it}
         />
       ))}

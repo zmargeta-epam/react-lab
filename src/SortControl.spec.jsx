@@ -14,19 +14,15 @@ describe('SortControl', () => {
     // assert
     expect(screen.getByText('Release Date')).toBeInTheDocument()
     expect(screen.getByText('Title')).toBeInTheDocument()
-    expect(screen.getByRole('combobox')).toHaveValue(
-      SortCriteria.ReleaseDate.toString()
-    )
+    expect(screen.getByRole('combobox')).toHaveValue(SortCriteria.ReleaseDate.toString())
   })
 
   it('renders selected option', () => {
     // arrange
-    render(<SortControl defaultValue={SortCriteria.Title} />)
+    render(<SortControl value={SortCriteria.Title} />)
 
     // assert
-    expect(screen.getByRole('combobox')).toHaveValue(
-      SortCriteria.Title.toString()
-    )
+    expect(screen.getByRole('combobox')).toHaveValue(SortCriteria.Title.toString())
   })
 
   it('triggers the callback on sort criteria change', async () => {

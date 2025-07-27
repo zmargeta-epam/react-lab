@@ -1,7 +1,7 @@
 import MovieTiles from './MovieTiles'
 import React from 'react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { cleanup, render, screen } from '@testing-library/react'
+import { cleanup, getByRole, render, screen } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import '@testing-library/jest-dom/vitest'
 
@@ -32,7 +32,7 @@ describe('MovieTiles', () => {
           { id: 1, title: 'title' },
           { id: 2, title: 'another_title' },
         ]}
-        onSelect={callback}
+        onSelectMovie={callback}
       />
     )
 
@@ -41,7 +41,78 @@ describe('MovieTiles', () => {
 
     // assert
     expect(callback).toHaveBeenCalled()
-    expect(callback).toHaveBeenCalledWith(expect.objectContaining({ id: 2, title: 'another_title' }), expect.anything())
+    expect(callback).toHaveBeenCalledWith(
+      expect.objectContaining({ id: 2, title: 'another_title' }),
+      expect.anything()
+    )
+  })
+
+  it('triggers the callback on edit movie', async () => {
+    // arrange
+    const user = userEvent.setup()
+    const callback = vi.fn()
+    render(
+      <MovieTiles
+        movies={[
+          { id: 1, title: 'title' },
+          { id: 2, title: 'another_title' },
+        ]}
+        onEditMovie={callback}
+      />
+    )
+
+    // act
+    const movieTile = screen.getByRole('article', { name: 'another_title' })
+    await user.hover(movieTile)
+    // bug: https://github.com/testing-library/user-event/discussions/1156
+    await user.pointer({
+      target: getByRole(movieTile, 'button'),
+      keys: '[MouseLeft]',
+    })
+    await user.pointer({
+      target: getByRole(movieTile, 'menuitem', { name: 'Edit' }),
+      keys: '[MouseLeft]',
+    })
+
+    // assert
+    expect(callback).toHaveBeenCalled()
+    expect(callback).toHaveBeenCalledWith(
+      expect.objectContaining({ id: 2, title: 'another_title' })
+    )
+  })
+
+  it('triggers the callback on delete movie', async () => {
+    // arrange
+    const user = userEvent.setup()
+    const callback = vi.fn()
+    render(
+      <MovieTiles
+        movies={[
+          { id: 1, title: 'title' },
+          { id: 2, title: 'another_title' },
+        ]}
+        onDeleteMovie={callback}
+      />
+    )
+
+    // act
+    const movieTile = screen.getByRole('article', { name: 'another_title' })
+    await user.hover(movieTile)
+    // bug: https://github.com/testing-library/user-event/discussions/1156
+    await user.pointer({
+      target: getByRole(movieTile, 'button'),
+      keys: '[MouseLeft]',
+    })
+    await user.pointer({
+      target: getByRole(movieTile, 'menuitem', { name: 'Delete' }),
+      keys: '[MouseLeft]',
+    })
+
+    // assert
+    expect(callback).toHaveBeenCalled()
+    expect(callback).toHaveBeenCalledWith(
+      expect.objectContaining({ id: 2, title: 'another_title' })
+    )
   })
 
   afterEach(() => {

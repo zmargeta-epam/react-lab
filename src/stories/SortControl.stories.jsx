@@ -22,7 +22,7 @@ export default {
 
 export const Default = {
   args: {
-    defaultValue: SortCriteria.ReleaseDate,
+    value: SortCriteria.ReleaseDate,
     onChange: fn(),
   },
 }

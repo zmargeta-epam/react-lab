@@ -22,29 +22,23 @@ const StyledList = styled.ul`
     line-height: 60px;
     text-align: center;
   }
+
   & li.selected {
     box-shadow: 0 3px #f65261;
   }
 `
 
-export default function GenreSelect({ values = [], defaultValue, onChange }) {
-  const [index, setIndex] = React.useState(
-    values.findIndex((it) => it.toLowerCase() === defaultValue?.toLowerCase())
-  )
+export default function GenreSelect({ values = [], selected, onChange }) {
+  const isSelected = (it) => it?.toLowerCase() === selected?.toLowerCase()
 
   return (
     <StyledList role="tablist">
       {values.map((it, idx) => (
         <li
-          role="tab"
           key={it?.toLowerCase().replace(/ +/, '_') || idx}
-          className={it === values[index] ? 'selected' : ''}
-          onClick={(e) => {
-            if (index !== idx) {
-              setIndex(idx)
-              onChange?.(values[idx], e)
-            }
-          }}
+          role="tab"
+          className={isSelected(it) ? 'selected' : ''}
+          onClick={!isSelected(it) ? (e) => onChange?.(it, e) : undefined}
         >
           {it}
         </li>

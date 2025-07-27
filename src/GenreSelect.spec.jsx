@@ -8,7 +8,7 @@ import '@testing-library/jest-dom/vitest'
 describe('GenreSelect', () => {
   it('renders all genres', () => {
     // arrange
-    render(<GenreSelect values={['genre', 'another_genre']} defaultValue={'genre'} />)
+    render(<GenreSelect values={['genre', 'another_genre']} selected={'genre'} />)
 
     // assert
     const actualGenres = screen.getAllByRole('tab')
@@ -19,7 +19,7 @@ describe('GenreSelect', () => {
 
   it('renders selected genre', () => {
     // arrange
-    render(<GenreSelect values={['genre', 'another_genre']} defaultValue={'genre'} />)
+    render(<GenreSelect values={['genre', 'another_genre']} selected={'genre'} />)
 
     // assert
     const actualGenres = screen.getAllByRole('tab')
@@ -33,7 +33,9 @@ describe('GenreSelect', () => {
     // arrange
     const user = userEvent.setup()
     const callback = vi.fn()
-    render(<GenreSelect values={['genre', 'another_genre']} defaultValue={'genre'} onChange={callback} />)
+    render(
+      <GenreSelect values={['genre', 'another_genre']} selected={'genre'} onChange={callback} />
+    )
 
     // act
     await user.click(screen.getByText('another_genre'))
