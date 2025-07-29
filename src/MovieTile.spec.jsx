@@ -17,7 +17,14 @@ describe('MovieTile', () => {
 
   it('renders movie information', () => {
     // arrange
-    render(<MovieTile imageUrl="image_url" title="title" releaseYear={2025} genres={['genre, another_genre']} />)
+    render(
+      <MovieTile
+        imageUrl="image_url"
+        title="title"
+        releaseYear={2025}
+        genres={['genre, another_genre']}
+      />
+    )
 
     // assert
     expect(screen.getByRole('img')).toHaveStyle('background-image: url("image_url")')

@@ -80,14 +80,15 @@ export default function MovieTile({
   onEditMovie,
   onDeleteMovie,
 }) {
-  const [menuButtonVisible, setMenuButtonVisible] = React.useState(false)
+  const [menuBtnVisible, setMenuBtnVisible] = React.useState(false)
   const [menuVisible, setMenuVisible] = React.useState(false)
 
   return (
     <StyledMovieTile
-      onClick={(e) => onClick?.(e)}
-      onMouseEnter={() => setMenuButtonVisible(true)}
-      onMouseLeave={() => setMenuButtonVisible(false)}
+      aria-label={title}
+      onClick={onClick}
+      onMouseEnter={() => setMenuBtnVisible(true)}
+      onMouseLeave={() => setMenuBtnVisible(false)}
     >
       <Poster imageUrl={imageUrl} />
       <Details>
@@ -95,7 +96,7 @@ export default function MovieTile({
         <ReleaseYear>{releaseYear || 'N/A'}</ReleaseYear>
         <Genres>{genres.length > 0 ? genres.join(', ') : 'Unknown'}</Genres>
       </Details>
-      {menuButtonVisible && (
+      {menuBtnVisible && (
         <GlyphButton
           imageUrl={glyphUrl}
           onClick={(e) => {

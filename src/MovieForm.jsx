@@ -117,19 +117,21 @@ export default function MovieForm({
       onSubmit={(e) => {
         e.preventDefault()
 
-        const formData = new FormData(e.target)
-        onSubmit?.({
-          imageUrl: formData.get('imageUrl'),
-          title: formData.get('title'),
-          genres: formData
-            .get('genres')
-            .split(',')
-            .map((it) => it.trim()),
-          releaseYear: parseInt(formData.get('releaseYear')),
-          rating: parseFloat(formData.get('rating')),
-          duration: parseInt(formData.get('duration')),
-          description: formData.get('description'),
-        })
+        if (onSubmit) {
+          const formData = new FormData(e.target)
+          onSubmit({
+            imageUrl: formData.get('imageUrl'),
+            title: formData.get('title'),
+            genres: formData
+              .get('genres')
+              .split(',')
+              .map((it) => it.trim()),
+            releaseYear: parseInt(formData.get('releaseYear')),
+            rating: parseFloat(formData.get('rating')),
+            duration: parseInt(formData.get('duration')),
+            description: formData.get('description'),
+          })
+        }
       }}
     >
       <label>
@@ -138,30 +140,15 @@ export default function MovieForm({
       </label>
       <label>
         <span>Movie URL</span>
-        <input
-          id="image-url"
-          name="imageUrl"
-          type="text"
-          defaultValue={imageUrl}
-        />
+        <input id="image-url" name="imageUrl" type="text" defaultValue={imageUrl} />
       </label>
       <label>
         <span>Genres</span>
-        <input
-          id="genres"
-          name="genres"
-          type="text"
-          defaultValue={genres.join(', ')}
-        />
+        <input id="genres" name="genres" type="text" defaultValue={genres.join(', ')} />
       </label>
       <label>
         <span>Release Date</span>
-        <input
-          id="release-year"
-          name="releaseYear"
-          type="text"
-          defaultValue={releaseYear}
-        />
+        <input id="release-year" name="releaseYear" type="text" defaultValue={releaseYear} />
       </label>
       <label>
         <span>Rating</span>
@@ -169,20 +156,11 @@ export default function MovieForm({
       </label>
       <label>
         <span>Runtime</span>
-        <input
-          id="duration"
-          name="duration"
-          type="text"
-          defaultValue={duration}
-        />
+        <input id="duration" name="duration" type="text" defaultValue={duration} />
       </label>
       <label>
         <span>Overview</span>
-        <textarea
-          id="description"
-          name="description"
-          defaultValue={description}
-        />
+        <textarea id="description" name="description" defaultValue={description} />
       </label>
       <ButtonPanel>
         <Button type="submit" variant={ButtonVariant.Primary}>

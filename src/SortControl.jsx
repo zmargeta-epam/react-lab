@@ -26,12 +26,7 @@ const StyledSortControl = styled.label`
   }
 `
 
-export default function SortControl({
-  defaultValue = SortCriteria.ReleaseDate,
-  onChange,
-}) {
-  const [value, setValue] = React.useState(parseInt(defaultValue))
-
+export default function SortControl({ value = SortCriteria.Popularity, onChange }) {
   return (
     <StyledSortControl>
       Sort by
@@ -39,12 +34,13 @@ export default function SortControl({
         value={value}
         onChange={(e) => {
           const newValue = parseInt(e.target.value)
+
           if (value !== newValue) {
-            setValue(newValue)
             onChange?.(newValue)
           }
         }}
       >
+        <option value={SortCriteria.Popularity}>Popularity</option>
         <option value={SortCriteria.ReleaseDate}>Release Date</option>
         <option value={SortCriteria.Title}>Title</option>
       </select>
