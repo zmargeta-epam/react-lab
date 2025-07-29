@@ -12,9 +12,10 @@ describe('SortControl', () => {
     render(<SortControl />)
 
     // assert
+    expect(screen.getByText('Popularity')).toBeInTheDocument()
     expect(screen.getByText('Release Date')).toBeInTheDocument()
     expect(screen.getByText('Title')).toBeInTheDocument()
-    expect(screen.getByRole('combobox')).toHaveValue(SortCriteria.ReleaseDate.toString())
+    expect(screen.getByRole('combobox')).toHaveValue(SortCriteria.Popularity.toString())
   })
 
   it('renders selected option', () => {

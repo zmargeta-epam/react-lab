@@ -26,7 +26,7 @@ const StyledSortControl = styled.label`
   }
 `
 
-export default function SortControl({ value = SortCriteria.ReleaseDate, onChange }) {
+export default function SortControl({ value = SortCriteria.Popularity, onChange }) {
   return (
     <StyledSortControl>
       Sort by
@@ -40,6 +40,7 @@ export default function SortControl({ value = SortCriteria.ReleaseDate, onChange
           }
         }}
       >
+        <option value={SortCriteria.Popularity}>Popularity</option>
         <option value={SortCriteria.ReleaseDate}>Release Date</option>
         <option value={SortCriteria.Title}>Title</option>
       </select>

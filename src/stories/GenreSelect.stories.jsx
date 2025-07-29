@@ -1,7 +1,6 @@
 import GenreSelect from '../GenreSelect.jsx'
 import { fn } from 'storybook/test'
 import { useArgs } from 'storybook/preview-api'
-import { action } from 'storybook/actions'
 
 export default {
   title: 'GenreSelect',

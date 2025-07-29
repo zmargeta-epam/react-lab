@@ -37,7 +37,7 @@ const GradientOverlay = styled.div`
   }
 `
 
-export default function SearchTile({ queryText, onSearch, onAddMovie }) {
+export default function SearchTile({ searchTerm, onSearch, onAddMovie }) {
   return (
     <StyledSearchTile $imageUrl={backgroundUrl}>
       <GradientOverlay>
@@ -45,7 +45,7 @@ export default function SearchTile({ queryText, onSearch, onAddMovie }) {
         <Button variant={ButtonVariant.Secondary} size={ButtonSize.Small} onClick={onAddMovie}>
           + Add Movie
         </Button>
-        <SearchForm value={queryText} onSubmit={onSearch} />
+        <SearchForm value={searchTerm} onSubmit={onSearch} />
       </GradientOverlay>
     </StyledSearchTile>
   )

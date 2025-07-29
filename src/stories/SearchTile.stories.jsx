@@ -9,7 +9,7 @@ export default {
 
 export const Default = {
   args: {
-    queryText: '',
+    searchTerm: '',
     onSearch: fn(),
     onAddMovie: fn(),
   },

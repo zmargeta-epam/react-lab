@@ -16,7 +16,7 @@ const StyledMovieDetails = styled.div`
 const Details = styled.div`
   display: grid;
   grid-template-columns: 100px fit-content(650px) 60px 1fr;
-  grid-template-rows: repeat(4, min-content);
+  grid-template-rows: repeat(3, min-content) 1fr;
   grid-template-areas:
     'title title rating .'
     'genres genres genres genres'
@@ -73,9 +73,16 @@ const Duration = styled.span`
   text-align: left;
 `
 
-const Description = styled.span`
+const Description = styled.p`
+  --max-lines: 7;
+  --line-height: 30px;
   font-size: 20px;
   grid-area: description;
+  line-height: var(--line-height);
+  margin: 0;
+  max-height: calc(var(--max-lines) * var(--line-height));
+  overflow: scroll;
+  padding: 0;
   text-align: left;
 `
 
@@ -88,7 +95,7 @@ export default function MovieDetails({
   duration,
   description,
 }) {
-  const hours = duration ? Math.floor(duration / 60) : 0
+  const hours = duration ? Math.floor(duration / 60) : undefined
   const minutes = duration ? duration - hours * 60 : 0
 
   return (
@@ -99,7 +106,9 @@ export default function MovieDetails({
         <Rating>{rating || 'N/A'}</Rating>
         <Genres>{genres.length > 0 ? genres.join(', ') : 'Unknown'}</Genres>
         <ReleaseYear>{releaseYear || 'N/A'}</ReleaseYear>
-        <Duration>{(duration && `${hours}h ${minutes}min`) || 'N/A'}</Duration>
+        <Duration>
+          {(duration && hours && `${hours}h ${minutes}min`) || `${minutes}min` || 'N/A'}
+        </Duration>
         <Description>{description || 'Unknown'}</Description>
       </Details>
     </StyledMovieDetails>

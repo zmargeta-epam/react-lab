@@ -1,4 +1,5 @@
 export const SortCriteria = Object.freeze({
-  ReleaseDate: 0,
-  Title: 1,
+  Popularity: 0,
+  ReleaseDate: 1,
+  Title: 2,
 })
