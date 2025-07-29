@@ -17,11 +17,7 @@ export default {
           [ButtonVariant.Secondary]: 'Secondary',
         },
       },
-      options: [
-        ButtonVariant.Default,
-        ButtonVariant.Primary,
-        ButtonVariant.Secondary,
-      ],
+      options: [ButtonVariant.Default, ButtonVariant.Primary, ButtonVariant.Secondary],
     },
     size: {
       control: {

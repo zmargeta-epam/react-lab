@@ -10,6 +10,11 @@ const StyledGlyphButton = styled.button`
   width: 36px;
   margin: 0;
   padding: 0;
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
 `
 
 const Glyph = styled.div`
@@ -34,7 +39,7 @@ const Glyph = styled.div`
 
 export default function GlyphButton({ imageUrl, onClick }) {
   return (
-    <StyledGlyphButton onClick={(e) => onClick?.(e)}>
+    <StyledGlyphButton onClick={onClick}>
       <Glyph $imageUrl={imageUrl} role="img" />
     </StyledGlyphButton>
   )

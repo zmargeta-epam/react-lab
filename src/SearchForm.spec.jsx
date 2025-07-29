@@ -6,12 +6,12 @@ import { userEvent } from '@testing-library/user-event'
 import '@testing-library/jest-dom/vitest'
 
 describe('SearchForm', () => {
-  it('renders the initial value', () => {
+  it('renders the value', () => {
     // arrange
-    render(<SearchForm initialValue="initial_value" />)
+    render(<SearchForm value="value" />)
 
     // assert
-    expect(screen.getByRole('searchbox')).toHaveValue('initial_value')
+    expect(screen.getByRole('searchbox')).toHaveValue('value')
   })
 
   it('triggers the callback on button click', async () => {

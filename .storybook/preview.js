@@ -16,9 +16,10 @@ const preview = {
     },
 
     backgrounds: {
-      default: 'Default',
+      default: 'default',
       options: {
-        default: { name: 'Default', value: '#232323' },
+        default: { name: 'default', value: '#232323' },
+        app: { name: 'app', value: '#555' },
       },
     },
   },
