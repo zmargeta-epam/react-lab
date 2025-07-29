@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 const StyledList = styled.ul`
   align-items: stretch;
+  box-sizing: border-box;
   color: #fff;
   display: flex;
   font-family: Montserrat, Helvetica, Arial, sans-serif;
@@ -14,34 +15,34 @@ const StyledList = styled.ul`
   text-transform: uppercase;
 
   & li {
+    box-sizing: border-box;
     cursor: pointer;
     display: block;
-    height: 72px;
-    line-height: 72px;
+    height: 60px;
+    line-height: 60px;
     text-align: center;
   }
   & li.selected {
-    border-bottom: 2px solid #f65261;
+    box-shadow: 0 3px #f65261;
   }
 `
 
 export default function GenreSelect({ values = [], defaultValue, onChange }) {
   const [index, setIndex] = React.useState(
-    values.findIndex((it) => it.toUpperCase() === defaultValue?.toUpperCase())
+    values.findIndex((it) => it.toLowerCase() === defaultValue?.toLowerCase())
   )
 
   return (
-    <StyledList>
+    <StyledList role="tablist">
       {values.map((it, idx) => (
         <li
-          key={idx}
-          data-index={idx}
+          role="tab"
+          key={it?.toLowerCase().replace(/ +/, '_') || idx}
           className={it === values[index] ? 'selected' : ''}
-          onClick={(event) => {
-            const newIndex = event.target.dataset.index
-            if (index !== newIndex) {
-              setIndex(newIndex)
-              onChange?.(values[newIndex])
+          onClick={(e) => {
+            if (index !== idx) {
+              setIndex(idx)
+              onChange?.(values[idx], e)
             }
           }}
         >

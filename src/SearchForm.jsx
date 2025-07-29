@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import Button from './Button.jsx'
+import { ButtonVariant } from './ButtonStyles.js'
 
 const StyledForm = styled.form`
   color: #fff;
@@ -13,43 +15,36 @@ const StyledForm = styled.form`
 
   & > input {
     border: 0;
+    box-sizing: border-box;
     display: block;
     font: inherit;
     font-weight: 400;
     height: 57px;
+    padding: 0;
   }
+
   & > input:focus {
     outline: none;
   }
+
   & > input[type='search'] {
     background-color: #323232cc;
+    box-sizing: border-box;
     color: #ffffff4d;
     line-height: 57px;
     padding-left: 19px;
     width: 713px;
   }
-  & > input[type='submit'] {
-    background-color: #f65261;
-    border-radius: 4px;
-    color: #fff;
-    text-transform: uppercase;
-    width: 233px;
-  }
 `
 
 export default function SearchForm({ initialValue, onSubmit }) {
-  const [, setValue] = React.useState(initialValue)
-
   return (
     <StyledForm
-      onSubmit={(event) => {
-        event.preventDefault()
+      onSubmit={(e) => {
+        e.preventDefault()
 
-        let formData = new FormData(event.target)
-        let newValue = formData.get('query')
-
-        setValue(newValue)
-        onSubmit?.(newValue)
+        const formData = new FormData(e.target)
+        onSubmit?.(formData.get('query'))
       }}
     >
       <input
@@ -59,7 +54,9 @@ export default function SearchForm({ initialValue, onSubmit }) {
         placeholder="What do you want to watch?"
         defaultValue={initialValue}
       />
-      <input type="submit" value="Search" />
+      <Button type="submit" variant={ButtonVariant.Primary}>
+        Search
+      </Button>
     </StyledForm>
   )
 }

@@ -9,8 +9,8 @@ const StyledSortControl = styled.label`
   font-size: 16px;
   font-weight: 100;
   gap: 30px;
-  height: 72px;
-  line-height: 72px;
+  height: 60px;
+  line-height: 60px;
   text-transform: uppercase;
 
   & > select {
@@ -18,7 +18,7 @@ const StyledSortControl = styled.label`
     background-color: transparent;
     border: 0;
     color: #fff;
-    cursor: inherit;
+    cursor: pointer;
     font: inherit;
     line-height: inherit;
     outline: none;
@@ -27,7 +27,7 @@ const StyledSortControl = styled.label`
 `
 
 export default function SortControl({
-  defaultValue = SortCriteria.RELEASE_DATE,
+  defaultValue = SortCriteria.ReleaseDate,
   onChange,
 }) {
   const [value, setValue] = React.useState(parseInt(defaultValue))
@@ -45,8 +45,8 @@ export default function SortControl({
           }
         }}
       >
-        <option value={SortCriteria.RELEASE_DATE}>Release Date</option>
-        <option value={SortCriteria.TITLE}>Title</option>
+        <option value={SortCriteria.ReleaseDate}>Release Date</option>
+        <option value={SortCriteria.Title}>Title</option>
       </select>
     </StyledSortControl>
   )

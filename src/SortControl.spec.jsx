@@ -12,24 +12,24 @@ describe('SortControl', () => {
     render(<SortControl />)
 
     // assert
-    screen.getByText('Release Date')
-    screen.getByText('Title')
+    expect(screen.getByText('Release Date')).toBeInTheDocument()
+    expect(screen.getByText('Title')).toBeInTheDocument()
     expect(screen.getByRole('combobox')).toHaveValue(
-      SortCriteria.RELEASE_DATE.toString()
+      SortCriteria.ReleaseDate.toString()
     )
   })
 
   it('renders selected option', () => {
     // arrange
-    render(<SortControl defaultValue={SortCriteria.TITLE} />)
+    render(<SortControl defaultValue={SortCriteria.Title} />)
 
     // assert
     expect(screen.getByRole('combobox')).toHaveValue(
-      SortCriteria.TITLE.toString()
+      SortCriteria.Title.toString()
     )
   })
 
-  it('submits the selected criteria on change', async () => {
+  it('triggers the callback on sort criteria change', async () => {
     // arrange
     const user = userEvent.setup()
     const callback = vi.fn()
@@ -40,7 +40,7 @@ describe('SortControl', () => {
 
     // assert
     expect(callback).toHaveBeenCalled()
-    expect(callback).toHaveBeenCalledWith(SortCriteria.TITLE)
+    expect(callback).toHaveBeenCalledWith(SortCriteria.Title)
   })
 
   afterEach(() => {

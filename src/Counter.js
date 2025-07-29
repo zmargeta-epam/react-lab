@@ -19,7 +19,7 @@ export default class Counter extends React.Component {
       React.createElement(
         'button',
         {
-          key: 'Up',
+          key: 'up',
           onClick: () => {
             this.increment()
           },
@@ -29,7 +29,7 @@ export default class Counter extends React.Component {
       React.createElement(
         'button',
         {
-          key: 'Down',
+          key: 'down',
           onClick: () => {
             this.decrement()
           },
