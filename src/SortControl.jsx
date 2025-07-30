@@ -30,6 +30,8 @@ const SortControl = ({ value = SortCriteria.Popularity, onChange }) => (
   <StyledSortControl>
     Sort by
     <select
+      id="sort-criteria"
+      name="sortCriteria"
       value={value}
       onChange={(e) => {
         const newValue = parseInt(e.target.value)

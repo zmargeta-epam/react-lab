@@ -12,7 +12,7 @@ const MovieTiles = ({ movies = [], onSelectMovie, onEditMovie, onDeleteMovie }) 
   <StyledMovieTiles>
     {movies.map((it, idx) => (
       <MovieTile
-        key={it.id || it?.title?.toLowerCase().replace(/ +/, '_') || idx}
+        key={it?.id || it?.title || idx}
         onClick={(e) => onSelectMovie?.(it, e)}
         onEditMovie={() => onEditMovie?.(it)}
         onDeleteMovie={() => onDeleteMovie?.(it)}

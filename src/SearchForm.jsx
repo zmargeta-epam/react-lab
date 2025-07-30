@@ -39,6 +39,7 @@ const StyledForm = styled.form`
 
 const SearchForm = ({ value, onSubmit }) => (
   <StyledForm
+    key={value}
     onSubmit={(e) => {
       e.preventDefault()
 

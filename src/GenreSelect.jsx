@@ -35,7 +35,7 @@ const GenreSelect = ({ values = [], selected, onChange }) => {
     <StyledList role="tablist">
       {values.map((it, idx) => (
         <li
-          key={it?.toLowerCase().replace(/ +/, '_') || idx}
+          key={it || idx}
           role="tab"
           className={isSelected(it) ? 'selected' : ''}
           onClick={!isSelected(it) ? (e) => onChange?.(it, e) : undefined}
