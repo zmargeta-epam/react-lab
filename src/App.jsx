@@ -1,7 +1,14 @@
 import './App.css'
 import React from 'react'
 import MoviesPage from './MoviesPage.jsx'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-export default function App() {
-  return <MoviesPage />
-}
+const App = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<MoviesPage />} />
+    </Routes>
+  </BrowserRouter>
+)
+
+export default App

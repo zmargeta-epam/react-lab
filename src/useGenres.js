@@ -15,7 +15,9 @@ const fetchGenres = () => {
   return axios.get('/3/genre/movie/list', config).then((res) => toGenreLookup(res.data.genres))
 }
 
-export default function useGenre(options) {
+const useGenre = (options) => {
   const { data, error, isLoading } = useSWR('/api/genres', fetchGenres, options)
   return { genres: data, error, loading: isLoading }
 }
+
+export default useGenre

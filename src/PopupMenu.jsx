@@ -22,16 +22,13 @@ const StyledPopupMenu = styled.ul`
   }
 `
 
-export default function PopupMenu({ visible = false, children, onHide }) {
-  return (
-    visible && (
-      <StyledPopupMenu role="menu" onMouseLeave={onHide}>
-        <GlyphButton imageUrl={glyphUrl} onClick={onHide} />
-        {children}
-      </StyledPopupMenu>
-    )
+const PopupMenu = ({ visible = false, children, onHide }) =>
+  visible && (
+    <StyledPopupMenu role="menu" onMouseLeave={onHide}>
+      <GlyphButton imageUrl={glyphUrl} onClick={onHide} />
+      {children}
+    </StyledPopupMenu>
   )
-}
 
 const StyledPopupMenuItem = styled.li`
   box-sizing: border-box;
@@ -50,10 +47,11 @@ const StyledPopupMenuItem = styled.li`
   }
 `
 
-export function PopupMenuItem({ children, onClick }) {
-  return (
-    <StyledPopupMenuItem role="menuitem" onClick={onClick}>
-      {children}
-    </StyledPopupMenuItem>
-  )
-}
+const PopupMenuItem = ({ children, onClick }) => (
+  <StyledPopupMenuItem role="menuitem" onClick={onClick}>
+    {children}
+  </StyledPopupMenuItem>
+)
+
+export default PopupMenu
+export { PopupMenuItem }

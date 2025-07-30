@@ -15,7 +15,7 @@ const fetchMovie = ({ movieId }) => {
   return axios.get(`/3/movie/${movieId}`, config).then((res) => toMovieUsing()(res.data))
 }
 
-export default function useMovie(movieId, options) {
+const useMovie = (movieId, options) => {
   const { data, error, isLoading } = useSWR(
     () => movieId && { url: `/api/movies/${movieId}`, movieId },
     fetchMovie,
@@ -23,3 +23,5 @@ export default function useMovie(movieId, options) {
   )
   return { movie: data, error, loading: isLoading }
 }
+
+export default useMovie

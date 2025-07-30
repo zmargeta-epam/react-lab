@@ -37,16 +37,16 @@ const GradientOverlay = styled.div`
   }
 `
 
-export default function SearchTile({ searchTerm, onSearch, onAddMovie }) {
-  return (
-    <StyledSearchTile $imageUrl={backgroundUrl}>
-      <GradientOverlay>
-        <Logo />
-        <Button variant={ButtonVariant.Secondary} size={ButtonSize.Small} onClick={onAddMovie}>
-          + Add Movie
-        </Button>
-        <SearchForm value={searchTerm} onSubmit={onSearch} />
-      </GradientOverlay>
-    </StyledSearchTile>
-  )
-}
+const SearchTile = ({ searchTerm, onSearch, onAddMovie }) => (
+  <StyledSearchTile $imageUrl={backgroundUrl}>
+    <GradientOverlay>
+      <Logo />
+      <Button variant={ButtonVariant.Secondary} size={ButtonSize.Small} onClick={onAddMovie}>
+        + Add Movie
+      </Button>
+      <SearchForm value={searchTerm} onSubmit={onSearch} />
+    </GradientOverlay>
+  </StyledSearchTile>
+)
+
+export default SearchTile

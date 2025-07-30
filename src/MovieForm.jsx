@@ -102,7 +102,7 @@ const ButtonPanel = styled.div`
   grid-area: button-panel;
 `
 
-export default function MovieForm({
+const MovieForm = ({
   imageUrl,
   title,
   releaseYear,
@@ -111,63 +111,63 @@ export default function MovieForm({
   duration,
   description,
   onSubmit,
-}) {
-  return (
-    <StyledMovieForm
-      onSubmit={(e) => {
-        e.preventDefault()
+}) => (
+  <StyledMovieForm
+    onSubmit={(e) => {
+      e.preventDefault()
 
-        if (onSubmit) {
-          const formData = new FormData(e.target)
-          onSubmit({
-            imageUrl: formData.get('imageUrl'),
-            title: formData.get('title'),
-            genres: formData
-              .get('genres')
-              .split(',')
-              .map((it) => it.trim()),
-            releaseYear: parseInt(formData.get('releaseYear')),
-            rating: parseFloat(formData.get('rating')),
-            duration: parseInt(formData.get('duration')),
-            description: formData.get('description'),
-          })
-        }
-      }}
-    >
-      <label>
-        <span>Title</span>
-        <input id="title" name="title" type="text" defaultValue={title} />
-      </label>
-      <label>
-        <span>Movie URL</span>
-        <input id="image-url" name="imageUrl" type="text" defaultValue={imageUrl} />
-      </label>
-      <label>
-        <span>Genres</span>
-        <input id="genres" name="genres" type="text" defaultValue={genres.join(', ')} />
-      </label>
-      <label>
-        <span>Release Date</span>
-        <input id="release-year" name="releaseYear" type="text" defaultValue={releaseYear} />
-      </label>
-      <label>
-        <span>Rating</span>
-        <input id="rating" name="rating" type="text" defaultValue={rating} />
-      </label>
-      <label>
-        <span>Runtime</span>
-        <input id="duration" name="duration" type="text" defaultValue={duration} />
-      </label>
-      <label>
-        <span>Overview</span>
-        <textarea id="description" name="description" defaultValue={description} />
-      </label>
-      <ButtonPanel>
-        <Button type="submit" variant={ButtonVariant.Primary}>
-          Submit
-        </Button>
-        <Button type="reset">Reset</Button>
-      </ButtonPanel>
-    </StyledMovieForm>
-  )
-}
+      if (onSubmit) {
+        const formData = new FormData(e.target)
+        onSubmit({
+          imageUrl: formData.get('imageUrl'),
+          title: formData.get('title'),
+          genres: formData
+            .get('genres')
+            .split(',')
+            .map((it) => it.trim()),
+          releaseYear: parseInt(formData.get('releaseYear')),
+          rating: parseFloat(formData.get('rating')),
+          duration: parseInt(formData.get('duration')),
+          description: formData.get('description'),
+        })
+      }
+    }}
+  >
+    <label>
+      <span>Title</span>
+      <input id="title" name="title" type="text" defaultValue={title} />
+    </label>
+    <label>
+      <span>Movie URL</span>
+      <input id="image-url" name="imageUrl" type="text" defaultValue={imageUrl} />
+    </label>
+    <label>
+      <span>Genres</span>
+      <input id="genres" name="genres" type="text" defaultValue={genres.join(', ')} />
+    </label>
+    <label>
+      <span>Release Date</span>
+      <input id="release-year" name="releaseYear" type="text" defaultValue={releaseYear} />
+    </label>
+    <label>
+      <span>Rating</span>
+      <input id="rating" name="rating" type="text" defaultValue={rating} />
+    </label>
+    <label>
+      <span>Runtime</span>
+      <input id="duration" name="duration" type="text" defaultValue={duration} />
+    </label>
+    <label>
+      <span>Overview</span>
+      <textarea id="description" name="description" defaultValue={description} />
+    </label>
+    <ButtonPanel>
+      <Button type="submit" variant={ButtonVariant.Primary}>
+        Submit
+      </Button>
+      <Button type="reset">Reset</Button>
+    </ButtonPanel>
+  </StyledMovieForm>
+)
+
+export default MovieForm

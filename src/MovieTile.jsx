@@ -71,7 +71,7 @@ const Genres = styled.span`
   white-space: nowrap;
 `
 
-export default function MovieTile({
+const MovieTile = ({
   imageUrl,
   title,
   releaseYear,
@@ -79,7 +79,7 @@ export default function MovieTile({
   onClick,
   onEditMovie,
   onDeleteMovie,
-}) {
+}) => {
   const [menuBtnVisible, setMenuBtnVisible] = React.useState(false)
   const [menuVisible, setMenuVisible] = React.useState(false)
 
@@ -136,3 +136,5 @@ export default function MovieTile({
     </StyledMovieTile>
   )
 }
+
+export default MovieTile

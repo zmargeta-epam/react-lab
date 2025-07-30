@@ -14,6 +14,6 @@ const StyledPoster = styled.div.attrs({ role: 'img' })`
   min-width: 322px;
   width: 322px;
 `
-export default function Poster({ imageUrl }) {
-  return <StyledPoster $imageUrl={imageUrl} />
-}
+const Poster = ({ imageUrl }) => <StyledPoster $imageUrl={imageUrl} />
+
+export default Poster

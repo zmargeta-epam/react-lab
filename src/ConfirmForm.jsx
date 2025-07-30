@@ -14,13 +14,13 @@ const StyledConfirmForm = styled.div`
   }
 `
 
-export default function ConfirmForm({ text, onConfirm }) {
-  return (
-    <StyledConfirmForm>
-      <span>{text}</span>
-      <Button variant={ButtonVariant.Primary} onClick={onConfirm}>
-        Confirm
-      </Button>
-    </StyledConfirmForm>
-  )
-}
+const ConfirmForm = ({ text, onConfirm }) => (
+  <StyledConfirmForm>
+    <span>{text}</span>
+    <Button variant={ButtonVariant.Primary} onClick={onConfirm}>
+      Confirm
+    </Button>
+  </StyledConfirmForm>
+)
+
+export default ConfirmForm

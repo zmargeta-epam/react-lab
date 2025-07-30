@@ -37,7 +37,7 @@ const findMovies = ({ searchTerm, lookups }) => {
     .then((res) => res.data.results?.map(toMovieUsing(lookups)))
 }
 
-export default function useMovies(searchTerm, genre, sortCriteria, options) {
+const useMovies = (searchTerm, genre, sortCriteria, options) => {
   const { genres, error: genresError } = useGenres(options)
   const {
     data: movies,
@@ -50,3 +50,5 @@ export default function useMovies(searchTerm, genre, sortCriteria, options) {
   )
   return { movies, error: genresError || moviesError, loading: isLoading }
 }
+
+export default useMovies

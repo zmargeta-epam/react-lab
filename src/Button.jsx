@@ -54,28 +54,30 @@ const StyledButton = styled.button`
   }
 `
 
-export default function Button({
+const VariantStyles = Object.freeze({
+  [ButtonVariant.Primary]: 'primary',
+  [ButtonVariant.Secondary]: 'secondary',
+})
+
+const SizeStyles = Object.freeze({
+  [ButtonSize.ExtraSmall]: 'x-small',
+  [ButtonSize.Small]: 'small',
+})
+
+const Button = ({
   type = 'button',
   variant = ButtonVariant.Default,
   size = ButtonSize.Medium,
   children,
   onClick,
-}) {
-  const VARIANT_STYLES = Object.freeze({
-    [ButtonVariant.Primary]: 'primary',
-    [ButtonVariant.Secondary]: 'secondary',
-  })
+}) => (
+  <StyledButton
+    type={type}
+    onClick={onClick}
+    className={[VariantStyles[variant], SizeStyles[size]].filter((it) => it).join(' ')}
+  >
+    {children}
+  </StyledButton>
+)
 
-  const SIZE_STYLES = Object.freeze({
-    [ButtonSize.ExtraSmall]: 'x-small',
-    [ButtonSize.Small]: 'small',
-  })
-
-  const styles = [VARIANT_STYLES[variant], SIZE_STYLES[size]].filter((it) => it).join(' ')
-
-  return (
-    <StyledButton type={type} onClick={onClick} className={styles}>
-      {children}
-    </StyledButton>
-  )
-}
+export default Button

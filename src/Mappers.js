@@ -6,10 +6,9 @@ const toReleaseYear = (value) => value && new Date(value).getFullYear()
 
 const toGenreUsing = (genreLookup) => (id) => genreLookup?.get(id) || undefined
 
-export const toGenreLookup = (values) =>
-  values?.reduce((acc, cur) => acc.set(cur.id, cur.name), new Map())
+const toGenreLookup = (values) => values?.reduce((acc, cur) => acc.set(cur.id, cur.name), new Map())
 
-export const toMovieUsing =
+const toMovieUsing =
   (lookups) =>
   ({
     id,
@@ -34,12 +33,12 @@ export const toMovieUsing =
     description: overview,
   })
 
-export const toGenreDtoUsing = (genreLookup) => (value) =>
+const toGenreDtoUsing = (genreLookup) => (value) =>
   value !== 'All'
     ? genreLookup?.entries().find(([, name]) => name?.toLowerCase() === value?.toLowerCase())?.[0]
     : undefined
 
-export const toSortByDto = (value) => {
+const toSortByDto = (value) => {
   let dtoValue = undefined
   switch (value) {
     case SortCriteria.Popularity:
@@ -54,3 +53,5 @@ export const toSortByDto = (value) => {
   }
   return dtoValue
 }
+
+export { toMovieUsing, toGenreDtoUsing, toGenreLookup, toSortByDto }

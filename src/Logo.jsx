@@ -7,11 +7,11 @@ const StyledLogo = styled.div`
   font-size: 20px;
 `
 
-export default function Logo() {
-  return (
-    <StyledLogo>
-      <strong>netflix</strong>
-      <span>roulette</span>
-    </StyledLogo>
-  )
-}
+const Logo = () => (
+  <StyledLogo>
+    <strong>netflix</strong>
+    <span>roulette</span>
+  </StyledLogo>
+)
+
+export default Logo

@@ -28,7 +28,7 @@ const StyledList = styled.ul`
   }
 `
 
-export default function GenreSelect({ values = [], selected, onChange }) {
+const GenreSelect = ({ values = [], selected, onChange }) => {
   const isSelected = (it) => it?.toLowerCase() === selected?.toLowerCase()
 
   return (
@@ -46,3 +46,5 @@ export default function GenreSelect({ values = [], selected, onChange }) {
     </StyledList>
   )
 }
+
+export default GenreSelect

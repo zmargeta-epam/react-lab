@@ -86,7 +86,7 @@ const Description = styled.p`
   text-align: left;
 `
 
-export default function MovieDetails({
+const MovieDetails = ({
   imageUrl,
   title,
   releaseYear,
@@ -94,7 +94,7 @@ export default function MovieDetails({
   rating,
   duration,
   description,
-}) {
+}) => {
   const hours = duration ? Math.floor(duration / 60) : undefined
   const minutes = duration ? duration - hours * 60 : 0
 
@@ -114,3 +114,5 @@ export default function MovieDetails({
     </StyledMovieDetails>
   )
 }
+
+export default MovieDetails

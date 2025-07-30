@@ -37,10 +37,10 @@ const Glyph = styled.div`
   }
 `
 
-export default function GlyphButton({ imageUrl, onClick }) {
-  return (
-    <StyledGlyphButton onClick={onClick}>
-      <Glyph $imageUrl={imageUrl} role="img" />
-    </StyledGlyphButton>
-  )
-}
+const GlyphButton = ({ imageUrl, onClick }) => (
+  <StyledGlyphButton onClick={onClick}>
+    <Glyph $imageUrl={imageUrl} role="img" />
+  </StyledGlyphButton>
+)
+
+export default GlyphButton

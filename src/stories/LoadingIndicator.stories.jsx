@@ -1,8 +1,8 @@
-import Loading from '../Loading.jsx'
+import LoadingIndicator from '../LoadingIndicator.jsx'
 
 export default {
   title: 'Loading',
-  component: Loading,
+  component: LoadingIndicator,
   tags: ['autodocs'],
 }
 

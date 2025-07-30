@@ -37,28 +37,28 @@ const StyledForm = styled.form`
   }
 `
 
-export default function SearchForm({ value, onSubmit }) {
-  return (
-    <StyledForm
-      onSubmit={(e) => {
-        e.preventDefault()
+const SearchForm = ({ value, onSubmit }) => (
+  <StyledForm
+    onSubmit={(e) => {
+      e.preventDefault()
 
-        if (onSubmit) {
-          const formData = new FormData(e.target)
-          onSubmit(formData.get('query'))
-        }
-      }}
-    >
-      <input
-        id="query"
-        name="query"
-        type="search"
-        placeholder="What do you want to watch?"
-        defaultValue={value}
-      />
-      <Button type="submit" variant={ButtonVariant.Primary}>
-        Search
-      </Button>
-    </StyledForm>
-  )
-}
+      if (onSubmit) {
+        const formData = new FormData(e.target)
+        onSubmit(formData.get('query'))
+      }
+    }}
+  >
+    <input
+      id="query"
+      name="query"
+      type="search"
+      placeholder="What do you want to watch?"
+      defaultValue={value}
+    />
+    <Button type="submit" variant={ButtonVariant.Primary}>
+      Search
+    </Button>
+  </StyledForm>
+)
+
+export default SearchForm

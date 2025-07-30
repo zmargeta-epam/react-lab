@@ -23,12 +23,12 @@ const StyledMovieDetailsTile = styled.div`
   }
 `
 
-export default function MovieDetailsTile({ movie, onClose }) {
-  return (
-    <StyledMovieDetailsTile>
-      <Logo />
-      <GlyphButton imageUrl={glyphUrl} onClick={onClose} />
-      <MovieDetails {...movie} />
-    </StyledMovieDetailsTile>
-  )
-}
+const MovieDetailsTile = ({ movie, onClose }) => (
+  <StyledMovieDetailsTile>
+    <Logo />
+    <GlyphButton imageUrl={glyphUrl} onClick={onClose} />
+    <MovieDetails {...movie} />
+  </StyledMovieDetailsTile>
+)
+
+export default MovieDetailsTile

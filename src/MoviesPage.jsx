@@ -6,7 +6,7 @@ import GenreSelect from './GenreSelect.jsx'
 import MovieTiles from './MovieTiles.jsx'
 import SortControl from './SortControl.jsx'
 import { SortCriteria } from './SortCriteria.js'
-import Loading from './Loading.jsx'
+import LoadingIndicator from './LoadingIndicator.jsx'
 import tmdbLogo from './assets/tmdb_logo.svg'
 import useMovies from './useMovies.js'
 import useMovie from './useMovie.js'
@@ -53,7 +53,7 @@ const Footer = styled.div`
   }
 `
 
-export default function MoviesPage() {
+const MoviesPage = () => {
   const genres = ['All', 'Action', 'Documentary', 'Comedy', 'Crime', 'Fantasy', 'Horror']
   const [searchTerm, setSearchTerm] = React.useState(undefined)
   const [activeGenre, setActiveGenre] = React.useState('All')
@@ -66,7 +66,7 @@ export default function MoviesPage() {
     <React.Fragment>
       <Header>
         {activeMovieId ? (
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<LoadingIndicator />}>
             <MovieDetailsTile movie={activeMovie} onClose={() => setActiveMovieId(undefined)} />
           </Suspense>
         ) : (
@@ -99,7 +99,7 @@ export default function MoviesPage() {
         />
       </Menu>
       <Content>
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<LoadingIndicator />}>
           <MovieTiles
             movies={movies}
             onSelectMovie={(it) => setActiveMovieId(it.id)}
@@ -115,3 +115,5 @@ export default function MoviesPage() {
     </React.Fragment>
   )
 }
+
+export default MoviesPage
