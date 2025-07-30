@@ -10,8 +10,8 @@ const StyledSearchTile = styled.div`
   background-image: url('${(props) => props.$imageUrl}');
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 540px;
-  min-width: 1027px;
+  height: 100%;
+  width: 100%;
 `
 
 const GradientOverlay = styled.div`

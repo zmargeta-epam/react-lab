@@ -8,7 +8,6 @@ const StyledLoading = styled.div`
   display: flex;
   height: 100%;
   justify-content: center;
-  min-height: 540px;
   width: 100%;
 `
 

@@ -54,15 +54,15 @@ const StyledButton = styled.button`
   }
 `
 
-const VariantStyles = Object.freeze({
+const VariantStyle = {
   [ButtonVariant.Primary]: 'primary',
   [ButtonVariant.Secondary]: 'secondary',
-})
+}
 
-const SizeStyles = Object.freeze({
+const SizeStyle = {
   [ButtonSize.ExtraSmall]: 'x-small',
   [ButtonSize.Small]: 'small',
-})
+}
 
 const Button = ({
   type = 'button',
@@ -74,7 +74,7 @@ const Button = ({
   <StyledButton
     type={type}
     onClick={onClick}
-    className={[VariantStyles[variant], SizeStyles[size]].filter((it) => it).join(' ')}
+    className={[VariantStyle[variant], SizeStyle[size]].filter((it) => it).join(' ')}
   >
     {children}
   </StyledButton>

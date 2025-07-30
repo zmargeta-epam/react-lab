@@ -54,4 +54,19 @@ const toSortByDto = (value) => {
   return dtoValue
 }
 
-export { toMovieUsing, toGenreDtoUsing, toGenreLookup, toSortByDto }
+const Converter = (convert, inverse) =>
+  Object.freeze({
+    convert: convert,
+    inverse: {
+      convert: inverse,
+    },
+  })
+
+Converter.Nop = Object.freeze({
+  convert: (it) => it,
+  inverse: {
+    convert: (it) => it,
+  },
+})
+
+export { Converter, toMovieUsing, toGenreDtoUsing, toGenreLookup, toSortByDto }

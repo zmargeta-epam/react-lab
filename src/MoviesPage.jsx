@@ -1,20 +1,22 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useState } from 'react'
 import styled from 'styled-components'
+import tmdbLogo from './assets/tmdb_logo.svg'
 import SearchTile from './SearchTile.jsx'
 import MovieDetailsTile from './MovieDetailsTile.jsx'
 import GenreSelect from './GenreSelect.jsx'
 import MovieTiles from './MovieTiles.jsx'
-import SortControl from './SortControl.jsx'
 import { SortCriteria } from './SortCriteria.js'
+import SortControl from './SortControl.jsx'
 import LoadingIndicator from './LoadingIndicator.jsx'
-import tmdbLogo from './assets/tmdb_logo.svg'
+import { Converter } from './Converters.js'
+import useQueryParams from './useQueryParams.js'
 import useMovies from './useMovies.js'
 import useMovie from './useMovie.js'
 
 const Header = styled.div`
   border-bottom: 10px solid #555;
   box-sizing: border-box;
-  max-height: 540px;
+  max-height: 560px;
   overflow: hidden;
 `
 
@@ -54,13 +56,44 @@ const Footer = styled.div`
 `
 
 const MoviesPage = () => {
-  const genres = ['All', 'Action', 'Documentary', 'Comedy', 'Crime', 'Fantasy', 'Horror']
-  const [searchTerm, setSearchTerm] = React.useState(undefined)
-  const [activeGenre, setActiveGenre] = React.useState('All')
-  const [sortCriteria, setSortCriteria] = React.useState(SortCriteria.Popularity)
-  const [activeMovieId, setActiveMovieId] = React.useState(undefined)
-  const { movies } = useMovies(searchTerm, activeGenre, sortCriteria, { suspense: true })
-  const { movie: activeMovie } = useMovie(activeMovieId, { suspense: true })
+  const P = { SearchTerm: 'q', ActiveGenre: 'genre', SortCriteria: 'sort_by' }
+  const F = { SearchTerm: null, ActiveGenre: 'All', SortCriteria: SortCriteria.Popularity }
+
+  const Genres = [F.ActiveGenre, 'Action', 'Documentary', 'Comedy', 'Crime', 'Fantasy', 'Horror']
+
+  const [searchTerm, setSearchTerm, activeGenre, setActiveGenre, sortCriteria, setSortCriteria] =
+    useQueryParams([
+      {
+        name: P.SearchTerm,
+        fallback: F.SearchTerm,
+        converter: Converter.Nop,
+        unset: [P.ActiveGenre, P.SortCriteria],
+      },
+      {
+        name: P.ActiveGenre,
+        fallback: F.ActiveGenre,
+        converter: Converter(
+          (it) => Genres.indexOf(it),
+          (it) => Genres[it]
+        ),
+        unset: [P.SearchTerm],
+      },
+      {
+        name: P.SortCriteria,
+        fallback: F.SortCriteria,
+        converter: Converter.Nop,
+        unset: [P.SearchTerm],
+      },
+    ])
+
+  const [activeMovieId, setActiveMovieId] = useState(undefined)
+  const [movies] = useMovies(
+    searchTerm,
+    searchTerm === F.SearchTerm ? activeGenre : F.ActiveGenre,
+    searchTerm === F.SearchTerm ? sortCriteria : F.SortCriteria,
+    { suspense: true }
+  )
+  const [activeMovie] = useMovie(activeMovieId, { suspense: true })
 
   return (
     <React.Fragment>
@@ -72,30 +105,20 @@ const MoviesPage = () => {
         ) : (
           <SearchTile
             searchTerm={searchTerm}
-            onSearch={(it) => {
-              setActiveGenre('All')
-              setSortCriteria(SortCriteria.Popularity)
-              setSearchTerm(it)
-            }}
+            onSearch={setSearchTerm}
             onAddMovie={() => console.log('onAddMovie')}
           />
         )}
       </Header>
       <Menu>
         <GenreSelect
-          values={genres}
-          selected={activeGenre}
-          onChange={(it) => {
-            setSearchTerm(undefined)
-            setActiveGenre(it)
-          }}
+          values={Genres}
+          selected={searchTerm === F.SearchTerm ? activeGenre : F.ActiveGenre}
+          onChange={setActiveGenre}
         />
         <SortControl
-          value={sortCriteria}
-          onChange={(it) => {
-            setSearchTerm(undefined)
-            setSortCriteria(it)
-          }}
+          value={searchTerm === F.SearchTerm ? sortCriteria : F.SortCriteria}
+          onChange={setSortCriteria}
         />
       </Menu>
       <Content>

@@ -1,27 +1,27 @@
 import useSWR from 'swr'
 import axios from 'axios'
-import { toMovieUsing } from './Mappers.js'
+import { toMovieUsing } from './Converters.js'
 
-const BASE_URL = import.meta.env.VITE_API_URL
-const API_KEY = import.meta.env.VITE_API_KEY
+const BaseUrl = import.meta.env.VITE_API_URL
+const ApiKey = import.meta.env.VITE_API_KEY
 
 const fetchMovie = ({ movieId }) => {
   const config = {
-    baseURL: BASE_URL,
+    baseURL: BaseUrl,
     headers: {
-      Authorization: `Bearer ${API_KEY}`,
+      Authorization: `Bearer ${ApiKey}`,
     },
   }
   return axios.get(`/3/movie/${movieId}`, config).then((res) => toMovieUsing()(res.data))
 }
 
-const useMovie = (movieId, options) => {
+const useMovie = (movieId, config) => {
   const { data, error, isLoading } = useSWR(
     () => movieId && { url: `/api/movies/${movieId}`, movieId },
     fetchMovie,
-    options
+    config
   )
-  return { movie: data, error, loading: isLoading }
+  return [data, isLoading, error]
 }
 
 export default useMovie

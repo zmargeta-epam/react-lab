@@ -45,13 +45,13 @@ const SearchForm = ({ value, onSubmit }) => (
 
       if (onSubmit) {
         const formData = new FormData(e.target)
-        onSubmit(formData.get('query'))
+        onSubmit(formData.get('searchTerm'))
       }
     }}
   >
     <input
-      id="query"
-      name="query"
+      id="search-term"
+      name="searchTerm"
       type="search"
       placeholder="What do you want to watch?"
       defaultValue={value}

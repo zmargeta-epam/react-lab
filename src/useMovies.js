@@ -1,16 +1,16 @@
 import useSWR from 'swr'
 import axios from 'axios'
 import useGenres from './useGenres.js'
-import { toGenreDtoUsing, toMovieUsing, toSortByDto } from './Mappers.js'
+import { toGenreDtoUsing, toMovieUsing, toSortByDto } from './Converters.js'
 
-const BASE_URL = import.meta.env.VITE_API_URL
-const API_KEY = import.meta.env.VITE_API_KEY
+const BaseUrl = import.meta.env.VITE_API_URL
+const ApiKey = import.meta.env.VITE_API_KEY
 
 const fetchMovies = ({ genre, sortCriteria, lookups }) => {
   const config = {
-    baseURL: BASE_URL,
+    baseURL: BaseUrl,
     headers: {
-      Authorization: `Bearer ${API_KEY}`,
+      Authorization: `Bearer ${ApiKey}`,
     },
     params: {
       with_genres: toGenreDtoUsing(lookups.genres)(genre),
@@ -24,9 +24,9 @@ const fetchMovies = ({ genre, sortCriteria, lookups }) => {
 
 const findMovies = ({ searchTerm, lookups }) => {
   const config = {
-    baseURL: BASE_URL,
+    baseURL: BaseUrl,
     headers: {
-      Authorization: `Bearer ${API_KEY}`,
+      Authorization: `Bearer ${ApiKey}`,
     },
     params: {
       query: searchTerm,
@@ -37,18 +37,14 @@ const findMovies = ({ searchTerm, lookups }) => {
     .then((res) => res.data.results?.map(toMovieUsing(lookups)))
 }
 
-const useMovies = (searchTerm, genre, sortCriteria, options) => {
-  const { genres, error: genresError } = useGenres(options)
-  const {
-    data: movies,
-    error: moviesError,
-    isLoading,
-  } = useSWR(
+const useMovies = (searchTerm, genre, sortCriteria, config) => {
+  const [genres, genresError] = useGenres(config)
+  const { data, error, isLoading } = useSWR(
     () => genres && { url: '/api/movies', searchTerm, genre, sortCriteria, lookups: { genres } },
     searchTerm ? findMovies : fetchMovies,
-    options
+    config
   )
-  return { movies, error: genresError || moviesError, loading: isLoading }
+  return [data, isLoading, genresError || error]
 }
 
 export default useMovies
