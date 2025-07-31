@@ -102,14 +102,14 @@ const MovieDetails = ({
     <StyledMovieDetails>
       <Poster imageUrl={imageUrl} />
       <Details>
-        <Title>{title || 'Unknown'}</Title>
-        <Rating>{rating || 'N/A'}</Rating>
+        <Title>{title ?? 'Unknown'}</Title>
+        <Rating>{rating ?? 'N/A'}</Rating>
         <Genres>{genres.length > 0 ? genres.join(', ') : 'Unknown'}</Genres>
-        <ReleaseYear>{releaseYear || 'N/A'}</ReleaseYear>
+        <ReleaseYear>{releaseYear ?? 'N/A'}</ReleaseYear>
         <Duration>
-          {(duration && hours && `${hours}h ${minutes}min`) || `${minutes}min` || 'N/A'}
+          {duration ? (hours ? `${hours}h ${minutes}min` : `${minutes}min`) : 'N/A'}
         </Duration>
-        <Description>{description || 'Unknown'}</Description>
+        <Description>{description ?? 'Unknown'}</Description>
       </Details>
     </StyledMovieDetails>
   )

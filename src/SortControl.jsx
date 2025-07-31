@@ -34,7 +34,7 @@ const SortControl = ({ value = SortCriteria.Popularity, onChange }) => (
       name="sortCriteria"
       value={value}
       onChange={(e) => {
-        const newValue = parseInt(e.target.value)
+        const newValue = Number(e.target.value)
 
         if (value !== newValue) {
           onChange?.(newValue)

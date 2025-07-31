@@ -1,72 +1,101 @@
-import { SortCriteria } from './SortCriteria.js'
+import { SortCriteria as SortCriteriaModel } from './SortCriteria.js'
 
-const toImageUrl = (value) => value && `https://www.themoviedb.org/t/p/w1280${value}`
+const BaseUrl = import.meta.env.VITE_IMG_URL
+const DateFormat = new Intl.DateTimeFormat('en-CA')
 
-const toReleaseYear = (value) => value && new Date(value).getFullYear()
-
-const toGenreUsing = (genreLookup) => (id) => genreLookup?.get(id) || undefined
-
-const toGenreLookup = (values) => values?.reduce((acc, cur) => acc.set(cur.id, cur.name), new Map())
-
-const toMovieUsing =
-  (lookups) =>
-  ({
-    id,
-    poster_path,
-    title,
-    vote_average,
-    genre_ids,
-    genres,
-    release_date,
-    runtime,
-    overview,
-  }) => ({
-    id,
-    imageUrl: toImageUrl(poster_path),
-    title,
-    rating: vote_average?.toFixed(1),
-    genres:
-      genres?.map((it) => it.name) ||
-      genre_ids.map(toGenreUsing(lookups?.genres)).filter((it) => it),
-    releaseYear: toReleaseYear(release_date),
-    duration: runtime,
-    description: overview,
-  })
-
-const toGenreDtoUsing = (genreLookup) => (value) =>
-  value !== 'All'
-    ? genreLookup?.entries().find(([, name]) => name?.toLowerCase() === value?.toLowerCase())?.[0]
-    : undefined
-
-const toSortByDto = (value) => {
-  let dtoValue = undefined
-  switch (value) {
-    case SortCriteria.Popularity:
-      dtoValue = 'popularity.desc'
-      break
-    case SortCriteria.ReleaseDate:
-      dtoValue = 'primary_release_date.desc'
-      break
-    case SortCriteria.Title:
-      dtoValue = 'original_title.asc'
-      break
-  }
-  return dtoValue
-}
-
-const Converter = (convert, inverse) =>
-  Object.freeze({
+const Converter = (convert, inverse) => {
+  return Object.freeze({
     convert: convert,
     inverse: {
       convert: inverse,
     },
+    using(context) {
+      return Converter(
+        (...args) => this.convert(...args, context),
+        (...args) => this.inverse.convert(...args, context)
+      )
+    },
   })
+}
 
-Converter.Nop = Object.freeze({
-  convert: (it) => it,
-  inverse: {
-    convert: (it) => it,
+Converter.Identity = Converter(
+  (it) => it,
+  (it) => it
+)
+
+const ImageUrl = Converter(
+  (val) => val?.replace(/^.*\//i, '/'),
+  (dto) => (dto ? `${BaseUrl}/t/p/w1280${dto}` : undefined)
+)
+
+const GenreLookup = Converter(
+  (val) => val?.entries().map(([id, name]) => ({ id, name })),
+  (dto) => dto?.reduce((map, obj) => map.set(obj.id, obj.name), new Map())
+)
+
+const Genre = Converter(
+  (val, { genreLookup = new Map() }) =>
+    val !== 'All'
+      ? genreLookup.entries().find(([, name]) => name?.toLowerCase() === val?.toLowerCase())?.[0]
+      : undefined,
+  (dto, { genreLookup = new Map() }) => genreLookup.get(dto)
+)
+
+const ReleaseYear = Converter(
+  (val) => (val ? DateFormat.format(new Date(val)) : undefined),
+  (dto) => (dto ? new Date(dto).getFullYear() : undefined)
+)
+
+const SortCriteria = Converter(
+  (val) => {
+    let dto = undefined
+    switch (Number(val)) {
+      case SortCriteriaModel.Popularity:
+        dto = 'popularity.desc'
+        break
+      case SortCriteriaModel.ReleaseDate:
+        dto = 'primary_release_date.desc'
+        break
+      case SortCriteriaModel.Title:
+        dto = 'original_title.asc'
+    }
+    return dto
   },
-})
+  (dto) => {
+    let val = undefined
+    switch (dto) {
+      case 'popularity.desc':
+        val = SortCriteriaModel.Popularity
+        break
+      case 'primary_release_date.desc':
+        val = SortCriteriaModel.ReleaseDate
+        break
+      case 'original_title.asc':
+        val = SortCriteriaModel.Title
+    }
+    return val
+  }
+)
 
-export { Converter, toMovieUsing, toGenreDtoUsing, toGenreLookup, toSortByDto }
+const Movie = Converter(
+  (val) => val,
+  (
+    { id, poster_path, title, vote_average, genre_ids, genres, release_date, runtime, overview },
+    context
+  ) => ({
+    id,
+    imageUrl: ImageUrl.inverse.convert(poster_path),
+    title,
+    rating: vote_average?.toFixed(1),
+    genres:
+      genres?.map((item) => item.name) ??
+      genre_ids
+        ?.map((item) => Genre.using(context).inverse.convert(item))
+        .filter((item) => item ?? null),
+    releaseYear: ReleaseYear.inverse.convert(release_date),
+    duration: runtime,
+    description: overview,
+  })
+)
+
+export { Converter, GenreLookup, Genre, ImageUrl, Movie, ReleaseYear, SortCriteria }

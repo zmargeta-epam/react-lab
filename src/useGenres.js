@@ -1,6 +1,6 @@
 import useSWR from 'swr'
 import axios from 'axios'
-import { toGenreLookup } from './Converters.js'
+import { GenreLookup } from './Converters.js'
 
 const BaseUrl = import.meta.env.VITE_API_URL
 const ApiKey = import.meta.env.VITE_API_KEY
@@ -12,7 +12,9 @@ const fetchGenres = () => {
       Authorization: `Bearer ${ApiKey}`,
     },
   }
-  return axios.get('/3/genre/movie/list', config).then((res) => toGenreLookup(res.data.genres))
+  return axios
+    .get('/3/genre/movie/list', config)
+    .then((res) => GenreLookup.inverse.convert(res.data.genres))
 }
 
 const useGenre = (config) => {

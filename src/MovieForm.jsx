@@ -125,9 +125,9 @@ const MovieForm = ({
             .get('genres')
             .split(',')
             .map((it) => it.trim()),
-          releaseYear: parseInt(formData.get('releaseYear')),
-          rating: parseFloat(formData.get('rating')),
-          duration: parseInt(formData.get('duration')),
+          releaseYear: Number(formData.get('releaseYear')),
+          rating: Number(formData.get('rating')),
+          duration: Number(formData.get('duration')),
           description: formData.get('description'),
         })
       }

@@ -92,11 +92,11 @@ const MovieTile = ({
     >
       <Poster imageUrl={imageUrl} />
       <Details>
-        <Title>{title || 'Unknown'}</Title>
-        <ReleaseYear>{releaseYear || 'N/A'}</ReleaseYear>
+        <Title>{title ?? 'Unknown'}</Title>
+        <ReleaseYear>{releaseYear ?? 'N/A'}</ReleaseYear>
         <Genres>{genres.length > 0 ? genres.join(', ') : 'Unknown'}</Genres>
       </Details>
-      {menuBtnVisible && (
+      {menuBtnVisible ? (
         <GlyphButton
           imageUrl={glyphUrl}
           onClick={(e) => {
@@ -104,7 +104,7 @@ const MovieTile = ({
             setMenuVisible(true)
           }}
         />
-      )}
+      ) : undefined}
       <PopupMenu
         visible={menuVisible}
         onHide={(e) => {

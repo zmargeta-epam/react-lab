@@ -74,7 +74,7 @@ const Button = ({
   <StyledButton
     type={type}
     onClick={onClick}
-    className={[VariantStyle[variant], SizeStyle[size]].filter((it) => it).join(' ')}
+    className={[VariantStyle[variant], SizeStyle[size]].filter((it) => it ?? null).join(' ')}
   >
     {children}
   </StyledButton>

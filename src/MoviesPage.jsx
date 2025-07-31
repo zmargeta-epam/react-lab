@@ -55,44 +55,43 @@ const Footer = styled.div`
   }
 `
 
+const P = { SearchTerm: 'q', ActiveGenre: 'genre', SortCriteria: 'sort_by' }
+const F = { SearchTerm: null, ActiveGenre: 'All', SortCriteria: SortCriteria.Popularity }
+
+const Genres = [F.ActiveGenre, 'Action', 'Documentary', 'Comedy', 'Crime', 'Fantasy', 'Horror']
+
+const QueryParams = [
+  {
+    name: P.SearchTerm,
+    fallback: F.SearchTerm,
+    unset: [P.ActiveGenre, P.SortCriteria],
+  },
+  {
+    name: P.ActiveGenre,
+    fallback: F.ActiveGenre,
+    converter: Converter(
+      (value) => Genres.indexOf(value),
+      (param) => Genres[param]
+    ),
+    deps: [P.SearchTerm],
+    predicate: ([searchTerm]) => searchTerm === F.SearchTerm,
+    unset: [P.SearchTerm],
+  },
+  {
+    name: P.SortCriteria,
+    fallback: F.SortCriteria,
+    deps: [P.SearchTerm],
+    predicate: ([searchTerm]) => searchTerm === F.SearchTerm,
+    unset: [P.SearchTerm],
+  },
+]
+
 const MoviesPage = () => {
-  const P = { SearchTerm: 'q', ActiveGenre: 'genre', SortCriteria: 'sort_by' }
-  const F = { SearchTerm: null, ActiveGenre: 'All', SortCriteria: SortCriteria.Popularity }
-
-  const Genres = [F.ActiveGenre, 'Action', 'Documentary', 'Comedy', 'Crime', 'Fantasy', 'Horror']
-
   const [searchTerm, setSearchTerm, activeGenre, setActiveGenre, sortCriteria, setSortCriteria] =
-    useQueryParams([
-      {
-        name: P.SearchTerm,
-        fallback: F.SearchTerm,
-        converter: Converter.Nop,
-        unset: [P.ActiveGenre, P.SortCriteria],
-      },
-      {
-        name: P.ActiveGenre,
-        fallback: F.ActiveGenre,
-        converter: Converter(
-          (it) => Genres.indexOf(it),
-          (it) => Genres[it]
-        ),
-        unset: [P.SearchTerm],
-      },
-      {
-        name: P.SortCriteria,
-        fallback: F.SortCriteria,
-        converter: Converter.Nop,
-        unset: [P.SearchTerm],
-      },
-    ])
+    useQueryParams(QueryParams)
 
   const [activeMovieId, setActiveMovieId] = useState(undefined)
-  const [movies] = useMovies(
-    searchTerm,
-    searchTerm === F.SearchTerm ? activeGenre : F.ActiveGenre,
-    searchTerm === F.SearchTerm ? sortCriteria : F.SortCriteria,
-    { suspense: true }
-  )
+  const [movies] = useMovies(searchTerm, activeGenre, sortCriteria, { suspense: true })
   const [activeMovie] = useMovie(activeMovieId, { suspense: true })
 
   return (
@@ -111,15 +110,8 @@ const MoviesPage = () => {
         )}
       </Header>
       <Menu>
-        <GenreSelect
-          values={Genres}
-          selected={searchTerm === F.SearchTerm ? activeGenre : F.ActiveGenre}
-          onChange={setActiveGenre}
-        />
-        <SortControl
-          value={searchTerm === F.SearchTerm ? sortCriteria : F.SortCriteria}
-          onChange={setSortCriteria}
-        />
+        <GenreSelect values={Genres} selected={activeGenre} onChange={setActiveGenre} />
+        <SortControl value={sortCriteria} onChange={setSortCriteria} />
       </Menu>
       <Content>
         <Suspense fallback={<LoadingIndicator />}>

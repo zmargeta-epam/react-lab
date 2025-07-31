@@ -23,12 +23,12 @@ const StyledPopupMenu = styled.ul`
 `
 
 const PopupMenu = ({ visible = false, children, onHide }) =>
-  visible && (
+  visible ? (
     <StyledPopupMenu role="menu" onMouseLeave={onHide}>
       <GlyphButton imageUrl={glyphUrl} onClick={onHide} />
       {children}
     </StyledPopupMenu>
-  )
+  ) : null
 
 const StyledPopupMenuItem = styled.li`
   box-sizing: border-box;
