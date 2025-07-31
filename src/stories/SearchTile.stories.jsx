@@ -1,16 +1,19 @@
 import SearchTile from '../SearchTile.jsx'
 import { fn } from 'storybook/test'
 
-export default {
+const meta = {
   title: 'SearchTile',
   component: SearchTile,
   tags: ['autodocs'],
 }
 
-export const Default = {
+const Default = {
   args: {
     searchTerm: '',
     onSearch: fn(),
     onAddMovie: fn(),
   },
 }
+
+export default meta
+export { Default }

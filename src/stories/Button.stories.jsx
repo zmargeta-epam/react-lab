@@ -2,7 +2,7 @@ import Button from '../Button.jsx'
 import { fn } from 'storybook/test'
 import { ButtonSize, ButtonVariant } from '../ButtonStyles.js'
 
-export default {
+const meta = {
   title: 'Button',
   component: Button,
   render: ({ label, ...args }) => <Button {...args}>{label}</Button>,
@@ -41,14 +41,14 @@ export default {
   },
 }
 
-export const Default = {
+const Default = {
   args: {
     label: '+ Add Movie',
     onClick: fn(),
   },
 }
 
-export const Primary = {
+const Primary = {
   args: {
     label: 'Submit',
     variant: ButtonVariant.Primary,
@@ -56,10 +56,13 @@ export const Primary = {
   },
 }
 
-export const Secondary = {
+const Secondary = {
   args: {
     label: 'Submit',
     variant: ButtonVariant.Secondary,
     onClick: fn(),
   },
 }
+
+export default meta
+export { Default, Primary, Secondary }

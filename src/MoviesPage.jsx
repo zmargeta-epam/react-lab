@@ -15,8 +15,11 @@ import useMovie from './useMovie.js'
 
 const Header = styled.div`
   border-bottom: 10px solid #555;
-  box-sizing: border-box;
-  max-height: 560px;
+  box-sizing: content-box;
+  min-height: 540px;
+  max-height: 540px;
+  min-width: 1178px;
+  max-width: 1178px;
   overflow: hidden;
 `
 
@@ -26,10 +29,14 @@ const Menu = styled.div`
   box-sizing: border-box;
   justify-content: space-between;
   margin: 0 50px 10px;
+  min-width: 1078px;
+  max-width: 1078px;
 `
 
 const Content = styled.div`
   margin: 40px 50px 50px;
+  min-width: 1078px;
+  max-width: 1078px;
 `
 
 const Footer = styled.div`
@@ -38,11 +45,13 @@ const Footer = styled.div`
   color: #ffffff99;
   display: flex;
   font-family: Montserrat, Helvetica, Arial, sans-serif;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 100;
-  gap: 15px;
+  gap: 10px;
   height: 60px;
   justify-content: center;
+  min-width: 1178px;
+  max-width: 1178px;
 
   & > a {
     // prettier-ignore
@@ -50,8 +59,8 @@ const Footer = styled.div`
     background-position: center;
     background-repeat: no-repeat;
     display: block;
-    height: 18px;
-    width: 137px;
+    height: 14px;
+    width: 106px;
   }
 `
 

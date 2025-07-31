@@ -10,8 +10,10 @@ const StyledSearchTile = styled.div`
   background-image: url('${(props) => props.$imageUrl}');
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100%;
-  width: 100%;
+  min-height: 540px;
+  max-height: 540px;
+  min-width: 1178px;
+  max-width: 1178px;
 `
 
 const GradientOverlay = styled.div`
@@ -21,17 +23,19 @@ const GradientOverlay = styled.div`
   flex-direction: column;
   justify-content: center;
   min-height: 540px;
-  min-width: 1027px;
+  max-height: 540px;
+  min-width: 1178px;
+  max-width: 1178px;
   position: relative;
 
   & > :nth-child(1) {
-    left: 60px;
+    left: 50px;
     position: absolute;
     top: 20px;
   }
 
   & > :nth-child(2) {
-    right: 60px;
+    right: 50px;
     top: 20px;
     position: absolute;
   }

@@ -1,15 +1,18 @@
 import SearchForm from '../SearchForm.jsx'
 import { fn } from 'storybook/test'
 
-export default {
+const meta = {
   title: 'SearchForm',
   component: SearchForm,
   tags: ['autodocs'],
 }
 
-export const Default = {
+const Default = {
   args: {
     value: '',
     onSubmit: fn(),
   },
 }
+
+export default meta
+export { Default }

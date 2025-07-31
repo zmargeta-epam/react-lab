@@ -2,13 +2,13 @@ import GenreSelect from '../GenreSelect.jsx'
 import { fn } from 'storybook/test'
 import { useArgs } from 'storybook/preview-api'
 
-export default {
+const meta = {
   title: 'GenreSelect',
   component: GenreSelect,
   tags: ['autodocs'],
 }
 
-export const Default = {
+const Default = {
   args: {
     values: ['All', 'Documentary', 'Comedy', 'Horror', 'Thriller', 'Crime'],
     selected: 'All',
@@ -29,3 +29,6 @@ export const Default = {
     )
   },
 }
+
+export default meta
+export { Default }

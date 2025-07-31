@@ -6,13 +6,16 @@ import GlyphButton from './GlyphButton.jsx'
 import glyphUrl from './assets/glyph_close.svg'
 
 const StyledMovieDetailsTile = styled.div`
-  height: 100%;
-  width: 100%;
-  padding: 65px 60px 20px;
+  box-sizing: border-box;
+  min-height: 540px;
+  max-height: 540px;
+  min-width: 1178px;
+  max-width: 1178px;
+  padding: 65px 50px 20px;
   position: relative;
 
   & > :nth-child(1) {
-    left: 60px;
+    left: 50px;
     position: absolute;
     top: 20px;
   }

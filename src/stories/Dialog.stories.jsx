@@ -5,12 +5,12 @@ import { Default as DefaultMovieForm } from './MovieForm.stories.jsx'
 import { fn } from 'storybook/test'
 import ConfirmForm from '../ConfirmForm.jsx'
 
-export default {
+const meta = {
   title: 'Dialog',
   component: Dialog,
 }
 
-export const AddMovie = {
+const AddMovie = {
   args: {
     title: 'Add Movie',
     visible: true,
@@ -23,7 +23,7 @@ export const AddMovie = {
   ),
 }
 
-export const EditMovie = {
+const EditMovie = {
   args: {
     title: 'Edit Movie',
     visible: true,
@@ -36,7 +36,7 @@ export const EditMovie = {
   ),
 }
 
-export const DeleteMovie = {
+const DeleteMovie = {
   args: {
     title: 'Delete Movie',
     visible: true,
@@ -48,3 +48,6 @@ export const DeleteMovie = {
     </Dialog>
   ),
 }
+
+export default meta
+export { AddMovie, EditMovie, DeleteMovie }

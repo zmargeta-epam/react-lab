@@ -1,7 +1,7 @@
 import PopupMenu, { PopupMenuItem } from '../PopupMenu.jsx'
 import { fn } from 'storybook/test'
 
-export default {
+const meta = {
   title: 'PopupMenu',
   component: PopupMenu,
   tags: ['autodocs'],
@@ -17,9 +17,12 @@ export default {
   ),
 }
 
-export const Default = {
+const Default = {
   args: {
     items: ['Edit', 'Delete'],
     onHide: fn(),
   },
 }
+
+export default meta
+export { Default }

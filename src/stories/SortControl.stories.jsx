@@ -3,7 +3,7 @@ import { fn } from 'storybook/test'
 import { SortCriteria } from '../SortCriteria.js'
 import { useArgs } from 'storybook/preview-api'
 
-export default {
+const meta = {
   title: 'SortControl',
   component: SortControl,
   tags: ['autodocs'],
@@ -22,7 +22,7 @@ export default {
   },
 }
 
-export const Default = {
+const Default = {
   args: {
     value: SortCriteria.Popularity,
     onChange: fn(),
@@ -42,3 +42,6 @@ export const Default = {
     )
   },
 }
+
+export default meta
+export { Default }
