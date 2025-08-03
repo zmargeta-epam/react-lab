@@ -9,10 +9,10 @@ const StyledPoster = styled.div.attrs({ role: 'img' })`
   background-position: center;
   background-repeat: no-repeat;
   background-size: ${(props) => (props.$imageUrl ? 'cover' : '40%')};
-  height: 455px;
-  min-height: 455px;
-  min-width: 322px;
-  width: 322px;
+  min-height: var(--poster-height);
+  max-height: var(--poster-height);
+  max-width: var(--poster-width);
+  min-width: var(--poster-width);
 `
 const Poster = ({ imageUrl }) => <StyledPoster $imageUrl={imageUrl} />
 

@@ -1,5 +1,7 @@
 /** @type { import('@storybook/react-vite').Preview } */
 import { sb } from 'storybook/test'
+import { withThemeFromJSXProvider } from '@storybook/addon-themes'
+import { GlobalStyles } from '../src/App.jsx'
 
 sb.mock('../src/useGenres.js')
 sb.mock('../src/useMovies.js')
@@ -26,6 +28,8 @@ const preview = {
       },
     },
   },
+
+  decorators: [withThemeFromJSXProvider({ GlobalStyles })],
 
   initialGlobals: {
     backgrounds: { value: 'default' },

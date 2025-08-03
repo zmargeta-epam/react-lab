@@ -7,6 +7,7 @@ const config = {
     '@storybook/addon-a11y',
     '@storybook/addon-vitest',
     'storybook-addon-remix-react-router',
+    '@storybook/addon-themes'
   ],
   framework: {
     name: '@storybook/react-vite',

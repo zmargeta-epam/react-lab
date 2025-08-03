@@ -2,12 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 
 const StyledGlyphButton = styled.button`
-  background-color: #232323;
+  background-color: var(--tile-color-background);
   border: 0;
-  border-radius: 18px;
+  border-radius: calc(0.5 * var(--ui-control-height-x-small));
   box-sizing: border-box;
-  height: 36px;
-  width: 36px;
+  max-height: var(--ui-control-height-x-small);
+  min-height: var(--ui-control-height-x-small);
+  max-width: var(--ui-control-height-x-small);
+  min-width: var(--ui-control-height-x-small);
   margin: 0;
   padding: 0;
 
@@ -18,22 +20,24 @@ const StyledGlyphButton = styled.button`
 `
 
 const Glyph = styled.div`
-  background-color: #fff;
+  background-color: var(--color-text);
   border: 0;
   box-sizing: border-box;
   cursor: pointer;
-  height: 100%;
   margin: 0;
+  max-height: var(--ui-control-height-x-small);
+  min-height: var(--ui-control-height-x-small);
+  max-width: var(--ui-control-height-x-small);
+  min-width: var(--ui-control-height-x-small);
   // prettier-ignore
   mask-image: url("${(props) => props.$imageUrl}");
   mask-position: center;
   mask-repeat: no-repeat;
-  mask-size: 12px;
+  mask-size: calc(0.33 * var(--ui-control-height-x-small));
   padding: 0;
-  width: 100%;
 
   &:hover {
-    background-color: #f65261;
+    background-color: var(--color-primary);
   }
 `
 

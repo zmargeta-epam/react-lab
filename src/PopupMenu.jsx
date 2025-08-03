@@ -5,19 +5,15 @@ import glyphUrl from './assets/glyph_close.svg'
 
 const StyledPopupMenu = styled.ul`
   align-items: stretch;
-  background-color: #232323;
+  background-color: var(--tile-color-background);
   box-sizing: border-box;
-  color: #ffffffcc;
   display: flex;
   flex-direction: column;
-  font-family: Montserrat, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 200;
   margin: 0;
-  padding: 0 0 10px;
+  padding: 0 0 var(--ui-control-gap);
   max-width: max-content;
 
-  & > :nth-child(1) {
+  > :nth-child(1) {
     align-self: flex-end;
   }
 `
@@ -32,18 +28,17 @@ const PopupMenu = ({ visible = false, children, onHide }) =>
 
 const StyledPopupMenuItem = styled.li`
   box-sizing: border-box;
-  color: #ffffffcc;
+  color: var(--color-text);
   cursor: pointer;
   display: block;
   font: inherit;
-  line-height: 35px;
-  min-width: 150px;
-  padding: 5px 20px 5px;
+  min-width: var(--ui-control-min-width);
+  padding: var(--ui-control-gap);
   text-align: left;
+  text-transform: uppercase;
 
   &:hover {
-    background-color: #f65261;
-    color: #fff;
+    background-color: var(--color-primary);
   }
 `
 

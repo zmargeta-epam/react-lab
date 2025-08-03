@@ -2,10 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import MovieTile from './MovieTile.jsx'
 
-const StyledMovieTiles = styled.div`
+const StyledMovieTiles = styled.section`
   display: flex;
   flex-wrap: wrap;
-  gap: 56px;
+  justify-content: space-between;
+  row-gap: calc(4 * var(--ui-control-gap));
 `
 
 const MovieTiles = ({ movies = [], onSelectMovie, onEditMovie, onDeleteMovie }) => (

@@ -2,15 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import Poster from './Poster.jsx'
 
-const StyledMovieDetails = styled.div`
-  color: #ffffffb3;
+const StyledMovieDetails = styled.article`
   display: flex;
-  font-family: Montserrat, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 100;
-  gap: 25px;
-  margin: 0;
-  padding: 0;
+  gap: calc(2 * var(--ui-control-gap));
 `
 
 const Details = styled.div`
@@ -25,58 +19,57 @@ const Details = styled.div`
 `
 
 const Title = styled.span`
-  color: #fff;
-  font-size: 40px;
+  font-size: 2.5rem;
   grid-area: title;
-  line-height: 60px;
-  padding-right: 25px;
+  line-height: 3.75rem;
+  padding-right: calc(2 * var(--ui-control-gap));
   text-align: left;
   text-transform: uppercase;
 `
 
 const ReleaseYear = styled.span`
-  color: #f65261;
-  font-size: 24px;
+  color: var(--color-primary);
+  font-size: 1.5rem;
   grid-area: release-year;
-  padding: 25px 0;
+  padding: calc(2 * var(--ui-control-gap)) 0;
   text-align: left;
 `
 
 const Genres = styled.span`
-  color: #ffffff80;
-  font-size: 14px;
+  color: var(--color-text-dimmed);
+  font-size: 0.875rem;
   grid-area: genres;
   text-align: left;
 `
 
 const Rating = styled.span`
-  border: 1px solid #fff;
+  border: 1px solid var(--color-text);
   border-radius: 30px;
-  color: #fff;
-  font-size: 20px;
+  font-size: 1.25rem;
   grid-area: rating;
-  height: 60px;
   line-height: 60px;
   max-height: 60px;
   max-width: 60px;
   min-height: 60px;
   min-width: 60px;
   text-align: center;
-  width: 60px;
 `
 
 const Duration = styled.span`
-  color: #f65261;
-  font-size: 24px;
+  color: var(--color-primary);
+  font-size: 1.5rem;
   grid-area: duration;
-  padding: 25px 0;
+  padding: calc(2 * var(--ui-control-gap)) 0;
   text-align: left;
 `
 
 const Description = styled.p`
-  --max-lines: 7;
-  --line-height: 30px;
-  font-size: 20px;
+  --max-lines: 6.5;
+  --line-height: 1.875rem;
+
+  color: var(--color-text-dimmed);
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-light);
   grid-area: description;
   line-height: var(--line-height);
   margin: 0;

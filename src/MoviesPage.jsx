@@ -13,54 +13,71 @@ import useQueryParams from './useQueryParams.js'
 import useMovies from './useMovies.js'
 import useMovie from './useMovie.js'
 
-const Header = styled.div`
-  border-bottom: 10px solid #555;
+const Header = styled.header`
+  --inherit-color-background: var(--tile-color-background);
+  --inherit-height: var(--tile-header-height);
+  --inherit-padding-horizontal: var(--tile-padding-horizontal);
+  --inherit-padding-vertical: var(--tile-padding-vertical);
+
+  --divider-color: var(--color-background);
+  --divider-height: var(--tile-divider-height);
+  --height: var(--inherit-height);
+
+  background-color: var(--inherit-color-background);
+  border-bottom: var(--divider-height) solid var(--divider-color);
   box-sizing: content-box;
-  min-height: 540px;
-  max-height: 540px;
-  min-width: 1178px;
-  max-width: 1178px;
+  display: flex;
+  flex-direction: column;
+  min-height: var(--height);
+  max-height: var(--height);
   overflow: hidden;
 `
 
-const Menu = styled.div`
+const Menu = styled.section`
+  --inherit-color-background: var(--tile-color-background);
+  --inherit-height: var(--ui-control-height);
+
+  --height: var(--inherit-height);
+  --padding-horizontal: var(--tile-padding-horizontal);
+
+  background-color: var(--inherit-color-background);
+  border-bottom: var(--menu-border-height) solid var(--menu-border-color);
   display: flex;
-  border-bottom: 2px solid #424242;
-  box-sizing: border-box;
   justify-content: space-between;
-  margin: 0 50px 10px;
-  min-width: 1078px;
-  max-width: 1078px;
+  margin: 0 var(--padding-horizontal);
+  min-height: var(--height);
+  max-height: var(--height);
 `
 
-const Content = styled.div`
-  margin: 40px 50px 50px;
-  min-width: 1078px;
-  max-width: 1078px;
+const Content = styled.main`
+  --inherit-padding-horizontal: var(--tile-padding-horizontal);
+  --inherit-padding-vertical: var(--tile-padding-vertical);
+
+  background-color: var(--inherit-color-background);
+  margin: var(--inherit-padding-horizontal);
+  max-width: var(--tile-max-width);
 `
 
-const Footer = styled.div`
+const Footer = styled.footer`
   align-items: center;
-  background-color: #424242;
-  color: #ffffff99;
+  background-color: var(--menu-border-color);
+  color: var(--color-text-dimmed);
   display: flex;
-  font-family: Montserrat, Helvetica, Arial, sans-serif;
-  font-size: 10px;
-  font-weight: 100;
-  gap: 10px;
-  height: 60px;
+  font-size: 0.625rem;
+  font-weight: var(--font-weight-light);
+  gap: var(--ui-control-gap);
+  height: var(--tile-padding-horizontal);
   justify-content: center;
-  min-width: 1178px;
-  max-width: 1178px;
 
   & > a {
     // prettier-ignore
     background-image: url("${tmdbLogo}");
     background-position: center;
     background-repeat: no-repeat;
+    background-size: contain;
     display: block;
-    height: 14px;
-    width: 106px;
+    height: 15px;
+    width: 100px;
   }
 `
 

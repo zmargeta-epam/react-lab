@@ -5,25 +5,29 @@ import Logo from './Logo.jsx'
 import GlyphButton from './GlyphButton.jsx'
 import glyphUrl from './assets/glyph_close.svg'
 
-const StyledMovieDetailsTile = styled.div`
+const StyledMovieDetailsTile = styled.section`
+  --height: var(--inherit-height, var(--tile-header-height));
+  --padding-horizontal: var(--inherit-padding-horizontal, var(--tile-padding-horizontal));
+  --padding-vertical: var(--inherit-padding-vertical, var(--tile-padding-vertical));
+
+  background-color: var(--parent-color-background);
   box-sizing: border-box;
-  min-height: 540px;
-  max-height: 540px;
-  min-width: 1178px;
-  max-width: 1178px;
-  padding: 65px 50px 20px;
+  flex: 1;
+  min-height: var(--height);
+  max-height: var(--height);
+  padding: 65px var(--padding-horizontal) var(--padding-horizontal);
   position: relative;
 
-  & > :nth-child(1) {
-    left: 50px;
+  > :nth-child(1) {
+    left: var(--padding-horizontal);
     position: absolute;
-    top: 20px;
+    top: var(--padding-vertical);
   }
 
-  & > :nth-child(2) {
-    right: 20px;
-    top: 20px;
+  > :nth-child(2) {
     position: absolute;
+    right: var(--padding-vertical);
+    top: var(--padding-vertical);
   }
 `
 

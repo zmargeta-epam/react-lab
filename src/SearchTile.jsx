@@ -6,38 +6,41 @@ import Button from './Button.jsx'
 import { ButtonSize, ButtonVariant } from './ButtonStyles.js'
 import backgroundUrl from './assets/background.jpg'
 
-const StyledSearchTile = styled.div`
+const StyledSearchTile = styled.section`
+  --color-background: var(--inherit-color-background, var(--tile-color-background));
+  --height: var(--inherit-height, var(--tile-header-height));
+
+  background-color: var(--color-background);
   background-image: url('${(props) => props.$imageUrl}');
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 540px;
-  max-height: 540px;
-  min-width: 1178px;
-  max-width: 1178px;
+  display: flex;
+  min-height: var(--height);
+  max-height: var(--height);
 `
 
 const GradientOverlay = styled.div`
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
+  --padding-horizontal: var(--inherit-padding-horizontal, var(--tile-padding-horizontal));
+  --padding-vertical: var(--inherit-padding-vertical, var(--tile-padding-vertical));
+
   align-items: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: center;
-  min-height: 540px;
-  max-height: 540px;
-  min-width: 1178px;
-  max-width: 1178px;
   position: relative;
 
-  & > :nth-child(1) {
-    left: 50px;
+  > :nth-child(1) {
+    left: var(--padding-horizontal);
     position: absolute;
-    top: 20px;
+    top: var(--padding-vertical);
   }
 
-  & > :nth-child(2) {
-    right: 50px;
-    top: 20px;
+  > :nth-child(2) {
     position: absolute;
+    right: var(--padding-horizontal);
+    top: var(--padding-vertical);
   }
 `
 
