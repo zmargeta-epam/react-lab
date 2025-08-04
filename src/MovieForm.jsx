@@ -119,13 +119,13 @@ const MovieForm = ({
       if (onSubmit) {
         const formData = new FormData(e.target)
         onSubmit({
-          imageUrl: formData.get('imageUrl'),
+          imageUrl: formData.get('image_url'),
           title: formData.get('title'),
           genres: formData
             .get('genres')
             .split(',')
             .map((it) => it.trim()),
-          releaseYear: Number(formData.get('releaseYear')),
+          releaseYear: Number(formData.get('release_year')),
           rating: Number(formData.get('rating')),
           duration: Number(formData.get('duration')),
           description: formData.get('description'),
@@ -139,7 +139,7 @@ const MovieForm = ({
     </label>
     <label>
       <span>Movie URL</span>
-      <input id="image-url" name="imageUrl" type="text" defaultValue={imageUrl} />
+      <input id="image-url" name="image_url" type="text" defaultValue={imageUrl} />
     </label>
     <label>
       <span>Genres</span>
@@ -147,7 +147,7 @@ const MovieForm = ({
     </label>
     <label>
       <span>Release Date</span>
-      <input id="release-year" name="releaseYear" type="text" defaultValue={releaseYear} />
+      <input id="release-year" name="release_year" type="text" defaultValue={releaseYear} />
     </label>
     <label>
       <span>Rating</span>

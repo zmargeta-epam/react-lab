@@ -25,7 +25,7 @@ Converter.Identity = Converter(
 
 const ImageUrl = Converter(
   (val) => val?.replace(/^.*\//i, '/'),
-  (dto) => (dto ? `${BaseUrl}/t/p/w1280${dto}` : undefined)
+  (dto) => (dto ? `${BaseUrl}/t/p/w300${dto}` : undefined)
 )
 
 const GenreLookup = Converter(

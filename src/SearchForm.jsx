@@ -37,26 +37,26 @@ const StyledForm = styled.form`
 
 const SearchForm = ({ value, onSubmit }) => (
   <StyledForm
+    id="movie-search"
+    aria-label="movie-search"
     key={value}
     onSubmit={(e) => {
       e.preventDefault()
 
       if (onSubmit) {
         const formData = new FormData(e.target)
-        onSubmit(formData.get('searchTerm'))
+        onSubmit(formData.get('search_term'))
       }
     }}
   >
     <input
       id="search-term"
-      name="searchTerm"
+      name="search_term"
       type="search"
       placeholder="What do you want to watch?"
       defaultValue={value}
     />
-    <Button type="submit" variant={ButtonVariant.Primary}>
-      Search
-    </Button>
+    <Button variant={ButtonVariant.Primary}>Search</Button>
   </StyledForm>
 )
 

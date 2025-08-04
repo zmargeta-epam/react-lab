@@ -29,7 +29,7 @@ const GenreSelect = ({ values = [], selected, onChange }) => {
   const isSelected = (it) => it?.toLowerCase() === selected?.toLowerCase()
 
   return (
-    <StyledGenreSelect role="tablist">
+    <StyledGenreSelect role="tablist" aria-label="genres">
       {values.map((it, idx) => (
         <li
           key={it ?? idx}

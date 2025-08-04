@@ -33,7 +33,6 @@ const useNavigateWithQueryParams = (queryParams = []) => {
     }
 
     const [toHost, toSearch] = to.split('?')
-    console.log(toHost, toSearch, toParams.toString(), mergeWithToParams(toSearch))
     return navigate(`${toHost}${mergeWithToParams(toSearch)}`, options)
   }
 }

@@ -32,7 +32,7 @@ const Header = styled.header`
   overflow: hidden;
 `
 
-const Menu = styled.section`
+const Menu = styled.nav`
   --inherit-color-background: var(--tile-color-background);
   --inherit-height: var(--ui-control-height);
 
@@ -124,7 +124,7 @@ const MoviesPage = () => {
           <Outlet />
         </Suspense>
       </Header>
-      <Menu>
+      <Menu aria-label="movie-filters">
         <GenreSelect values={Genres} selected={activeGenre} onChange={setActiveGenre} />
         <SortControl value={sortCriteria} onChange={setSortCriteria} />
       </Menu>

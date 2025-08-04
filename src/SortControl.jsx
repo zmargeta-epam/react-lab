@@ -32,7 +32,8 @@ const SortControl = ({ value = SortCriteria.Popularity, onChange }) => (
     Sort by
     <select
       id="sort-criteria"
-      name="sortCriteria"
+      name="sort_criteria"
+      aria-label="sort-criteria"
       value={value}
       onChange={(e) => {
         const newValue = Number(e.target.value)

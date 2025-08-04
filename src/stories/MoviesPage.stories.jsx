@@ -4,6 +4,7 @@ import { mocked } from 'storybook/test'
 import useGenres from '../useGenres.js'
 import useMovies from '../useMovies.js'
 import useMovie from '../useMovie.js'
+import SearchTile from '../SearchTile.jsx'
 
 const meta = {
   title: 'MoviesPage',
@@ -49,7 +50,9 @@ back and forth in time.`,
 const Default = {
   args: {},
   parameters: {
-    reactRouter: reactRouterParameters({ routing: { path: '/' } }),
+    reactRouter: reactRouterParameters({
+      routing: { path: '/' },
+    }),
   },
 }
 

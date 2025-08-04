@@ -92,7 +92,7 @@ const MovieDetails = ({
   const minutes = duration ? duration - hours * 60 : 0
 
   return (
-    <StyledMovieDetails>
+    <StyledMovieDetails aria-label="movie-details">
       <Poster imageUrl={imageUrl} />
       <Details>
         <Title>{title ?? 'Unknown'}</Title>

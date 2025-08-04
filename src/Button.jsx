@@ -64,14 +64,14 @@ const SizeStyle = {
 }
 
 const Button = ({
-  type = 'button',
   variant = ButtonVariant.Default,
   size = ButtonSize.Medium,
   children,
   onClick,
+  ...props
 }) => (
   <StyledButton
-    type={type}
+    {...props}
     onClick={onClick}
     className={[VariantStyle[variant], SizeStyle[size]].filter((it) => it ?? null).join(' ')}
   >
