@@ -1,17 +1,16 @@
-import React, { Suspense, useState } from 'react'
+import React, { Suspense } from 'react'
 import styled from 'styled-components'
 import tmdbLogo from './assets/tmdb_logo.svg'
-import SearchTile from './SearchTile.jsx'
-import MovieDetailsTile from './MovieDetailsTile.jsx'
 import GenreSelect from './GenreSelect.jsx'
 import MovieTiles from './MovieTiles.jsx'
 import { SortCriteria } from './SortCriteria.js'
 import SortControl from './SortControl.jsx'
 import LoadingIndicator from './LoadingIndicator.jsx'
 import { Converter } from './Converters.js'
+import { Outlet } from 'react-router-dom'
 import useQueryParams from './useQueryParams.js'
+import useNavigateWithQueryParams from './useNavigateWithQueryParams.js'
 import useMovies from './useMovies.js'
-import useMovie from './useMovie.js'
 
 const Header = styled.header`
   --inherit-color-background: var(--tile-color-background);
@@ -113,27 +112,17 @@ const QueryParams = [
 ]
 
 const MoviesPage = () => {
-  const [searchTerm, setSearchTerm, activeGenre, setActiveGenre, sortCriteria, setSortCriteria] =
+  const [searchTerm, , activeGenre, setActiveGenre, sortCriteria, setSortCriteria] =
     useQueryParams(QueryParams)
-
-  const [activeMovieId, setActiveMovieId] = useState(undefined)
   const [movies] = useMovies(searchTerm, activeGenre, sortCriteria, { suspense: true })
-  const [activeMovie] = useMovie(activeMovieId, { suspense: true })
+  const navigate = useNavigateWithQueryParams([P.ActiveGenre, P.SortCriteria])
 
   return (
     <React.Fragment>
       <Header>
-        {activeMovieId ? (
-          <Suspense fallback={<LoadingIndicator />}>
-            <MovieDetailsTile movie={activeMovie} onClose={() => setActiveMovieId(undefined)} />
-          </Suspense>
-        ) : (
-          <SearchTile
-            searchTerm={searchTerm}
-            onSearch={setSearchTerm}
-            onAddMovie={() => console.log('onAddMovie')}
-          />
-        )}
+        <Suspense fallback={<LoadingIndicator />}>
+          <Outlet />
+        </Suspense>
       </Header>
       <Menu>
         <GenreSelect values={Genres} selected={activeGenre} onChange={setActiveGenre} />
@@ -143,7 +132,7 @@ const MoviesPage = () => {
         <Suspense fallback={<LoadingIndicator />}>
           <MovieTiles
             movies={movies}
-            onSelectMovie={(it) => setActiveMovieId(it.id)}
+            onSelectMovie={(it) => navigate(`/${it.id}`)}
             onEditMovie={() => console.log('onEditMovie')}
             onDeleteMovie={() => console.log('onDeleteMovie')}
           />
@@ -158,3 +147,4 @@ const MoviesPage = () => {
 }
 
 export default MoviesPage
+export { P, QueryParams }

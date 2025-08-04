@@ -1,5 +1,4 @@
 import SearchTile from '../SearchTile.jsx'
-import { fn } from 'storybook/test'
 
 const meta = {
   title: 'SearchTile',
@@ -10,8 +9,6 @@ const meta = {
 const Default = {
   args: {
     searchTerm: '',
-    onSearch: fn(),
-    onAddMovie: fn(),
   },
 }
 

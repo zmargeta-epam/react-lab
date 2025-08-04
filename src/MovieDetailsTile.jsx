@@ -4,6 +4,10 @@ import MovieDetails from './MovieDetails.jsx'
 import Logo from './Logo.jsx'
 import GlyphButton from './GlyphButton.jsx'
 import glyphUrl from './assets/glyph_close.svg'
+import { P } from './MoviesPage.jsx'
+import { useParams } from 'react-router-dom'
+import useNavigateWithQueryParams from './useNavigateWithQueryParams.js'
+import useMovie from './useMovie.js'
 
 const StyledMovieDetailsTile = styled.section`
   --height: var(--inherit-height, var(--tile-header-height));
@@ -31,12 +35,18 @@ const StyledMovieDetailsTile = styled.section`
   }
 `
 
-const MovieDetailsTile = ({ movie, onClose }) => (
-  <StyledMovieDetailsTile>
-    <Logo />
-    <GlyphButton imageUrl={glyphUrl} onClick={onClose} />
-    <MovieDetails {...movie} />
-  </StyledMovieDetailsTile>
-)
+const MovieDetailsTile = () => {
+  const { movieId } = useParams()
+  const [movie] = useMovie(movieId, { suspense: true })
+  const navigate = useNavigateWithQueryParams([P.ActiveGenre, P.SortCriteria])
+
+  return (
+    <StyledMovieDetailsTile>
+      <Logo />
+      <GlyphButton imageUrl={glyphUrl} onClick={() => navigate('/')} />
+      <MovieDetails {...movie} />
+    </StyledMovieDetailsTile>
+  )
+}
 
 export default MovieDetailsTile

@@ -3,6 +3,8 @@ import MoviesPage from './MoviesPage.jsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 import { transparentize } from 'polished'
+import SearchTile from './SearchTile.jsx'
+import MovieDetailsTile from './MovieDetailsTile.jsx'
 
 const GlobalStyles = createGlobalStyle`
   :root {
@@ -67,7 +69,10 @@ const App = () => (
     <GlobalStyles />
     <BrowserRouter>
       <Routes>
-        <Route index element={<MoviesPage />} />
+        <Route path="/" element={<MoviesPage />}>
+          <Route index element={<SearchTile />} />
+          <Route path="/:movieId" element={<MovieDetailsTile />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   </React.Fragment>

@@ -5,6 +5,8 @@ import SearchForm from './SearchForm'
 import Button from './Button.jsx'
 import { ButtonSize, ButtonVariant } from './ButtonStyles.js'
 import backgroundUrl from './assets/background.jpg'
+import useQueryParams from './useQueryParams.js'
+import { QueryParams } from './MoviesPage.jsx'
 
 const StyledSearchTile = styled.section`
   --color-background: var(--inherit-color-background, var(--tile-color-background));
@@ -44,16 +46,24 @@ const GradientOverlay = styled.div`
   }
 `
 
-const SearchTile = ({ searchTerm, onSearch, onAddMovie }) => (
-  <StyledSearchTile $imageUrl={backgroundUrl}>
-    <GradientOverlay>
-      <Logo />
-      <Button variant={ButtonVariant.Secondary} size={ButtonSize.Small} onClick={onAddMovie}>
-        + Add Movie
-      </Button>
-      <SearchForm value={searchTerm} onSubmit={onSearch} />
-    </GradientOverlay>
-  </StyledSearchTile>
-)
+const SearchTile = () => {
+  const [searchTerm, setSearchTerm] = useQueryParams(QueryParams)
+
+  return (
+    <StyledSearchTile $imageUrl={backgroundUrl}>
+      <GradientOverlay>
+        <Logo />
+        <Button
+          variant={ButtonVariant.Secondary}
+          size={ButtonSize.Small}
+          onClick={() => console.log('Add Movie')}
+        >
+          + Add Movie
+        </Button>
+        <SearchForm value={searchTerm} onSubmit={setSearchTerm} />
+      </GradientOverlay>
+    </StyledSearchTile>
+  )
+}
 
 export default SearchTile
