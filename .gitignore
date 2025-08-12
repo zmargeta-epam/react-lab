@@ -17,3 +17,5 @@ sketch
 storybook-static
 
 .env
+dist/
+cypress/screenshots

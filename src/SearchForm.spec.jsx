@@ -22,7 +22,7 @@ describe('SearchForm', () => {
 
     // act
     await user.type(screen.getByRole('searchbox'), 'value')
-    await user.click(screen.getByRole('button', { name: 'Search' }))
+    await user.click(screen.getByRole('button', { type: 'search' }))
 
     // assert
     expect(callback).toHaveBeenCalled()

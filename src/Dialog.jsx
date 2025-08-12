@@ -57,7 +57,7 @@ const Title = styled.h1`
   text-transform: uppercase;
 `
 
-export default function Dialog({ title, visible = false, children, onHide }) {
+const Dialog = ({ title, visible = false, children, onHide }) => {
   const dialogRef = useRef(null)
 
   useEffect(
@@ -83,3 +83,5 @@ export default function Dialog({ title, visible = false, children, onHide }) {
     </StyledDialog>
   )
 }
+
+export default Dialog

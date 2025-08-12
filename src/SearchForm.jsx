@@ -4,61 +4,60 @@ import Button from './Button.jsx'
 import { ButtonVariant } from './ButtonStyles.js'
 
 const StyledForm = styled.form`
-  color: #fff;
   display: flex;
-  font-family: Montserrat, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 200;
-  gap: 14px;
-  margin: 0;
-  padding: 0;
+  gap: var(--ui-control-gap);
 
-  & > input {
+  > input {
     border: 0;
+    border-radius: var(--ui-control-border-radius);
     box-sizing: border-box;
     display: block;
     font: inherit;
-    font-weight: 400;
-    height: 57px;
+    font-weight: var(--font-weight-input);
+    height: var(--ui-control-height);
     padding: 0;
   }
 
-  & > input:focus {
+  > input:focus {
     outline: none;
   }
 
-  & > input[type='search'] {
-    background-color: #323232cc;
-    box-sizing: border-box;
-    color: #ffffff4d;
-    line-height: 57px;
-    padding-left: 19px;
-    width: 713px;
+  > input[type='search'] {
+    background-color: var(--color-background-input);
+    color: var(--color-text-dimmed);
+    line-height: var(--ui-control-height);
+    padding-left: var(--ui-control-gap);
+    width: 715px;
+  }
+
+  > input[type='search']::placeholder {
+    color: var(--color-text-dimmed);
   }
 `
 
-export default function SearchForm({ value, onSubmit }) {
-  return (
-    <StyledForm
-      onSubmit={(e) => {
-        e.preventDefault()
+const SearchForm = ({ value, onSubmit }) => (
+  <StyledForm
+    id="movie-search"
+    aria-label="movie-search"
+    key={value}
+    onSubmit={(e) => {
+      e.preventDefault()
 
-        if (onSubmit) {
-          const formData = new FormData(e.target)
-          onSubmit(formData.get('query'))
-        }
-      }}
-    >
-      <input
-        id="query"
-        name="query"
-        type="search"
-        placeholder="What do you want to watch?"
-        defaultValue={value}
-      />
-      <Button type="submit" variant={ButtonVariant.Primary}>
-        Search
-      </Button>
-    </StyledForm>
-  )
-}
+      if (onSubmit) {
+        const formData = new FormData(e.target)
+        onSubmit(formData.get('search_term'))
+      }
+    }}
+  >
+    <input
+      id="search-term"
+      name="search_term"
+      type="search"
+      placeholder="What do you want to watch?"
+      defaultValue={value}
+    />
+    <Button variant={ButtonVariant.Primary}>Search</Button>
+  </StyledForm>
+)
+
+export default SearchForm

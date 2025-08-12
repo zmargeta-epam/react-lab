@@ -1,12 +1,13 @@
 import MovieTiles from '../MovieTiles.jsx'
 import { fn } from 'storybook/test'
 
-export default {
+const meta = {
   title: 'MovieTiles',
   component: MovieTiles,
   tags: ['autodocs'],
 }
-export const Default = {
+
+const Default = {
   args: {
     movies: [
       {
@@ -30,3 +31,6 @@ export const Default = {
     onDeleteMovie: fn(),
   },
 }
+
+export default meta
+export { Default }

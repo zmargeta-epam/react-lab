@@ -1,41 +1,38 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const StyledList = styled.ul`
+const StyledGenreSelect = styled.menu`
+  --height: var(--inherit-height, var(--ui-control-height));
+
   align-items: stretch;
-  box-sizing: border-box;
-  color: #fff;
+  background-color: var(--inherit-color-background);
   display: flex;
-  font-family: Montserrat, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 200;
-  gap: 30px;
+  gap: calc(2 * var(--ui-control-gap));
   margin: 0;
   padding: 0;
   text-transform: uppercase;
 
-  & li {
-    box-sizing: border-box;
+  li {
     cursor: pointer;
     display: block;
-    height: 60px;
-    line-height: 60px;
+    height: var(--height);
+    line-height: var(--height);
     text-align: center;
   }
 
-  & li.selected {
-    box-shadow: 0 3px #f65261;
+  li.selected {
+    box-shadow: 0 var(--menu-border-height) var(--color-primary);
   }
 `
 
-export default function GenreSelect({ values = [], selected, onChange }) {
+const GenreSelect = ({ values = [], selected, onChange }) => {
   const isSelected = (it) => it?.toLowerCase() === selected?.toLowerCase()
 
   return (
-    <StyledList role="tablist">
+    <StyledGenreSelect role="tablist" aria-label="genres">
       {values.map((it, idx) => (
         <li
-          key={it?.toLowerCase().replace(/ +/, '_') || idx}
+          key={it ?? idx}
           role="tab"
           className={isSelected(it) ? 'selected' : ''}
           onClick={!isSelected(it) ? (e) => onChange?.(it, e) : undefined}
@@ -43,6 +40,8 @@ export default function GenreSelect({ values = [], selected, onChange }) {
           {it}
         </li>
       ))}
-    </StyledList>
+    </StyledGenreSelect>
   )
 }
+
+export default GenreSelect

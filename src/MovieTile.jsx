@@ -6,40 +6,44 @@ import glyphUrl from './assets/glyph_menu.svg'
 import PopupMenu, { PopupMenuItem } from './PopupMenu.jsx'
 
 const StyledMovieTile = styled.article`
-  color: #ffffffb3;
+  --padding-horizontal: var(--inherit-padding-horizontal, var(--tile-padding-horizontal));
+  --padding-vertical: var(--inherit-padding-vertical, var(--tile-padding-vertical));
+
+  --baloon-height: calc(1.75 * var(--font-size-genre));
+  --baloon-width: calc(0.4 * var(--ui-control-min-width));
+  --font-size-title: 1.125rem;
+  --font-size-genre: 0.875rem;
+
+  color: var(--color-text-dimmed);
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  font-family: Montserrat, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 100;
-  grid-template-rows: 455px 1fr;
-  margin: 0;
-  padding: 0;
+  grid-template-rows: var(--poster-height) 1fr;
+  overflow: hidden;
   position: relative;
-  gap: 25px;
-  width: 322px;
+  gap: var(--ui-control-gap);
+  width: var(--poster-width);
 
-  & > button:nth-of-type(1),
-  & > ul[role='menu']:nth-of-type(1) {
+  > button:nth-of-type(1),
+  > ul[role='menu']:nth-of-type(1) {
     position: absolute;
-    right: 10px;
-    top: 10px;
+    right: var(--padding-vertical);
+    top: var(--padding-vertical);
   }
 `
 
 const Details = styled.div`
   display: grid;
-  grid-template-columns: 1fr 66px;
-  grid-template-rows: 18px 14px;
+  grid-template-columns: 1fr calc(var(--ui-control-gap) + var(--baloon-width));
+  grid-template-rows: var(--font-size-title) var(--font-size-genre);
   grid-template-areas:
     'title release-year'
     'genres release-year';
-  row-gap: 8px;
+  row-gap: calc(0.5 * var(--ui-control-gap));
 `
 
 const Title = styled.span`
-  font-size: 18px;
+  font-size: var(--font-size-title);
   grid-area: title;
   height: fit-content;
   overflow: hidden;
@@ -49,20 +53,19 @@ const Title = styled.span`
 `
 
 const ReleaseYear = styled.span`
-  border: 1px solid #97979780;
-  border-radius: 4px;
-  font-size: 14px;
+  border: 1px solid;
+  border-radius: var(--ui-control-border-radius);
+  font-size: var(--font-size-genre);
   grid-area: release-year;
-  height: 26px;
+  height: var(--baloon-height);
   justify-self: end;
-  line-height: 26px;
+  line-height: var(--baloon-height);
   text-align: center;
-  width: 66px;
+  width: var(--baloon-width);
 `
 
 const Genres = styled.span`
-  color: #ffffff80;
-  font-size: 14px;
+  font-size: var(--font-size-genre);
   grid-area: genres;
   height: fit-content;
   overflow: hidden;
@@ -71,7 +74,7 @@ const Genres = styled.span`
   white-space: nowrap;
 `
 
-export default function MovieTile({
+const MovieTile = ({
   imageUrl,
   title,
   releaseYear,
@@ -79,7 +82,7 @@ export default function MovieTile({
   onClick,
   onEditMovie,
   onDeleteMovie,
-}) {
+}) => {
   const [menuBtnVisible, setMenuBtnVisible] = React.useState(false)
   const [menuVisible, setMenuVisible] = React.useState(false)
 
@@ -92,11 +95,11 @@ export default function MovieTile({
     >
       <Poster imageUrl={imageUrl} />
       <Details>
-        <Title>{title || 'Unknown'}</Title>
-        <ReleaseYear>{releaseYear || 'N/A'}</ReleaseYear>
+        <Title>{title ?? 'Unknown'}</Title>
+        <ReleaseYear>{releaseYear ?? 'N/A'}</ReleaseYear>
         <Genres>{genres.length > 0 ? genres.join(', ') : 'Unknown'}</Genres>
       </Details>
-      {menuBtnVisible && (
+      {menuBtnVisible ? (
         <GlyphButton
           imageUrl={glyphUrl}
           onClick={(e) => {
@@ -104,7 +107,7 @@ export default function MovieTile({
             setMenuVisible(true)
           }}
         />
-      )}
+      ) : undefined}
       <PopupMenu
         visible={menuVisible}
         onHide={(e) => {
@@ -136,3 +139,5 @@ export default function MovieTile({
     </StyledMovieTile>
   )
 }
+
+export default MovieTile

@@ -1,13 +1,13 @@
 import MovieForm from '../MovieForm.jsx'
 import { fn } from 'storybook/test'
 
-export default {
+const meta = {
   title: 'MovieForm',
   component: MovieForm,
   tags: ['autodocs'],
 }
 
-export const Default = {
+const Default = {
   args: {
     imageUrl: 'https://www.themoviedb.org/t/p/w1280/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg',
     title: 'Pulp Fiction',
@@ -21,3 +21,6 @@ trip back and forth in time.`,
     onSubmit: fn(),
   },
 }
+
+export default meta
+export { Default }

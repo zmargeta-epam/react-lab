@@ -11,7 +11,7 @@ describe('MovieDetails', () => {
 
     //assert
     expect(screen.getAllByText('Unknown')).toHaveLength(3)
-    expect(screen.getAllByText('N/A')).toHaveLength(2)
+    expect(screen.getAllByText('N/A')).toHaveLength(3)
   })
 
   it('renders movie details', () => {

@@ -1,12 +1,12 @@
 import MovieDetails from '../MovieDetails.jsx'
 
-export default {
+const meta = {
   title: 'MovieDetails',
   component: MovieDetails,
   tags: ['autodocs'],
 }
 
-export const Default = {
+const Default = {
   args: {
     imageUrl: 'https://www.themoviedb.org/t/p/w1280/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg',
     title: 'Pulp Fiction',
@@ -20,6 +20,9 @@ back and forth in time.`,
   },
 }
 
-export const Unavailable = {
+const Unavailable = {
   args: {},
 }
+
+export default meta
+export { Default, Unavailable }

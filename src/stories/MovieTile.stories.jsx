@@ -1,13 +1,13 @@
 import MovieTile from '../MovieTile.jsx'
 import { fn } from 'storybook/test'
 
-export default {
+const meta = {
   title: 'MovieTile',
   component: MovieTile,
   tags: ['autodocs'],
 }
 
-export const Default = {
+const Default = {
   args: {
     imageUrl: 'https://www.themoviedb.org/t/p/w1280/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg',
     title: 'Pulp Fiction',
@@ -19,10 +19,13 @@ export const Default = {
   },
 }
 
-export const Unavailable = {
+const Unavailable = {
   args: {
     onClick: fn(),
     onEditMovie: fn(),
     onDeleteMovie: fn(),
   },
 }
+
+export default meta
+export { Default, Unavailable }

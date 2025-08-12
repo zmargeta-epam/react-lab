@@ -3,21 +3,22 @@ import styled from 'styled-components'
 import { SortCriteria } from './SortCriteria.js'
 
 const StyledSortControl = styled.label`
+  --height: var(--inherit-height, var(--ui-control-height));
+
+  background-color: var(--inherit-color-background);
   display: flex;
-  color: #ffffff99;
-  font-family: Montserrat, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 100;
-  gap: 30px;
-  height: 60px;
-  line-height: 60px;
+  color: var(--color-text-dimmed);
+  font-weight: var(--font-weight-light);
+  gap: var(--ui-control-gap);
+  height: var(--height);
+  line-height: var(--height);
   text-transform: uppercase;
 
-  & > select {
+  > select {
     align-items: center;
     background-color: transparent;
     border: 0;
-    color: #fff;
+    color: var(--color-text);
     cursor: pointer;
     font: inherit;
     line-height: inherit;
@@ -26,24 +27,27 @@ const StyledSortControl = styled.label`
   }
 `
 
-export default function SortControl({ value = SortCriteria.Popularity, onChange }) {
-  return (
-    <StyledSortControl>
-      Sort by
-      <select
-        value={value}
-        onChange={(e) => {
-          const newValue = parseInt(e.target.value)
+const SortControl = ({ value = SortCriteria.Popularity, onChange }) => (
+  <StyledSortControl>
+    Sort by
+    <select
+      id="sort-criteria"
+      name="sort_criteria"
+      aria-label="sort-criteria"
+      value={value}
+      onChange={(e) => {
+        const newValue = Number(e.target.value)
 
-          if (value !== newValue) {
-            onChange?.(newValue)
-          }
-        }}
-      >
-        <option value={SortCriteria.Popularity}>Popularity</option>
-        <option value={SortCriteria.ReleaseDate}>Release Date</option>
-        <option value={SortCriteria.Title}>Title</option>
-      </select>
-    </StyledSortControl>
-  )
-}
+        if (value !== newValue) {
+          onChange?.(newValue)
+        }
+      }}
+    >
+      <option value={SortCriteria.Popularity}>Popularity</option>
+      <option value={SortCriteria.ReleaseDate}>Release Date</option>
+      <option value={SortCriteria.Title}>Title</option>
+    </select>
+  </StyledSortControl>
+)
+
+export default SortControl

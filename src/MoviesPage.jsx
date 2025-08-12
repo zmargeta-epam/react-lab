@@ -1,45 +1,71 @@
 import React, { Suspense } from 'react'
 import styled from 'styled-components'
-import SearchTile from './SearchTile.jsx'
-import MovieDetailsTile from './MovieDetailsTile.jsx'
+import tmdbLogo from './assets/tmdb_logo.svg'
 import GenreSelect from './GenreSelect.jsx'
 import MovieTiles from './MovieTiles.jsx'
-import SortControl from './SortControl.jsx'
 import { SortCriteria } from './SortCriteria.js'
-import Loading from './Loading.jsx'
-import tmdbLogo from './assets/tmdb_logo.svg'
+import SortControl from './SortControl.jsx'
+import LoadingIndicator from './LoadingIndicator.jsx'
+import { Converter } from './Converters.js'
+import { Outlet } from 'react-router-dom'
+import useQueryParams from './useQueryParams.js'
+import useNavigateWithQueryParams from './useNavigateWithQueryParams.js'
 import useMovies from './useMovies.js'
-import useMovie from './useMovie.js'
 
-const Header = styled.div`
-  border-bottom: 10px solid #555;
-  box-sizing: border-box;
-  max-height: 540px;
+const Header = styled.header`
+  --inherit-color-background: var(--tile-color-background);
+  --inherit-height: var(--tile-header-height);
+  --inherit-padding-horizontal: var(--tile-padding-horizontal);
+  --inherit-padding-vertical: var(--tile-padding-vertical);
+
+  --divider-color: var(--color-background);
+  --divider-height: var(--tile-divider-height);
+  --height: var(--inherit-height);
+
+  background-color: var(--inherit-color-background);
+  border-bottom: var(--divider-height) solid var(--divider-color);
+  box-sizing: content-box;
+  display: flex;
+  flex-direction: column;
+  min-height: var(--height);
+  max-height: var(--height);
   overflow: hidden;
 `
 
-const Menu = styled.div`
+const Menu = styled.nav`
+  --inherit-color-background: var(--tile-color-background);
+  --inherit-height: var(--ui-control-height);
+
+  --height: var(--inherit-height);
+  --padding-horizontal: var(--tile-padding-horizontal);
+
+  background-color: var(--inherit-color-background);
+  border-bottom: var(--menu-border-height) solid var(--menu-border-color);
   display: flex;
-  border-bottom: 2px solid #424242;
-  box-sizing: border-box;
   justify-content: space-between;
-  margin: 0 50px 10px;
+  margin: 0 var(--padding-horizontal);
+  min-height: var(--height);
+  max-height: var(--height);
 `
 
-const Content = styled.div`
-  margin: 40px 50px 50px;
+const Content = styled.main`
+  --inherit-padding-horizontal: var(--tile-padding-horizontal);
+  --inherit-padding-vertical: var(--tile-padding-vertical);
+
+  background-color: var(--inherit-color-background);
+  margin: var(--inherit-padding-horizontal);
+  max-width: var(--tile-max-width);
 `
 
-const Footer = styled.div`
+const Footer = styled.footer`
   align-items: center;
-  background-color: #424242;
-  color: #ffffff99;
+  background-color: var(--menu-border-color);
+  color: var(--color-text-dimmed);
   display: flex;
-  font-family: Montserrat, Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  font-weight: 100;
-  gap: 15px;
-  height: 60px;
+  font-size: 0.625rem;
+  font-weight: var(--font-weight-light);
+  gap: var(--ui-control-gap);
+  height: var(--tile-padding-horizontal);
   justify-content: center;
 
   & > a {
@@ -47,62 +73,66 @@ const Footer = styled.div`
     background-image: url("${tmdbLogo}");
     background-position: center;
     background-repeat: no-repeat;
+    background-size: contain;
     display: block;
-    height: 18px;
-    width: 137px;
+    height: 15px;
+    width: 100px;
   }
 `
 
-export default function MoviesPage() {
-  const genres = ['All', 'Action', 'Documentary', 'Comedy', 'Crime', 'Fantasy', 'Horror']
-  const [searchTerm, setSearchTerm] = React.useState(undefined)
-  const [activeGenre, setActiveGenre] = React.useState('All')
-  const [sortCriteria, setSortCriteria] = React.useState(SortCriteria.Popularity)
-  const [activeMovieId, setActiveMovieId] = React.useState(undefined)
-  const { movies } = useMovies(searchTerm, activeGenre, sortCriteria, { suspense: true })
-  const { movie: activeMovie } = useMovie(activeMovieId, { suspense: true })
+const P = { SearchTerm: 'q', ActiveGenre: 'genre', SortCriteria: 'sort_by' }
+const F = { SearchTerm: null, ActiveGenre: 'All', SortCriteria: SortCriteria.Popularity }
+
+const Genres = [F.ActiveGenre, 'Action', 'Documentary', 'Comedy', 'Crime', 'Fantasy', 'Horror']
+
+const QueryParams = [
+  {
+    name: P.SearchTerm,
+    fallback: F.SearchTerm,
+    unset: [P.ActiveGenre, P.SortCriteria],
+  },
+  {
+    name: P.ActiveGenre,
+    fallback: F.ActiveGenre,
+    converter: Converter(
+      (value) => Genres.indexOf(value),
+      (param) => Genres[param]
+    ),
+    deps: [P.SearchTerm],
+    predicate: ([searchTerm]) => searchTerm === F.SearchTerm,
+    unset: [P.SearchTerm],
+  },
+  {
+    name: P.SortCriteria,
+    fallback: F.SortCriteria,
+    deps: [P.SearchTerm],
+    predicate: ([searchTerm]) => searchTerm === F.SearchTerm,
+    unset: [P.SearchTerm],
+  },
+]
+
+const MoviesPage = () => {
+  const [searchTerm, , activeGenre, setActiveGenre, sortCriteria, setSortCriteria] =
+    useQueryParams(QueryParams)
+  const [movies] = useMovies(searchTerm, activeGenre, sortCriteria, { suspense: true })
+  const navigate = useNavigateWithQueryParams([P.ActiveGenre, P.SortCriteria])
 
   return (
     <React.Fragment>
       <Header>
-        {activeMovieId ? (
-          <Suspense fallback={<Loading />}>
-            <MovieDetailsTile movie={activeMovie} onClose={() => setActiveMovieId(undefined)} />
-          </Suspense>
-        ) : (
-          <SearchTile
-            searchTerm={searchTerm}
-            onSearch={(it) => {
-              setActiveGenre('All')
-              setSortCriteria(SortCriteria.Popularity)
-              setSearchTerm(it)
-            }}
-            onAddMovie={() => console.log('onAddMovie')}
-          />
-        )}
+        <Suspense fallback={<LoadingIndicator />}>
+          <Outlet />
+        </Suspense>
       </Header>
-      <Menu>
-        <GenreSelect
-          values={genres}
-          selected={activeGenre}
-          onChange={(it) => {
-            setSearchTerm(undefined)
-            setActiveGenre(it)
-          }}
-        />
-        <SortControl
-          value={sortCriteria}
-          onChange={(it) => {
-            setSearchTerm(undefined)
-            setSortCriteria(it)
-          }}
-        />
+      <Menu aria-label="movie-filters">
+        <GenreSelect values={Genres} selected={activeGenre} onChange={setActiveGenre} />
+        <SortControl value={sortCriteria} onChange={setSortCriteria} />
       </Menu>
       <Content>
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<LoadingIndicator />}>
           <MovieTiles
             movies={movies}
-            onSelectMovie={(it) => setActiveMovieId(it.id)}
+            onSelectMovie={(it) => navigate(`/${it.id}`)}
             onEditMovie={() => console.log('onEditMovie')}
             onDeleteMovie={() => console.log('onDeleteMovie')}
           />
@@ -115,3 +145,6 @@ export default function MoviesPage() {
     </React.Fragment>
   )
 }
+
+export default MoviesPage
+export { P, QueryParams }

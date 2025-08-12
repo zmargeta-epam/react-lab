@@ -4,48 +4,47 @@ import { ButtonSize, ButtonVariant } from './ButtonStyles.js'
 
 const StyledButton = styled.button`
   background-color: transparent;
-  border: 1px solid #f65261;
-  border-radius: 4px;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--ui-control-border-radius);
   box-sizing: border-box;
   display: block;
-  color: #f65261;
+  color: var(--color-primary);
   cursor: pointer;
-  font-family: Montserrat, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  height: 57px;
+  font: inherit;
+  font-weight: var(--font-weight-strong);
+  height: var(--ui-control-height);
   overflow: hidden;
   text-overflow: ellipsis;
   text-transform: uppercase;
   white-space: nowrap;
   max-width: max-content;
-  min-width: 180px;
-  padding: 0 16px;
+  min-width: var(--ui-control-min-width);
+  padding: 0 var(--ui-control-gap);
 
   &:focus {
     text-decoration: underline;
   }
 
   &.primary {
-    background-color: #f65261;
+    background-color: var(--color-primary);
     border: 0;
-    color: #fff;
+    color: var(--color-text);
   }
 
   &.secondary {
-    background-color: #606060ad;
+    background-color: var(--color-secondary);
     border: 0;
-    color: #f65261;
+    color: var(--color-primary);
   }
 
   &.small {
-    height: 46px;
+    height: var(--ui-control-height-small);
   }
 
   &.x-small {
-    height: 36px;
+    height: var(--ui-control-height-x-small);
     min-width: auto;
-    padding: 0 12px;
+    padding: 0 var(--ui-control-gap);
   }
 
   &:focus,
@@ -54,28 +53,30 @@ const StyledButton = styled.button`
   }
 `
 
-export default function Button({
-  type = 'button',
+const VariantStyle = {
+  [ButtonVariant.Primary]: 'primary',
+  [ButtonVariant.Secondary]: 'secondary',
+}
+
+const SizeStyle = {
+  [ButtonSize.ExtraSmall]: 'x-small',
+  [ButtonSize.Small]: 'small',
+}
+
+const Button = ({
   variant = ButtonVariant.Default,
   size = ButtonSize.Medium,
   children,
   onClick,
-}) {
-  const VARIANT_STYLES = Object.freeze({
-    [ButtonVariant.Primary]: 'primary',
-    [ButtonVariant.Secondary]: 'secondary',
-  })
+  ...props
+}) => (
+  <StyledButton
+    {...props}
+    onClick={onClick}
+    className={[VariantStyle[variant], SizeStyle[size]].filter((it) => it ?? null).join(' ')}
+  >
+    {children}
+  </StyledButton>
+)
 
-  const SIZE_STYLES = Object.freeze({
-    [ButtonSize.ExtraSmall]: 'x-small',
-    [ButtonSize.Small]: 'small',
-  })
-
-  const styles = [VARIANT_STYLES[variant], SIZE_STYLES[size]].filter((it) => it).join(' ')
-
-  return (
-    <StyledButton type={type} onClick={onClick} className={styles}>
-      {children}
-    </StyledButton>
-  )
-}
+export default Button
