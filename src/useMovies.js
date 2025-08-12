@@ -1,53 +1,43 @@
 import useSWR from 'swr'
 import axios from 'axios'
-import useGenres from './useGenres.js'
-import { Genre, SortCriteria, Movie } from './Converters.js'
+import { Genre, Movie, SortCriteria } from './Converters.js'
 
 const BaseUrl = import.meta.env.VITE_API_URL
-const ApiKey = import.meta.env.VITE_API_KEY
 
-const fetchMovies = ({ genre, sortCriteria, context }) => {
+const fetchMovies = ({ genre, sortCriteria }) => {
   const config = {
     baseURL: BaseUrl,
-    headers: {
-      Authorization: `Bearer ${ApiKey}`,
-    },
     params: {
-      with_genres: Genre.using(context).convert(genre),
-      sort_by: SortCriteria.convert(sortCriteria),
+      filter: Genre.convert(genre),
+      sortBy: SortCriteria.convert(sortCriteria),
+      sortOrder: 'desc',
     },
   }
   return axios
-    .get('/3/discover/movie', config)
-    .then((res) => res.data.results?.map((item) => Movie.using(context).inverse.convert(item)))
+    .get('/movies', config)
+    .then((res) => res.data.data?.map((item) => Movie.inverse.convert(item)))
 }
 
-const findMovies = ({ searchTerm, context }) => {
+const findMovies = ({ searchTerm }) => {
   const config = {
     baseURL: BaseUrl,
-    headers: {
-      Authorization: `Bearer ${ApiKey}`,
-    },
     params: {
-      query: searchTerm,
+      search: searchTerm,
+      searchBy: 'title',
     },
   }
   return axios
-    .get('/3/search/movie', config)
-    .then((res) => res.data.results?.map((item) => Movie.using(context).inverse.convert(item)))
+    .get('/movies', config)
+    .then((res) => res.data.data?.map((item) => Movie.inverse.convert(item)))
 }
 
 const useMovies = (searchTerm, genre, sortCriteria, config) => {
-  const [genreLookup, genresError] = useGenres(config)
   const { data, error, isLoading } = useSWR(
-    () =>
-      genreLookup
-        ? { url: '/api/movies', searchTerm, genre, sortCriteria, context: { genreLookup } }
-        : null,
+    { url: '/api/movies', searchTerm, genre, sortCriteria },
     searchTerm ? findMovies : fetchMovies,
     config
   )
-  return [data, isLoading, genresError ?? error]
+  return [data, isLoading, error]
 }
 
 export default useMovies

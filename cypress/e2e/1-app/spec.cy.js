@@ -1,19 +1,16 @@
 describe('React Lab', () => {
   beforeEach(() => {
-    cy.intercept('GET', 'https:/api.mock.org/3/genre/movie/list', {
-      fixture: 'get_genre_movie_list.json',
-    }).as('genres')
-    cy.intercept('GET', 'https:/api.mock.org/3/discover/movie?sort_by=popularity.desc', {
+    cy.intercept('GET', 'https:/api.mock.org/movies?sortBy=popularity&sortOrder=desc', {
       fixture: 'get_discover_movie.json',
     }).as('discover')
     cy.intercept(
       'GET',
-      'https:/api.mock.org/3/discover/movie?with_genres=1&sort_by=primary_release_date.desc',
+      'https:/api.mock.org/movies?filter=Action&sortBy=release_date&sortOrder=desc',
       {
         fixture: 'get_discover_movie_sorted.json',
       }
     ).as('discover')
-    cy.intercept('GET', 'https:/api.mock.org/3/search/movie?query=Pulp+Fiction', {
+    cy.intercept('GET', 'https:/api.mock.org/movies?search=Pulp+Fiction&searchBy=title', {
       fixture: 'get_search_movie.json',
     }).as('search')
   })
