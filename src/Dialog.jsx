@@ -8,8 +8,8 @@ const StyledDialog = styled.dialog`
   padding: 0;
 
   &::backdrop {
-    background-color: #232323;
-    opacity: 0.9;
+    background-color: var(--tile-color-background);
+    opacity: var(--modal-backdrop-opacity);
   }
 
   &:focus,
@@ -22,36 +22,27 @@ const Container = styled.div`
   align-items: stretch;
   display: flex;
   flex-direction: column;
-  font-family: Montserrat, Helvetica, Arial, sans-serif;
-  font-size: 20px;
-  font-weight: 200;
-  background-color: #232323;
-  border: 0;
+  background-color: var(--tile-color-background);
   box-sizing: border-box;
-  color: #fff;
-  min-height: 350px;
-  min-width: 700px;
-  max-width: 975px;
-  padding: 0;
+  min-height: var(--modal-min-height);
+  min-width: var(--modal-min-width);
+  max-width: calc(var(--tile-width) / 2 * 3);
 
-  & > :nth-child(n) {
-    margin: 0 50px 20px;
-  }
-
-  & > :nth-child(1) {
+  > :nth-child(1) {
     margin: 0;
     align-self: flex-end;
   }
 
-  & > :nth-last-child(1) {
-    margin-bottom: 36px;
+  > :nth-child(2),
+  > :nth-child(3) {
+    margin: 0 var(--tile-padding-horizontal) calc(2 * var(--tile-padding-vertical));
   }
 `
 
 const Title = styled.h1`
-  color: #fff;
-  font-size: 40px;
-  font-weight: 200;
+  color: var(--color-text);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight);
   margin: 0;
   padding: 0;
   text-transform: uppercase;

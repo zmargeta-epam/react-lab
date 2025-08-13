@@ -15,15 +15,18 @@
     "sb:dev": "BROWSER='google chrome' storybook dev -p 6006"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.1",
     "axios": "^1.11.0",
     "normalize.css": "^8.0.1",
     "polished": "^4.3.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-hook-form": "^7.62.0",
     "react-router-dom": "^7.7.1",
     "react-spinners": "^0.17.0",
     "styled-components": "^6.1.19",
-    "swr": "^2.3.4"
+    "swr": "^2.3.4",
+    "zod": "^4.0.17"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.1",

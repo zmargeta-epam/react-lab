@@ -5,6 +5,9 @@ import { createGlobalStyle } from 'styled-components'
 import { transparentize } from 'polished'
 import SearchTile from './SearchTile.jsx'
 import MovieDetailsTile from './MovieDetailsTile.jsx'
+import AddMoviePage from './AddMoviePage.jsx'
+import EditMoviePage from './EditMoviePage.jsx'
+import DeleteMoviePage from './DeleteMoviePage.jsx'
 
 const GlobalStyles = createGlobalStyle`
   :root {
@@ -17,9 +20,9 @@ const GlobalStyles = createGlobalStyle`
     --font-family: Montserrat, Helvetica, Arial, sans-serif;
     --font-size: 1rem;
     --font-weight: 200;
-    --font-weight-input: 400;
+    --font-weight-input: 200;
     --font-weight-light: 100;
-    --font-weight-strong: 500;
+    --font-weight-strong: 400;
     
     --tile-color-background: #232323;
     --tile-divider-height: 10px;
@@ -30,6 +33,10 @@ const GlobalStyles = createGlobalStyle`
     
     --menu-border-color: #424242;
     --menu-border-height: 2px;
+
+    --modal-min-height: 350px;
+    --modal-min-width: 700px;
+    --modal-backdrop-opacity: 0.5;
 
     --ui-control-border-radius: 6px;
     --ui-control-gap: 14px;
@@ -70,8 +77,13 @@ const App = () => (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MoviesPage />}>
-          <Route index element={<SearchTile />} />
-          <Route path="/:movieId" element={<MovieDetailsTile />} />
+          <Route path="/" element={<SearchTile />}>
+            <Route path="/add" element={<AddMoviePage />} />
+          </Route>
+          <Route path="/:movieId" element={<MovieDetailsTile />}>
+            <Route path="/:movieId/edit" element={<EditMoviePage />} />
+            <Route path="/:movieId/delete" element={<DeleteMoviePage />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

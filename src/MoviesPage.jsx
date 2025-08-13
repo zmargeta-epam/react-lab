@@ -133,8 +133,8 @@ const MoviesPage = () => {
           <MovieTiles
             movies={movies}
             onSelectMovie={(it) => navigate(`/${it.id}`)}
-            onEditMovie={() => console.log('onEditMovie')}
-            onDeleteMovie={() => console.log('onDeleteMovie')}
+            onEditMovie={(it) => navigate(`/${it.id}/edit`)}
+            onDeleteMovie={(it) => navigate(`/${it.id}/delete`)}
           />
         </Suspense>
       </Content>

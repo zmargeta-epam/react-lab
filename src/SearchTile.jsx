@@ -6,7 +6,9 @@ import Button from './Button.jsx'
 import { ButtonSize, ButtonVariant } from './ButtonStyles.js'
 import backgroundUrl from './assets/background.jpg'
 import useQueryParams from './useQueryParams.js'
-import { QueryParams } from './MoviesPage.jsx'
+import { P, QueryParams } from './MoviesPage.jsx'
+import useNavigateWithQueryParams from './useNavigateWithQueryParams.js'
+import { Outlet } from 'react-router-dom'
 
 const StyledSearchTile = styled.section`
   --color-background: var(--inherit-color-background, var(--tile-color-background));
@@ -48,21 +50,25 @@ const GradientOverlay = styled.div`
 
 const SearchTile = () => {
   const [searchTerm, setSearchTerm] = useQueryParams(QueryParams)
+  const navigate = useNavigateWithQueryParams([P.ActiveGenre, P.SortCriteria])
 
   return (
-    <StyledSearchTile $imageUrl={backgroundUrl}>
-      <GradientOverlay>
-        <Logo />
-        <Button
-          variant={ButtonVariant.Secondary}
-          size={ButtonSize.Small}
-          onClick={() => console.log('Add Movie')}
-        >
-          + Add Movie
-        </Button>
-        <SearchForm value={searchTerm} onSubmit={setSearchTerm} />
-      </GradientOverlay>
-    </StyledSearchTile>
+    <React.Fragment>
+      <StyledSearchTile $imageUrl={backgroundUrl}>
+        <GradientOverlay>
+          <Logo />
+          <Button
+            variant={ButtonVariant.Secondary}
+            size={ButtonSize.Small}
+            onClick={() => navigate('/add')}
+          >
+            + Add Movie
+          </Button>
+          <SearchForm value={searchTerm} onSubmit={setSearchTerm} />
+        </GradientOverlay>
+      </StyledSearchTile>
+      <Outlet />
+    </React.Fragment>
   )
 }
 
