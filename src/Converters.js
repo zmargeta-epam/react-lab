@@ -34,7 +34,7 @@ const Genre = Converter(
 )
 
 const ReleaseYear = Converter(
-  (val) => (val ? DateFormat.format(new Date(val)) : undefined),
+  (val) => (val ? DateFormat.format(new Date(val.toString())) : undefined),
   (dto) => (dto ? new Date(dto).getFullYear() : undefined)
 )
 
@@ -70,7 +70,16 @@ const SortCriteria = Converter(
 )
 
 const Movie = Converter(
-  (val) => val,
+  ({ id, imageUrl, title, rating, genres, releaseYear, duration, description }) => ({
+    id,
+    poster_path: ImageUrl.convert(imageUrl),
+    title,
+    vote_average: rating,
+    genres,
+    release_date: ReleaseYear.convert(releaseYear),
+    runtime: duration,
+    overview: description,
+  }),
   ({ id, poster_path, title, vote_average, genres, release_date, runtime, overview }) => ({
     id,
     imageUrl: ImageUrl.inverse.convert(poster_path),

@@ -4,37 +4,32 @@ import { Genre, Movie, SortCriteria } from './Converters.js'
 
 const BaseUrl = import.meta.env.VITE_API_URL
 
-const fetchMovies = ({ genre, sortCriteria }) => {
-  const config = {
-    baseURL: BaseUrl,
-    params: {
-      filter: Genre.convert(genre),
-      sortBy: SortCriteria.convert(sortCriteria),
-      sortOrder: 'desc',
-    },
-  }
-  return axios
-    .get('/movies', config)
-    .then((res) => res.data.data?.map((item) => Movie.inverse.convert(item)))
-}
+const fetcher = ([, args]) =>
+  args.query
+    ? axios
+        .get('/movies', {
+          baseURL: BaseUrl,
+          params: {
+            search: args.query,
+            searchBy: 'title',
+          },
+        })
+        .then((result) => result.data.data?.map((item) => Movie.inverse.convert(item)))
+    : axios
+        .get('/movies', {
+          baseURL: BaseUrl,
+          params: {
+            filter: Genre.convert(args.genre),
+            sortBy: SortCriteria.convert(args.sortBy),
+            sortOrder: 'desc',
+          },
+        })
+        .then((result) => result.data.data?.map((item) => Movie.inverse.convert(item)))
 
-const findMovies = ({ searchTerm }) => {
-  const config = {
-    baseURL: BaseUrl,
-    params: {
-      search: searchTerm,
-      searchBy: 'title',
-    },
-  }
-  return axios
-    .get('/movies', config)
-    .then((res) => res.data.data?.map((item) => Movie.inverse.convert(item)))
-}
-
-const useMovies = (searchTerm, genre, sortCriteria, config) => {
+const useMovies = (query, genre, sortBy, config) => {
   const { data, error, isLoading } = useSWR(
-    { url: '/api/movies', searchTerm, genre, sortCriteria },
-    searchTerm ? findMovies : fetchMovies,
+    ['/api/movies', { query, genre, sortBy }],
+    fetcher,
     config
   )
   return [data, isLoading, error]

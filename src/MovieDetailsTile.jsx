@@ -38,7 +38,7 @@ const StyledMovieDetailsTile = styled.section`
 const MovieDetailsTile = () => {
   const { movieId } = useParams()
   const [movie] = useMovie(movieId, { suspense: true })
-  const navigate = useNavigateWithQueryParams([P.ActiveGenre, P.SortCriteria])
+  const navigate = useNavigateWithQueryParams([P.SearchTerm, P.ActiveGenre, P.SortCriteria])
 
   return (
     <React.Fragment>

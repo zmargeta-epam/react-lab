@@ -115,7 +115,7 @@ const MoviesPage = () => {
   const [searchTerm, , activeGenre, setActiveGenre, sortCriteria, setSortCriteria] =
     useQueryParams(QueryParams)
   const [movies] = useMovies(searchTerm, activeGenre, sortCriteria, { suspense: true })
-  const navigate = useNavigateWithQueryParams([P.ActiveGenre, P.SortCriteria])
+  const navigate = useNavigateWithQueryParams([P.SearchTerm, P.ActiveGenre, P.SortCriteria])
 
   return (
     <React.Fragment>
