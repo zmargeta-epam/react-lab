@@ -64,7 +64,7 @@ const Duration = styled.span`
 `
 
 const Description = styled.p`
-  --max-lines: 6.5;
+  --max-lines: 8;
   --line-height: 1.875rem;
 
   color: var(--color-text-dimmed);
@@ -74,7 +74,7 @@ const Description = styled.p`
   line-height: var(--line-height);
   margin: 0;
   max-height: calc(var(--max-lines) * var(--line-height));
-  overflow: scroll;
+  overflow: hidden;
   padding: 0;
   text-align: left;
 `
