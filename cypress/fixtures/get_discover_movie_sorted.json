@@ -1,6 +1,5 @@
 {
-  "page": 1,
-  "results": [
+  "data": [
     {
       "adult": false,
       "backdrop_path": "/1RgPyOhN4DRs225BGTlHJqCudII.jpg",
@@ -75,7 +74,5 @@
       "vote_average": 4.523,
       "vote_count": 128
     }
-  ],
-  "total_pages": 1,
-  "total_results": 4
+  ]
 }

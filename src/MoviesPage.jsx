@@ -115,7 +115,7 @@ const MoviesPage = () => {
   const [searchTerm, , activeGenre, setActiveGenre, sortCriteria, setSortCriteria] =
     useQueryParams(QueryParams)
   const [movies] = useMovies(searchTerm, activeGenre, sortCriteria, { suspense: true })
-  const navigate = useNavigateWithQueryParams([P.ActiveGenre, P.SortCriteria])
+  const navigate = useNavigateWithQueryParams([P.SearchTerm, P.ActiveGenre, P.SortCriteria])
 
   return (
     <React.Fragment>
@@ -133,8 +133,8 @@ const MoviesPage = () => {
           <MovieTiles
             movies={movies}
             onSelectMovie={(it) => navigate(`/${it.id}`)}
-            onEditMovie={() => console.log('onEditMovie')}
-            onDeleteMovie={() => console.log('onDeleteMovie')}
+            onEditMovie={(it) => navigate(`/${it.id}/edit`)}
+            onDeleteMovie={(it) => navigate(`/${it.id}/delete`)}
           />
         </Suspense>
       </Content>

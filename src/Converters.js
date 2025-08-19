@@ -24,25 +24,17 @@ Converter.Identity = Converter(
 )
 
 const ImageUrl = Converter(
-  (val) => val?.replace(/^.*\//i, '/'),
-  (dto) => (dto ? `${BaseUrl}/t/p/w300${dto}` : undefined)
-)
-
-const GenreLookup = Converter(
-  (val) => val?.entries().map(([id, name]) => ({ id, name })),
-  (dto) => dto?.reduce((map, obj) => map.set(obj.id, obj.name), new Map())
+  (val) => val,
+  (dto) => (dto ? `${BaseUrl}/t/p/w300${dto.replace(/^.*\//i, '/')}` : undefined)
 )
 
 const Genre = Converter(
-  (val, { genreLookup = new Map() }) =>
-    val !== 'All'
-      ? genreLookup.entries().find(([, name]) => name?.toLowerCase() === val?.toLowerCase())?.[0]
-      : undefined,
-  (dto, { genreLookup = new Map() }) => genreLookup.get(dto)
+  (val) => (val !== 'All' ? val : undefined),
+  (dto) => dto
 )
 
 const ReleaseYear = Converter(
-  (val) => (val ? DateFormat.format(new Date(val)) : undefined),
+  (val) => (val ? DateFormat.format(new Date(val.toString())) : undefined),
   (dto) => (dto ? new Date(dto).getFullYear() : undefined)
 )
 
@@ -51,26 +43,26 @@ const SortCriteria = Converter(
     let dto = undefined
     switch (Number(val)) {
       case SortCriteriaModel.Popularity:
-        dto = 'popularity.desc'
+        dto = 'popularity'
         break
       case SortCriteriaModel.ReleaseDate:
-        dto = 'primary_release_date.desc'
+        dto = 'release_date'
         break
       case SortCriteriaModel.Title:
-        dto = 'original_title.asc'
+        dto = 'title'
     }
     return dto
   },
   (dto) => {
     let val = undefined
     switch (dto) {
-      case 'popularity.desc':
+      case 'popularity':
         val = SortCriteriaModel.Popularity
         break
-      case 'primary_release_date.desc':
+      case 'release_date':
         val = SortCriteriaModel.ReleaseDate
         break
-      case 'original_title.asc':
+      case 'title':
         val = SortCriteriaModel.Title
     }
     return val
@@ -78,24 +70,26 @@ const SortCriteria = Converter(
 )
 
 const Movie = Converter(
-  (val) => val,
-  (
-    { id, poster_path, title, vote_average, genre_ids, genres, release_date, runtime, overview },
-    context
-  ) => ({
+  ({ id, imageUrl, title, rating, genres, releaseYear, duration, description }) => ({
+    id,
+    poster_path: ImageUrl.convert(imageUrl),
+    title,
+    vote_average: rating,
+    genres,
+    release_date: ReleaseYear.convert(releaseYear),
+    runtime: duration,
+    overview: description,
+  }),
+  ({ id, poster_path, title, vote_average, genres, release_date, runtime, overview }) => ({
     id,
     imageUrl: ImageUrl.inverse.convert(poster_path),
     title,
     rating: vote_average?.toFixed(1),
-    genres:
-      genres?.map((item) => item.name) ??
-      genre_ids
-        ?.map((item) => Genre.using(context).inverse.convert(item))
-        .filter((item) => item ?? null),
+    genres: genres,
     releaseYear: ReleaseYear.inverse.convert(release_date),
     duration: runtime,
     description: overview,
   })
 )
 
-export { Converter, GenreLookup, Genre, ImageUrl, Movie, ReleaseYear, SortCriteria }
+export { Converter, Genre, ImageUrl, Movie, ReleaseYear, SortCriteria }
